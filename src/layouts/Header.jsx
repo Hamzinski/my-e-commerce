@@ -49,56 +49,60 @@ const buttons = [
 function Header() {
   return (
     <>
-      <div className="flex  flex-col justify-center   ">
-        <div className="flex justify-between bg-[#252B42] p-6 ">
-          <div className="flex gap-6">
-            {contactInfo.map((info, index) => (
-              <button key={index} className="flex items-center gap-2" href="">
-                <FontAwesomeIcon className="text-white" icon={info.icon} />
-                <h6 className="font-mont text-white text-sm font-bold">
-                  {info.text}
-                </h6>
-              </button>
-            ))}
-          </div>
+      <div className="flex  flex-col  ">
+        <div className=" bg-[#252B42] p-6 ">
+          <div className="flex justify-between custom-container">
+            <div className="flex gap-6">
+              {contactInfo.map((info, index) => (
+                <button key={index} className="flex items-center gap-2" href="">
+                  <FontAwesomeIcon className="text-white" icon={info.icon} />
+                  <h6 className="font-mont text-white text-sm font-bold">
+                    {info.text}
+                  </h6>
+                </button>
+              ))}
+            </div>
 
-          <h6 className="font-mont text-white text-sm font-bold">
-            Follow Us and get a chance to win 80% off
-          </h6>
-
-          <div className="flex gap-4">
             <h6 className="font-mont text-white text-sm font-bold">
-              Follow Us :
+              Follow Us and get a chance to win 80% off
             </h6>
-            {socialMediaIcons.map((icon, index) => (
-              <button key={index} href="">
-                <FontAwesomeIcon className="text-white" icon={icon.icon} />
-              </button>
-            ))}
-          </div>
-        </div>
 
-        <div className="flex justify-between items-center  bg-[#FFFFFF] p-6">
-          <div className="flex items-center ml-14">
-            <h3 className="font-mont text-2xl font-bold">Bandage</h3>
-            <div className="flex gap-3 ml-32">
-              {links.map((link, index) => (
-                <a
-                  key={index}
-                  className="font-mont text-sm font-bold text-[#737373]"
-                  href={link.href}
-                >
-                  {link.text}
-                </a>
+            <div className="flex gap-4">
+              <h6 className="font-mont text-white text-sm font-bold">
+                Follow Us :
+              </h6>
+              {socialMediaIcons.map((icon, index) => (
+                <button key={index} href="">
+                  <FontAwesomeIcon className="text-white" icon={icon.icon} />
+                </button>
               ))}
             </div>
           </div>
-          <div className="flex gap-9">
-            {buttons.map((button, index) => (
-              <button key={index} className={button.className}>
-                <FontAwesomeIcon icon={button.icon} /> {button.text}
-              </button>
-            ))}
+        </div>
+
+        <div className=" bg-[#FFFFFF] p-6">
+          <div className="flex justify-between items-center  custom-container">
+            <div className="flex items-center ">
+              <h3 className="font-mont text-2xl font-bold">Bandage</h3>
+              <div className="flex gap-3 ml-32">
+                {links.map((link, index) => (
+                  <a
+                    key={index}
+                    className="font-mont text-sm font-bold text-[#737373]"
+                    href={link.href}
+                  >
+                    {link.text}
+                  </a>
+                ))}
+              </div>
+            </div>
+            <div className="flex gap-9">
+              {buttons.map((button, index) => (
+                <button key={index} className={button.className}>
+                  <FontAwesomeIcon icon={button.icon} /> {button.text}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </div>
