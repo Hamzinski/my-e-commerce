@@ -70,8 +70,8 @@ function ProductCard() {
   ];
   return (
     <div className="custom-container flex justify-between flex-wrap gap-9 px-36 py-12">
-      {myarr.map((item) => (
-        <div className="flex flex-col items-center ">
+      {myarr.map((item, index) => (
+        <div key={index} className="flex flex-col items-center ">
           <img className="w-60 h-[427px]" src={item.img} alt="" />
           <div className="flex flex-col gap-3 items-center pt-6  pb-9">
             <h5 className="font-mont font-bold text-base text-[#252B42]">
