@@ -55,7 +55,7 @@ function PostCard() {
         <div key={post.id}>
           <div className="flex flex-col items-center pb-36">
             <div>
-              <div className="absolute bg-[#E74040] font-mont font-bold text-white text-lg m-3 px-2.5 rounded">
+              <div className="absolute bg-danger-color font-mont font-bold text-white text-lg m-3 px-2.5 rounded">
                 New
               </div>
               <img className="w-80 h-80" src={post.image} alt="" />
@@ -63,7 +63,7 @@ function PostCard() {
 
             <div className="w-80 h-80 flex flex-col gap-3 px-3  pt-6 shadow-md">
               <div className="flex justify-start gap-3">
-                <button className="font-mont font-medium text-sm text-[#23A6F0]">
+                <button className="font-mont font-medium text-sm text-primary-color">
                   {post.tag1}
                 </button>
                 <button className="font-mont font-medium text-sm">
@@ -73,27 +73,27 @@ function PostCard() {
                   {post.tag3}
                 </button>
               </div>
-              <h4 className="font-mont font-bold text-xl text-[#252B42]">
+              <h4 className="font-mont font-bold text-xl text-dark-text-color">
                 {post.title}
               </h4>
-              <p className="font-mont font-semibold text-sm text-[#737373]">
+              <p className="font-mont font-semibold text-sm text-second-text-color">
                 {post.description}
               </p>
               <div className="flex justify-between gap-3">
-                <p className="flex items-center gap-2 font-mont font-medium text-sm text-[#737373]">
-                  <LuAlarmClock className="text-[#23A6F0]" /> {post.date}
+                <p className="flex items-center gap-2 font-mont font-medium text-sm text-second-text-color">
+                  <LuAlarmClock className="text-primary-color" /> {post.date}
                 </p>
-                <p className="flex items-center gap-2 font-mont font-medium text-sm text-[#737373]">
-                  <BsGraphUp className="text-[#23856D]" />
+                <p className="flex items-center gap-2 font-mont font-medium text-sm text-second-text-color">
+                  <BsGraphUp className="text-secondary-color" />
                   {post.comments}
                 </p>
               </div>
               <div className="flex items-center">
-                <h6 className="font-mont font-bold text-sm text-[#737373]">
+                <h6 className="font-mont font-bold text-sm text-second-text-color">
                   {post.learn}{" "}
                 </h6>
                 <button className="">
-                  <MdOutlineKeyboardArrowRight className="text-[#23A6F0] size-8" />
+                  <MdOutlineKeyboardArrowRight className="text-primary-color size-8" />
                 </button>
               </div>
             </div>

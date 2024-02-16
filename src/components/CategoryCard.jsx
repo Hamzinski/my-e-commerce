@@ -16,16 +16,20 @@ const items = [
 function CategoryCard() {
   return (
     <div>
-      <div className="bg-[#FAFAFA]">
+      <div className="bg-light-gray-1">
         <div className="custom-container flex flex-col py-8">
           <div className="justify-between flex ">
-            <h3 className="font-mont font-bold text-2xl">Shop</h3>
+            <h3 className="font-mont font-bold text-2xl text-dark-text-color">
+              Shop
+            </h3>
             <div className="flex items-center">
-              <p className="font-mont font-bold text-sm text-[#252B42]">
+              <p className="font-mont font-bold text-sm text-dark-text-color ">
                 Home{" "}
               </p>
-              <MdOutlineKeyboardArrowRight className="text-[#BDBDBD] size-8" />
-              <p className="font-mont font-bold text-sm text-[#BDBDBD]">Shop</p>
+              <MdOutlineKeyboardArrowRight className="text-muted-text-color size-8" />
+              <p className="font-mont font-bold text-sm text-muted-text-color">
+                Shop
+              </p>
             </div>
           </div>
         </div>

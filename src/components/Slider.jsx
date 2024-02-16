@@ -36,17 +36,17 @@ function Slider() {
         className="w-full h-full bg-cover object-cover duration-500"
       >
         <div className="flex flex-col gap-9 p-52">
-          <h5 className="font-mont font-bold text-base text-[#FFFFFF]">
+          <h5 className="font-mont font-bold text-base text-white">
             SUMMER 2020
           </h5>
-          <h1 className="font-mont font-bold text-6xl text-[#FFFFFF]">
+          <h1 className="font-mont font-bold text-6xl text-white">
             NEW COLLECTION
           </h1>
-          <h4 className="font-mont font-normal text-xl text-[#FFFFFF]">
+          <h4 className="font-mont font-normal text-xl text-white">
             We know how large objects will act,
             <br /> but things on a small scale.
           </h4>
-          <button className="w-fit font-mont font-bold rounded-md text-2xl text-[#FFFFFF] bg-[#2DC071] py-3.5 px-10">
+          <button className="w-fit font-mont font-bold rounded-md text-2xl text-white bg-success-color py-3.5 px-10">
             SHOP NOW
           </button>
         </div>

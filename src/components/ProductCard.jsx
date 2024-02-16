@@ -74,42 +74,42 @@ function ProductCard() {
         <div key={index} className="flex flex-col items-center ">
           <img className="w-60 h-[427px]" src={item.img} alt="" />
           <div className="flex flex-col gap-3 items-center pt-6  pb-9">
-            <h5 className="font-mont font-bold text-base text-[#252B42]">
+            <h5 className="font-mont font-bold text-base text-dark-text-color">
               {item.title}
             </h5>
-            <p className="font-mont font-bold text-sm text-[#737373]">
+            <p className="font-mont font-bold text-sm text-second-text-color">
               {item.department}
             </p>
             <div className="flex gap-3">
-              <h5 className="font-mont font-bold text-base text-[#BDBDBD]">
+              <h5 className="font-mont font-bold text-base text-muted-text-color">
                 {item.oldPrice}
               </h5>
-              <h5 className="font-mont font-bold text-base text-[#23856D]">
+              <h5 className="font-mont font-bold text-base text-secondary-color">
                 {item.newPrice}
               </h5>
             </div>
             <div className="flex gap-2">
               <button>
                 <FontAwesomeIcon
-                  className="w-fit text-[#23A6F0]"
+                  className="w-fit text-primary-color"
                   icon={faCircle}
                 />
               </button>
               <button>
                 <FontAwesomeIcon
-                  className="w-fit text-[#23856D]"
+                  className="w-fit text-secondary-color"
                   icon={faCircle}
                 />
               </button>
               <button>
                 <FontAwesomeIcon
-                  className="w-fit text-[#E77C40]"
+                  className="w-fit text-alert-color"
                   icon={faCircle}
                 />
               </button>
               <button>
                 <FontAwesomeIcon
-                  className="w-fit text-[#252B42]"
+                  className="w-fit text-dark-text-color"
                   icon={faCircle}
                 />
               </button>

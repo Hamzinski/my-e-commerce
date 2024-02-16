@@ -37,22 +37,20 @@ function Slider2() {
         className="w-full h-full bg-cover object-cover duration-500 flex justify-around items-center "
       >
         <div className="flex flex-col gap-9 ">
-          <h5 className="font-mont font-bold text-base text-[#FFFFFF]">
+          <h5 className="font-mont font-bold text-base text-white">
             SUMMER 2020
           </h5>
-          <h1 className="font-mont font-bold text-6xl text-[#FFFFFF]">
+          <h1 className="font-mont font-bold text-6xl text-white">
             Vita Classic
             <br /> Product
           </h1>
-          <h4 className="font-mont font-normal text-xl text-[#FFFFFF]">
+          <h4 className="font-mont font-normal text-xl text-white">
             We know how large objects will act, We know
             <br /> how are objects will act, We know
           </h4>
           <div className="flex gap-9">
-            <h3 className="font-mont font-bold text-2xl text-[#FFFFFF]">
-              $16.48
-            </h3>
-            <button className="w-fit font-mont font-bold text-sm text-[#FFFFFF] rounded-md bg-[#2DC071] py-3.5 px-10">
+            <h3 className="font-mont font-bold text-2xl text-white">$16.48</h3>
+            <button className="w-fit font-mont font-bold text-sm text-white rounded-md bg-success-color py-3.5 px-10">
               ADD TO CART
             </button>
           </div>

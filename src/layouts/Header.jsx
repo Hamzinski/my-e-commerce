@@ -39,18 +39,18 @@ const buttons = [
   {
     icon: faUser,
     text: "Login / Register",
-    className: "font-mont font-bold text-[#23A6F0]",
+    className: "font-mont font-bold text-primary-color",
   },
-  { icon: faMagnifyingGlass, text: "", className: "text-[#23A6F0]" },
-  { icon: faCartShopping, text: "", className: "text-[#23A6F0]" },
-  { icon: faHeart, text: "", className: "text-[#23A6F0]" },
+  { icon: faMagnifyingGlass, text: "", className: "text-primary-color" },
+  { icon: faCartShopping, text: "", className: "text-primary-color" },
+  { icon: faHeart, text: "", className: "text-primary-color" },
 ];
 
 function Header() {
   return (
     <>
       <div className="flex  flex-col  ">
-        <div className=" bg-[#252B42] p-6 ">
+        <div className=" bg-dark-background-color p-6 ">
           <div className="flex justify-between custom-container">
             <div className="flex gap-6">
               {contactInfo.map((info, index) => (
@@ -80,15 +80,17 @@ function Header() {
           </div>
         </div>
 
-        <div className=" bg-[#FFFFFF] p-6">
+        <div className=" bg-white p-6">
           <div className="flex justify-between items-center  custom-container">
             <div className="flex items-center ">
-              <h3 className="font-mont text-2xl font-bold">Bandage</h3>
+              <h3 className="font-mont text-2xl font-bold text-dark-text-color">
+                Bandage
+              </h3>
               <div className="flex gap-3 ml-32">
                 {links.map((link, index) => (
                   <a
                     key={index}
-                    className="font-mont text-sm font-bold text-[#737373]"
+                    className="font-mont text-sm font-bold text-second-text-color"
                     href={link.href}
                   >
                     {link.text}

@@ -39,15 +39,17 @@ function Footer() {
   return (
     <>
       <div className="flex flex-col">
-        <div className=" bg-[#FAFAFA] p-12  ">
+        <div className=" bg-light-gray-1 p-12  ">
           <div className="custom-container flex items-center justify-between">
-            <h3 className="font-mont text-2xl font-bold">Bandage</h3>
+            <h3 className="font-mont text-2xl font-bold text-dark-text-color">
+              Bandage
+            </h3>
             <div className="flex gap-6">
               {" "}
               {socialMediaIcons.map((icon, index) => (
                 <button className="text-3xl" key={index} href="">
                   <FontAwesomeIcon
-                    className="text-[#23A6F0]"
+                    className="text-primary-color"
                     icon={icon.icon}
                   />
                 </button>
@@ -56,7 +58,7 @@ function Footer() {
           </div>
         </div>
 
-        <div className=" bg-[#FFFFFF] p-12 ">
+        <div className=" bg-white p-12 ">
           <div className="custom-container flex justify-between">
             {links.map((section, index) => (
               <div key={index} className="flex flex-col">
@@ -67,7 +69,7 @@ function Footer() {
                   section.items.map((item, itemIndex) => (
                     <a
                       key={itemIndex}
-                      className="text-[#737373] text-sm font-bold"
+                      className="text-second-text-color text-sm font-bold"
                       href=""
                     >
                       {item}
@@ -76,16 +78,16 @@ function Footer() {
                 {section.inputGroup && (
                   <InputGroup>
                     <Input placeholder="Your Email" />
-                    <Button className="bg-[#23A6F0]">Subscribe</Button>
+                    <Button className="bg-primary-bg">Subscribe</Button>
                   </InputGroup>
                 )}
               </div>
             ))}
           </div>
         </div>
-        <div className="bg-[#FAFAFA] p-6 ">
+        <div className="bg-light-gray-1 p-6 ">
           <div className="custom-container">
-            <p className="font-mont text-sm text-[#737373] font-bold">
+            <p className="font-mont text-sm text-second-text-color font-bold">
               Made With Love By Finland All Right Reserved{" "}
             </p>
           </div>
