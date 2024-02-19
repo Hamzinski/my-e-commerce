@@ -12,6 +12,7 @@ export default {
         "primary-bg": "#23A6F0",
         "success-color": "#2DC071",
         "danger-color": "#E74040",
+        "hover-color": "#2A7CC7",
       },
       textColor: {
         "primary-color": "#23A6F0",
@@ -21,9 +22,12 @@ export default {
         "dark-text-color": "#252B42",
         "muted-text-color": "#BDBDBD",
         "success-text-color": "#2DC071",
+        "danger-text-color": "#E74040",
+        "gray-text-color": "#858585",
       },
       borderColor: {
         "success-border-color": "#2DC071",
+        "gray-border": "#E8E8E8",
       },
     },
   },
