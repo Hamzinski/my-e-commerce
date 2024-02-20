@@ -33,35 +33,34 @@ function Slider() {
         <div
           style={{
             backgroundImage: `url(${slides[currentIndex].url}) `,
+            backgroundPosition: "center",
           }}
           className="w-full h-full bg-cover object-cover duration-500"
         >
-          <div className="absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl p-2 text-white cursor-pointer">
+          <div className="absolute top-[50%] -translate-x-0 translate-y-[-50%] left-0 md:left-5 text-2xl p-2 text-white cursor-pointer">
             <BsChevronCompactLeft onClick={prevSlide} size={60} />
           </div>
-          <div className="absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl p-2 text-white cursor-pointer">
+          <div className="absolute top-[50%] -translate-x-0 translate-y-[-50%] right-0 md:right-5 text-2xl p-2 text-white cursor-pointer">
             <BsChevronCompactRight onClick={nextSlide} size={60} />
           </div>
 
-          <div className="flex flex-col gap-9  p-52">
+          <div className="flex flex-col gap-12 md:gap-9 p-20 md:p-52 text-center md:text-start items-center md:items-start">
             <h5 className="font-mont font-bold text-base text-white">
               SUMMER 2020
             </h5>
-            <h1 className="font-mont font-bold text-6xl text-white">
+            <h1 className="font-mont font-bold text-4xl md:text-6xl text-white">
               NEW COLLECTION
             </h1>
-
-            <h4 className="font-mont font-normal text-xl text-white">
-              We know how large objects will act,
-              <br /> but things on a small scale.
-            </h4>
+            <p className="font-mont font-normal md:text-start text-xl text-white w-72 md:w-96">
+              We know how large objects will act, but things on a small scale.
+            </p>
             <button className="w-fit font-mont font-bold rounded-md text-2xl text-white bg-success-color py-3.5 px-10">
               SHOP NOW
             </button>
           </div>
         </div>
 
-        <div className="flex absolute bottom-4 right-0 left-0 justify-center py-2 gap-1">
+        <div className="hidden md:flex absolute bottom-4 right-0 left-0 justify-center py-2 gap-1">
           {slides.map((slide, slideIndex) => (
             <div
               key={slideIndex}

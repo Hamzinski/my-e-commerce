@@ -35,27 +35,27 @@ function Slider2() {
       <div className="custom container relative">
         <div
           style={{ background: `${slides[currentIndex].bgcolor}` }}
-          className="w-full h-full bg-cover object-cover duration-500 flex justify-around items-center "
+          className="w-full h-full bg-cover object-cover duration-500 flex flex-col md:flex-row justify-around items-center "
         >
-          <div className="absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl  p-2  text-white cursor-pointer">
+          <div className="absolute top-[50%] -translate-x-0 translate-y-[-50%] left-0 md:left-5 text-2xl  p-2  text-white cursor-pointer">
             <BsChevronCompactLeft onClick={prevSlide} size={60} />
           </div>
-          <div className="absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl p-2  text-white cursor-pointer">
+          <div className="absolute top-[50%] -translate-x-0 translate-y-[-50%] right-0 md:right-5 text-2xl p-2  text-white cursor-pointer">
             <BsChevronCompactRight onClick={nextSlide} size={60} />
           </div>
-          <div className="flex flex-col gap-9 ">
-            <h5 className="font-mont font-bold text-base text-white">
+          <div className="flex mt-24 md:mt-0 text-center md:text-start items-center md:items-stretch flex-col gap-12 md:gap-9">
+            <h5 className="font-mont font-bold md:text-start text-base text-white">
               SUMMER 2020
             </h5>
-            <h1 className="font-mont font-bold text-6xl text-white">
+            <h1 className="font-mont font-bold md:text-start text-6xl text-white">
               Vita Classic
               <br /> Product
             </h1>
-            <h4 className="font-mont font-normal text-xl text-white">
-              We know how large objects will act, We know
-              <br /> how are objects will act, We know
+            <h4 className="font-mont font-normal md:text-start text-xl text-white w-72 md:w-96">
+              We know how large objects will act, We know how are objects will
+              act, We know
             </h4>
-            <div className="flex gap-9">
+            <div className="flex flex-col md:flex-row gap-9">
               <h3 className="font-mont font-bold text-2xl text-white">
                 $16.48
               </h3>
@@ -64,12 +64,12 @@ function Slider2() {
               </button>
             </div>
           </div>
-          <div className="h-full flex items-end">
+          <div className="h-full flex items-end mt-12 md:mt-0">
             <img className="" src={slides[currentIndex].image} alt="" />
           </div>
         </div>
 
-        <div className="flex absolute bottom-4 right-0 left-0 justify-center py-2 gap-1">
+        <div className="hidden md:flex absolute bottom-4 right-0 left-0 justify-center py-2 gap-1">
           {slides.map((slide, slideIndex) => (
             <div
               key={slideIndex}

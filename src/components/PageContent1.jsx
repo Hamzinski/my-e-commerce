@@ -7,23 +7,27 @@ import ep4 from "../assets/ep4.png";
 function PageContent1() {
   return (
     <div>
-      <div className="flex gap-6">
-        <div className="flex gap-6">
-          <div className="flex w-[500px] h-[500px] relative">
+      <div className="mobile-container md:custom-container flex flex-col md:flex-row justify-center gap-6">
+        <div className="flex flex-col md:flex-row gap-6">
+          <div className="flex w-[324px] h-[500px] md:w-[500px] md:h-[500px] relative">
             <div className="flex items-end p-6 absolute w-full h-full">
               <button className="bg-white font-mont font-bold text-base w-44 h-12">
                 MEN
               </button>
             </div>
-            <img src={ep1} alt="" />
+            <img className="object-cover" src={ep1} alt="" />
           </div>
-          <div className="flex w-60 h-[500px] relative">
+          <div className="flex w-[324px] h-[500px] md:w-60 md:h-[500px] relative">
             <div className="flex items-end p-6 absolute w-full h-full">
               <button className="bg-white font-mont font-bold text-base w-32 h-12">
                 WOMEN
               </button>
             </div>
-            <img src={ep2} alt="" />
+            <img
+              className="object-cover w-[324px] h-[500px] md:w-60 md:h-[500px]"
+              src={ep2}
+              alt=""
+            />
           </div>
         </div>
         <div className="flex flex-col gap-6">
