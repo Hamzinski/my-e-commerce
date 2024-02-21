@@ -18,7 +18,7 @@ function Home() {
             EDITOR'S PICK
           </h3>
           <p className="font-mont font-medium text-sm text-second-text-color">
-            Problems trying too resolve the conflict between{" "}
+            Problems trying to resolve the conflict between{" "}
           </p>
         </div>
         <PageContent1 />
