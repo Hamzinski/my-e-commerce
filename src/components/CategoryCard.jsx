@@ -18,7 +18,7 @@ function CategoryCard() {
     <div>
       <div className="bg-light-gray-1">
         <div className="custom-container flex flex-col py-8">
-          <div className="justify-between flex ">
+          <div className="justify-between flex flex-col md:flex-row items-center md:items-stretch gap-9 md:gap-0">
             <h3 className="font-mont font-bold text-2xl text-dark-text-color">
               Shop
             </h3>
@@ -33,14 +33,15 @@ function CategoryCard() {
             </div>
           </div>
         </div>
-        <div className="custom-container flex justify-between">
+        <div className="custom-container flex flex-col md:flex-row items-center md:items-stretch justify-between gap-3">
           {items.map((item, index) => (
             <div
               key={index}
-              className="w-52 h-56 flex flex-col justify-center items-center gap-3"
+              className="md:w-52 md:h-56 w-80 h-72 flex flex-col justify-center items-center gap-3"
               style={{
                 backgroundImage: `url(${item.backgroundImage})`,
                 backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
               }}
             >
               <p className="font-mont font-bold text-white text-base">

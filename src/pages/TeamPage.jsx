@@ -76,11 +76,11 @@ function TeamPage() {
   return (
     <div>
       <Header />
-      <div className="custom-container flex flex-col justify-center items-center gap-6 py-12">
+      <div className="custom-container flex flex-col justify-center items-center gap-6 py-12 px-2 md:px-0">
         <p className="font-mont font-bold text-base text-second-text-color">
           WHAT WE DO
         </p>
-        <p className="font-mont font-bold text-6xl text-dark-text-color">
+        <p className="font-mont font-bold text-5xl md:text-6xl text-dark-text-color text-center">
           Innovation tailored for you
         </p>
         <div className="custom-container flex items-center">
@@ -93,13 +93,33 @@ function TeamPage() {
           </p>
         </div>
       </div>
-      <div className="custom-container flex py-12 gap-2">
-        <img src={team1} alt="" />
-        <div className="flex flex-wrap gap-2">
-          <img className="max-w-[361px] max-h-[260px]" src={team2} alt="" />
-          <img className="max-w-[361px] max-h-[260px]" src={team3} alt="" />
-          <img className="max-w-[361px] max-h-[260px]" src={team4} alt="" />
-          <img className="max-w-[361px] max-h-[260px]" src={team5} alt="" />
+      <div className="custom-container flex flex-col md:flex-row py-12 gap-2">
+        <img className="w-full md:w-[700px] object-cover" src={team1} alt="" />
+        <div className="flex flex-col gap-2">
+          <div className="flex gap-1">
+            <img
+              className="w-1/2 md:w-[361px] h-[260px] object-cover"
+              src={team2}
+              alt=""
+            />
+            <img
+              className="w-1/2 md:w-[361px] h-[260px] object-cover"
+              src={team3}
+              alt=""
+            />
+          </div>
+          <div className="flex gap-1">
+            <img
+              className="w-1/2 md:w-[361px] h-[260px] object-cover"
+              src={team4}
+              alt=""
+            />
+            <img
+              className="w-1/2 md:w-[361px] h-[260px] object-cover"
+              src={team5}
+              alt=""
+            />
+          </div>
         </div>
       </div>
       <p className="font-mont font-bold text-5xl text-center my-12">
@@ -131,11 +151,11 @@ function TeamPage() {
           </div>
         ))}
       </div>
-      <div className="custom-container flex flex-col gap-9 items-center my-16">
+      <div className="custom-container flex flex-col gap-9 items-center text-center my-16">
         <p className="font-mont font-bold text-5xl text-dark-text-color">
           Start your 14 days free trial
         </p>
-        <p className="w-2/6 font-mont font-semibold text-base text-second-text-color text-center">
+        <p className="w-5/6 md:w-2/6 font-mont font-semibold text-base text-second-text-color text-center">
           Met minim Mollie non desert Alamo est sit cliquey dolor do met sent.
           RELIT official consequent.
         </p>

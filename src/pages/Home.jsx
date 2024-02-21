@@ -15,7 +15,7 @@ function Home() {
       <div className="flex gap-9 flex-col justify-center items-center py-24">
         <div className="flex gap-3 flex-col items-center">
           <h3 className="font-mont font-bold text-2xl text-dark-text-color">
-            EDITOR’S PICK
+            EDITOR'S PICK
           </h3>
           <p className="font-mont font-medium text-sm text-second-text-color">
             Problems trying to resolve the conflict between{" "}

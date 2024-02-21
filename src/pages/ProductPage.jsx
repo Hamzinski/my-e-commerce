@@ -100,7 +100,7 @@ function ProductPage() {
     <div>
       <Header />
       <div className="py-8 bg-light-gray-1">
-        <div className="custom-container flex items-center">
+        <div className="custom-container flex justify-center md:justify-start items-center">
           <p className="font-mont font-bold text-sm text-dark-text-color ">
             Home{" "}
           </p>
@@ -109,11 +109,11 @@ function ProductPage() {
             Shop
           </p>
         </div>
-        <div className="custom-container flex gap-12 py-12">
+        <div className="custom-container items-center md:items-stretch flex flex-col md:flex-row gap-12 py-12">
           <div>
             <Slider3 />
           </div>
-          <div className="flex flex-col gap-3 w-1/3">
+          <div className="flex flex-col gap-3 w-2/3 md:w-1/3">
             <p className="text-dark-text-color font-mont font-semibold text-xl">
               Floating Phone
             </p>
@@ -190,7 +190,7 @@ function ProductPage() {
         </div>
       </div>
       <div className="custom-container flex flex-col">
-        <div className="flex justify-center gap-12 font-mont font-semibold text-second-text-color pt-12 py-6">
+        <div className="flex justify-center gap-6 font-mont font-semibold text-second-text-color pt-12 py-6 ">
           <p>Description</p>
           <p>Additional Information</p>
           <p>
@@ -198,9 +198,9 @@ function ProductPage() {
           </p>
         </div>
         <hr />
-        <div className="flex justify-center gap-9 py-12">
+        <div className="flex flex-col md:flex-row justify-center gap-9 py-12 px-12 md:px-0">
           <img src={product1} alt="" />
-          <div className="w-80 flex flex-col gap-6">
+          <div className="w-full md:w-80 flex flex-col gap-6">
             <p className="text-dark-text-color font-mont font-bold text-2xl">
               the quick fox jumps over
             </p>
@@ -212,7 +212,7 @@ function ProductPage() {
               </div>
             ))}
           </div>
-          <div className="flex flex-col gap-3">
+          <div className="flex items-center md:items-stretch flex-col gap-3">
             <div className="flex flex-col gap-9">
               <div>
                 <p className="text-dark-text-color font-mont font-bold text-2xl">
@@ -262,8 +262,8 @@ function ProductPage() {
           </div>
         </div>
       </div>
-      <div className="custom-container flex flex-col px-36 py-12">
-        <p className="text-dark-text-color font-mont font-bold text-2xl">
+      <div className="custom-container flex flex-col px-12 md:px-36 py-12">
+        <p className="text-dark-text-color text-center font-mont font-bold text-2xl">
           BESTSELLER PRODUCTS
         </p>
         <div>

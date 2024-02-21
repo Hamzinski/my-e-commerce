@@ -11,21 +11,21 @@ function ContactPage() {
   return (
     <div>
       <Header />
-      <div className="custom-container flex justify-between items-center">
-        <div className="flex flex-col w-1/3 gap-9">
-          <p className="font-mont font-bold text-base text-dark-text-color">
+      <div className="custom-container flex flex-col md:flex-row justify-between items-center mt-24 md:mt-0 gap-16 md:gap-0">
+        <div className="flex flex-col w-full md:w-1/3 text-center gap-9 items-center md:items-stretch px-12 md:px-0">
+          <p className="font-mont font-bold text-base text-dark-text-color md:text-start">
             CONTACT US
           </p>
-          <p className="font-mont font-bold text-6xl text-dark-text-color">
+          <p className="font-mont font-bold text-6xl text-dark-text-color md:text-start">
             Get in touch today!
           </p>
-          <p className="font-mont font-medium text-xl text-second-text-color">
+          <p className="font-mont font-medium text-xl text-second-text-color md:text-start">
             We know how large objects will act, but things on a small scale
           </p>
-          <p className="font-mont font-bold text-2xl text-dark-text-color">
+          <p className="font-mont font-bold text-2xl text-dark-text-color md:text-start">
             Phone ; +451 215 215{" "}
           </p>
-          <p className="font-mont font-bold text-2xl text-dark-text-color">
+          <p className="font-mont font-bold text-2xl text-dark-text-color md:text-start">
             Fax : +451 215 215
           </p>
           <div className="flex gap-9">
@@ -35,9 +35,9 @@ function ContactPage() {
             <img src={logolinkedln} alt="" />
           </div>
         </div>
-        <img src={contactpic} alt="" />
+        <img className="px-3 md:px-0" src={contactpic} alt="" />
       </div>
-      <div className="custom-container flex flex-col text-center items-center gap-12 w-1/3 my-32">
+      <div className="custom-container flex flex-col text-center items-center gap-12 w-3/4 md:w-1/3 my-32">
         <p className="font-mont font-bold text-4xl text-dark-text-color">
           Get answers to all your questions.
         </p>

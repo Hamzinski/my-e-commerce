@@ -1,4 +1,5 @@
 import React from "react";
+import Hamburger from "../components/Hamburger";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPhone,
@@ -39,18 +40,30 @@ const buttons = [
   {
     icon: faUser,
     text: "Login / Register",
-    className: "font-mont font-bold text-primary-color",
+    className: "font-mont font-bold text-2xl md:text-base text-primary-color",
   },
-  { icon: faMagnifyingGlass, text: "", className: "text-primary-color" },
-  { icon: faCartShopping, text: "", className: "text-primary-color" },
-  { icon: faHeart, text: "", className: "text-primary-color" },
+  {
+    icon: faMagnifyingGlass,
+    text: "",
+    className: "text-primary-color text-2xl md:text-base",
+  },
+  {
+    icon: faCartShopping,
+    text: "",
+    className: "text-primary-color text-2xl md:text-base",
+  },
+  {
+    icon: faHeart,
+    text: "",
+    className: "text-primary-color text-2xl md:text-base",
+  },
 ];
 
 function Header() {
   return (
     <>
       <div className="flex  flex-col  ">
-        <div className=" bg-dark-background-color p-6 ">
+        <div className="hidden md:block bg-dark-background-color p-6 ">
           <div className="flex justify-between custom-container">
             <div className="flex gap-6">
               {contactInfo.map((info, index) => (
@@ -81,16 +94,22 @@ function Header() {
         </div>
 
         <div className=" bg-white p-6">
-          <div className="flex justify-between items-center  custom-container">
-            <div className="flex items-center ">
-              <h3 className="font-mont text-2xl font-bold text-dark-text-color">
-                Bandage
-              </h3>
-              <div className="flex gap-3 ml-32">
+          <div className="flex flex-col md:flex-row justify-between gap-6 md:gap-0 custom-container">
+            <div className="flex flex-col gap-6 md:gap-0 md:flex-row ">
+              <div className="flex justify-between items-center">
+                <h3 className="font-mont text-2xl font-bold text-dark-text-color">
+                  Bandage
+                </h3>
+                <div className="block md:hidden">
+                  <Hamburger />
+                </div>
+              </div>
+
+              <div className="flex flex-col items-center md:flex-row gap-3 ml-0 md:ml-32">
                 {links.map((link, index) => (
                   <a
                     key={index}
-                    className="font-mont text-sm font-bold text-second-text-color"
+                    className="font-mont text-3xl md:text-sm font-normal md:font-bold text-second-text-color"
                     href={link.href}
                   >
                     {link.text}
@@ -98,7 +117,7 @@ function Header() {
                 ))}
               </div>
             </div>
-            <div className="flex gap-9">
+            <div className="flex flex-col md:flex-row gap-3 md:gap-9">
               {buttons.map((button, index) => (
                 <button key={index} className={button.className}>
                   <FontAwesomeIcon icon={button.icon} /> {button.text}

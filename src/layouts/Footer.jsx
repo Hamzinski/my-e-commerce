@@ -40,7 +40,7 @@ function Footer() {
     <>
       <div className="flex flex-col">
         <div className=" bg-light-gray-1 p-12  ">
-          <div className="custom-container flex items-center justify-between">
+          <div className="custom-container flex flex-col md:flex-row items-start md:items-center gap-3 md:gap-0 justify-between">
             <h3 className="font-mont text-2xl font-bold text-dark-text-color">
               Bandage
             </h3>
@@ -59,9 +59,9 @@ function Footer() {
         </div>
 
         <div className=" bg-white p-12 ">
-          <div className="custom-container flex justify-between">
+          <div className="custom-container flex flex-col md:flex-row gap-6 md:gap-0 justify-between">
             {links.map((section, index) => (
-              <div key={index} className="flex flex-col">
+              <div key={index} className="flex flex-col gap-2">
                 <h5 className="font-mont font-bold text-base">
                   {section.title}
                 </h5>
@@ -86,8 +86,8 @@ function Footer() {
           </div>
         </div>
         <div className="bg-light-gray-1 p-6 ">
-          <div className="custom-container">
-            <p className="font-mont text-sm text-second-text-color font-bold">
+          <div className="custom-container text-center">
+            <p className="md:text-start font-mont text-sm text-second-text-color font-bold">
               Made With Love By Finland All Right Reserved{" "}
             </p>
           </div>

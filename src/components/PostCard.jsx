@@ -50,7 +50,7 @@ const postData = [
 
 function PostCard() {
   return (
-    <div className="flex justify-center gap-3">
+    <div className="flex flex-col md:flex-row justify-center gap-3">
       {postData.map((post) => (
         <div key={post.id}>
           <div className="flex flex-col items-center pb-36">

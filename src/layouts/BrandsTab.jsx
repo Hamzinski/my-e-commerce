@@ -11,7 +11,7 @@ const images = [fa1, fa2, fa3, fa4, fa5, fa6];
 function BrandsTab() {
   return (
     <div>
-      <div className="custom-container flex flex-wrap justify-between p-12">
+      <div className="custom-container flex flex-wrap flex-col md:flex-row justify-between p-12 gap-9">
         {images.map((src, index) => (
           <img key={index} className="object-contain" src={src} alt="" />
         ))}
