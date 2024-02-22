@@ -1,7 +1,5 @@
 import React from "react";
-import Header from "../layouts/Header";
 import BrandsTab from "../layouts/BrandsTab";
-import Footer from "../layouts/Footer";
 import Slider3 from "../components/Slider3";
 import product1 from "../assets/product1.png";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
@@ -98,7 +96,6 @@ const data1 = [
 function ProductPage() {
   return (
     <div>
-      <Header />
       <div className="py-8 bg-light-gray-1">
         <div className="custom-container flex justify-center md:justify-start items-center">
           <p className="font-mont font-bold text-sm text-dark-text-color ">
@@ -296,7 +293,6 @@ function ProductPage() {
         </div>
       </div>
       <BrandsTab />
-      <Footer />
     </div>
   );
 }

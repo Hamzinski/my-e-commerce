@@ -1,6 +1,4 @@
 import React from "react";
-import Header from "../layouts/Header";
-import Footer from "../layouts/Footer";
 import ProductCard from "../components/ProductCard";
 import CategoryCard from "../components/CategoryCard";
 import { TbCategoryFilled } from "react-icons/tb";
@@ -10,7 +8,6 @@ import BrandsTab from "../layouts/BrandsTab";
 function ProductListPage() {
   return (
     <div>
-      <Header />
       <CategoryCard />
       <div className="custom-container p-12">
         <div className="flex flex-col md:flex-row gap-6 md:gap-0 justify-between items-center">
@@ -35,7 +32,6 @@ function ProductListPage() {
       </div>
       <ProductCard />
       <BrandsTab />
-      <Footer />
     </div>
   );
 }
