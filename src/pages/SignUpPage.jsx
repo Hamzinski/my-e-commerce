@@ -1,6 +1,5 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Button, Input, Label } from "reactstrap";
 import axios from "axios";
 
 const api = axios.create({
@@ -14,26 +13,26 @@ function SignUpPage() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await api.post("/roles", data);
+      const response = await api.post("/signup", data);
       console.log(response.data);
     } catch (error) {
-      console.error("Form gönderilirken bir hata oluştu", error);
+      console.error("An error occurred while submitting the form", error);
     }
   };
 
   return (
     <div className="flex justify-center">
       <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
-        <Label htmlFor="username">Username</Label>
-        <Input
+        <label htmlFor="username">Username</label>
+        <input
           type="text"
           name="username"
           id="username"
           {...register("username", { required: true, minLength: 3 })}
         />
 
-        <Label htmlFor="email">E-mail</Label>
-        <Input
+        <label htmlFor="email">E-mail</label>
+        <input
           type="email"
           name="email"
           id="email"
@@ -43,21 +42,19 @@ function SignUpPage() {
           })}
         />
 
-        <Label htmlFor="password">Password</Label>
-        <Input
+        <label htmlFor="password">Password</label>
+        <input
           type="password"
           name="password"
           id="password"
           {...register("password", {
             required: true,
             minLength: 8,
-            pattern:
-              /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
           })}
         />
 
-        <Label htmlFor="passwordAgain">Password again</Label>
-        <Input
+        <label htmlFor="passwordAgain">Password again</label>
+        <input
           type="password"
           name="passwordAgain"
           id="passwordAgain"
@@ -67,9 +64,9 @@ function SignUpPage() {
               value === watchPassword || "Passwords do not match",
           })}
         />
-        <Button className="bg-primary-bg" type="submit">
+        <button className="bg-primary-bg" type="submit">
           Submit
-        </Button>
+        </button>
       </form>
     </div>
   );
