@@ -1,4 +1,5 @@
-import "./App.css";
+import React from "react";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import Home from "./pages/Home";
 import ProductListPage from "./pages/ProductListPage";
 import AboutPage from "./pages/AboutPage";
@@ -8,20 +9,20 @@ import ContactPage from "./pages/ContactPage";
 import SignUpPage from "./pages/SignUpPage";
 import Header from "./layouts/Header";
 import Footer from "./layouts/Footer";
-import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
+
 function App() {
   return (
     <Router>
       <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/productlist" element={<ProductListPage />} />
-        <Route path="/product" element={<ProductPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/team" element={<TeamPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/signup" element={<SignUpPage />} />
-      </Routes>
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/productlist" component={ProductListPage} />
+        <Route path="/product" component={ProductPage} />
+        <Route path="/about" component={AboutPage} />
+        <Route path="/team" component={TeamPage} />
+        <Route path="/contact" component={ContactPage} />
+        <Route path="/signup" component={SignUpPage} />
+      </Switch>
       <Footer />
     </Router>
   );
