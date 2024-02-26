@@ -1,6 +1,4 @@
 import React from "react";
-import Header from "../layouts/Header";
-import Footer from "../layouts/Footer";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import team1 from "../assets/team1.png";
 import team2 from "../assets/team2.png";
@@ -75,7 +73,6 @@ const socialMediaIcons = [
 function TeamPage() {
   return (
     <div>
-      <Header />
       <div className="custom-container flex flex-col justify-center items-center gap-6 py-12 px-2 md:px-0">
         <p className="font-mont font-bold text-base text-second-text-color">
           WHAT WE DO
@@ -169,7 +166,6 @@ function TeamPage() {
           <img src={logolinkedln} alt="" />
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

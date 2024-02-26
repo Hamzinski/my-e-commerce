@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
+import { Button } from "reactstrap";
 function Slider() {
   const slides = [
     {
@@ -54,9 +55,9 @@ function Slider() {
             <p className="font-mont font-normal md:text-start text-xl text-white w-72 md:w-96">
               We know how large objects will act, but things on a small scale.
             </p>
-            <button className="w-fit font-mont font-bold rounded-md text-2xl text-white bg-success-color py-3.5 px-10">
+            <Button className="w-fit font-mont font-bold rounded-md text-2xl text-white bg-success-color py-3.5 px-10">
               SHOP NOW
-            </button>
+            </Button>
           </div>
         </div>
 

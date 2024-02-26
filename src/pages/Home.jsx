@@ -1,16 +1,14 @@
 import React from "react";
-import Header from "../layouts/Header";
 import PageContent1 from "../components/PageContent1";
 import PageContent2 from "../components/PageContent2";
 import Slider from "../components/Slider";
 import Slider2 from "../components/Slider2";
 import ProductCard from "../components/ProductCard";
 import PostCard from "../components/PostCard";
-import Footer from "../layouts/Footer";
+
 function Home() {
   return (
     <>
-      <Header />
       <Slider />
       <div className="flex gap-9 flex-col justify-center items-center py-24">
         <div className="flex gap-3 flex-col items-center">
@@ -52,7 +50,6 @@ function Home() {
         </div>
       </div>
       <PostCard />
-      <Footer />
     </>
   );
 }

@@ -1,7 +1,5 @@
 import React from "react";
-import Header from "../layouts/Header";
 import BrandsTab from "../layouts/BrandsTab";
-import Footer from "../layouts/Footer";
 import AboutUsHero from "../assets/aboutUsHero.png";
 import BgVideo from "../assets/bgvideo.png";
 import imgWomen from "../assets/imgwomen.png";
@@ -47,7 +45,6 @@ const socialMediaIcons = [
 function AboutPage() {
   return (
     <div>
-      <Header />
       <div className="custom-container flex flex-col md:flex-row justify-between mt-36 md:mt-0">
         <div className="flex flex-col items-center md:items-start gap-9 text-center justify-center w-full md:w-96">
           <h5 className="font-mont font-bold text-base text-dark-text-color">
@@ -179,8 +176,6 @@ function AboutPage() {
 
         <img className="hidden md:block" src={imgWomen} alt="" />
       </div>
-
-      <Footer />
     </div>
   );
 }

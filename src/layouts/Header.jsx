@@ -6,6 +6,7 @@ import {
   faEnvelope,
   faMagnifyingGlass,
   faCartShopping,
+  faAddressCard,
 } from "@fortawesome/free-solid-svg-icons";
 import { faUser, faHeart } from "@fortawesome/free-regular-svg-icons";
 import {
@@ -14,6 +15,7 @@ import {
   faFacebook,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
+import { NavLink } from "reactstrap";
 
 const contactInfo = [
   { icon: faPhone, text: "(225) 555-0118" },
@@ -28,34 +30,44 @@ const socialMediaIcons = [
 ];
 
 const links = [
-  { text: "Home", href: "#" },
-  { text: "Shop", href: "#" },
-  { text: "About", href: "#" },
-  { text: "Blog", href: "#" },
-  { text: "Contact", href: "#" },
+  { text: "Home", href: "/" },
+  { text: "Shop", href: "productlist" },
+  { text: "About", href: "about" },
+  { text: "Blog", href: "team" },
+  { text: "Contact", href: "contact" },
   { text: "Pages", href: "#" },
 ];
 
 const buttons = [
   {
     icon: faUser,
-    text: "Login / Register",
+    text: "Login",
     className: "font-mont font-bold text-2xl md:text-base text-primary-color",
+    href: "#",
+  },
+  {
+    icon: faAddressCard,
+    text: "Register",
+    className: "font-mont font-bold text-2xl md:text-base text-primary-color",
+    href: "signup",
   },
   {
     icon: faMagnifyingGlass,
     text: "",
     className: "text-primary-color text-2xl md:text-base",
+    href: "#",
   },
   {
     icon: faCartShopping,
     text: "",
     className: "text-primary-color text-2xl md:text-base",
+    href: "#",
   },
   {
     icon: faHeart,
     text: "",
     className: "text-primary-color text-2xl md:text-base",
+    href: "#",
   },
 ];
 
@@ -105,23 +117,27 @@ function Header() {
                 </div>
               </div>
 
-              <div className="flex flex-col items-center md:flex-row gap-3 ml-0 md:ml-32">
+              <div className="flex flex-col items-center md:flex-row ml-0 md:ml-32">
                 {links.map((link, index) => (
-                  <a
+                  <NavLink
                     key={index}
                     className="font-mont text-3xl md:text-sm font-normal md:font-bold text-second-text-color"
                     href={link.href}
                   >
                     {link.text}
-                  </a>
+                  </NavLink>
                 ))}
               </div>
             </div>
-            <div className="flex flex-col md:flex-row gap-3 md:gap-9">
+            <div className="flex flex-col md:flex-row items-center">
               {buttons.map((button, index) => (
-                <button key={index} className={button.className}>
+                <NavLink
+                  key={index}
+                  className={button.className}
+                  href={button.href}
+                >
                   <FontAwesomeIcon icon={button.icon} /> {button.text}
-                </button>
+                </NavLink>
               ))}
             </div>
           </div>

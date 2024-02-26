@@ -1,6 +1,4 @@
 import React from "react";
-import Header from "../layouts/Header";
-import Footer from "../layouts/Footer";
 import logoface from "../assets/logoface.png";
 import logoinsta from "../assets/logoinsta.png";
 import logolinkedln from "../assets/logolinkedln.png";
@@ -10,7 +8,6 @@ import arrow from "../assets/arrow.png";
 function ContactPage() {
   return (
     <div>
-      <Header />
       <div className="custom-container flex flex-col md:flex-row justify-between items-center mt-24 md:mt-0 gap-16 md:gap-0">
         <div className="flex flex-col w-full md:w-1/3 text-center gap-9 items-center md:items-stretch px-12 md:px-0">
           <p className="font-mont font-bold text-base text-dark-text-color md:text-start">
@@ -68,7 +65,6 @@ function ContactPage() {
           Try it free now
         </button>
       </div>
-      <Footer />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import slider2 from "../assets/slider2.png";
+import { Button } from "reactstrap";
 function Slider2() {
   const slides = [
     {
@@ -59,9 +60,9 @@ function Slider2() {
               <h3 className="font-mont font-bold text-2xl text-white">
                 $16.48
               </h3>
-              <button className="w-fit font-mont font-bold text-sm text-white rounded-md bg-success-color py-3.5 px-10">
+              <Button className="w-fit font-mont font-bold text-sm text-white rounded-md bg-success-color py-3.5 px-10">
                 ADD TO CART
-              </button>
+              </Button>
             </div>
           </div>
           <div className="h-full flex items-end mt-12 md:mt-0">
