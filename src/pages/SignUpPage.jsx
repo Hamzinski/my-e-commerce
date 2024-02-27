@@ -4,6 +4,8 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { fetchRoles } from "../store/actions/GlobalAction";
+import { useDispatch, useSelector } from "react-redux";
 
 const instance = axios.create({
   baseURL: "https://workintech-fe-ecommerce.onrender.com",
@@ -25,6 +27,8 @@ const initialData = {
 
 function SignUpPage() {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const roles = useSelector((store) => store.global.roles);
   const [loading, setLoading] = useState(false);
   const {
     register,
@@ -33,13 +37,8 @@ function SignUpPage() {
     watch,
   } = useForm({ defaultValues: initialData });
 
-  const [roles, setRoles] = useState([]);
-
   useEffect(() => {
-    instance.get("/roles").then((res) => {
-      setRoles(res.data);
-      console.log("resp:", res.data);
-    });
+    dispatch(fetchRoles());
   }, []);
 
   const selectedRole = watch("role_id");
@@ -69,12 +68,13 @@ function SignUpPage() {
   };
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center my-12">
       <ToastContainer />
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label>Name</label>
+      <form className="flex flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex flex-col">
+          <label className="font-mont font-bold">Name</label>
           <input
+            className="border-3 rounded-md border-gray-border"
             type="text"
             {...register("name", {
               required: "Name is required",
@@ -84,11 +84,14 @@ function SignUpPage() {
               },
             })}
           />
-          <span>{errors.name && errors.name.message}</span>
+          <span className="font-mont font-medium text-red-600">
+            {errors.name && errors.name.message}
+          </span>
         </div>
-        <div>
-          <label>Email</label>
+        <div className="flex flex-col">
+          <label className="font-mont font-bold">Email</label>
           <input
+            className="border-3 rounded-md border-gray-border"
             type="text"
             {...register("email", {
               required: "Email is required",
@@ -98,11 +101,14 @@ function SignUpPage() {
               },
             })}
           />
-          <span>{errors.email && errors.email.message}</span>
+          <span className="font-mont font-medium text-red-600">
+            {errors.email && errors.email.message}
+          </span>
         </div>
-        <div>
-          <label>Password</label>
+        <div className="flex flex-col">
+          <label className="font-mont font-bold">Password</label>
           <input
+            className="border-3 rounded-md border-gray-border"
             type="password"
             {...register("password", {
               required: "Password is required",
@@ -117,24 +123,30 @@ function SignUpPage() {
               },
             })}
           />
-          <span>{errors.password && errors.password.message}</span>
+          <span className="font-mont font-medium text-red-600">
+            {errors.password && errors.password.message}
+          </span>
         </div>
-        <div>
-          <label>Confirm Password</label>
+        <div className="flex flex-col">
+          <label className="font-mont font-bold">Confirm Password</label>
           <input
+            className="border-3 rounded-md border-gray-border"
             type="password"
             {...register("confirmPassword", {
               validate: (value) =>
                 value === password || "Passwords do not match",
             })}
           />
-          <span>
+          <span className="font-mont font-medium text-red-600">
             {errors.confirmPassword && errors.confirmPassword.message}
           </span>
         </div>
-        <div>
-          <label>Role</label>
-          <select {...register("role_id")}>
+        <div className="flex flex-col">
+          <label className="font-mont font-bold">Role</label>
+          <select
+            className="w-fit font-mont font-medium"
+            {...register("role_id")}
+          >
             {roles.map((role_id) => (
               <option key={role_id.id} value={role_id.id}>
                 {role_id.name}
@@ -145,9 +157,10 @@ function SignUpPage() {
 
         {selectedRole === "2" && (
           <>
-            <div>
-              <label>Store Name</label>
+            <div className="flex flex-col">
+              <label className="font-mont font-bold">Store Name</label>
               <input
+                className="border-3 rounded-md border-gray-border"
                 type="text"
                 {...register("store.name", {
                   required: "Store Name is required",
@@ -157,11 +170,14 @@ function SignUpPage() {
                   },
                 })}
               />
-              <span>{errors.store?.name && errors.store.name.message}</span>
+              <span className="font-mont font-medium text-red-600">
+                {errors.store?.name && errors.store.name.message}
+              </span>
             </div>
-            <div>
-              <label>Store Phone</label>
+            <div className="flex flex-col">
+              <label className="font-mont font-bold">Store Phone</label>
               <input
+                className="border-3 rounded-md border-gray-border"
                 type="text"
                 {...register("store.phone", {
                   required: "Store Phone is required",
@@ -171,11 +187,14 @@ function SignUpPage() {
                   },
                 })}
               />
-              <span>{errors.store?.phone && errors.store.phone.message}</span>
+              <span className="font-mont font-medium text-red-600">
+                {errors.store?.phone && errors.store.phone.message}
+              </span>
             </div>
-            <div>
-              <label>Store Tax ID</label>
+            <div className="flex flex-col">
+              <label className="font-mont font-bold">Store Tax ID</label>
               <input
+                className="border-3 rounded-md border-gray-border"
                 type="text"
                 {...register("store.tax_no", {
                   required: "Store Tax ID is required",
@@ -185,11 +204,14 @@ function SignUpPage() {
                   },
                 })}
               />
-              <span>{errors.store?.tax_no && errors.store.tax_no.message}</span>
+              <span className="font-mont font-medium text-red-600">
+                {errors.store?.tax_no && errors.store.tax_no.message}
+              </span>
             </div>
-            <div>
-              <label>Store Bank Account</label>
+            <div className="flex flex-col">
+              <label className="font-mont font-bold">Store Bank Account</label>
               <input
+                className="border-3 rounded-md border-gray-border"
                 type="text"
                 {...register("store.bank_account", {
                   required: "Store Bank Account is required",
@@ -201,7 +223,7 @@ function SignUpPage() {
                 })}
               />
 
-              <span>
+              <span className="font-mont font-medium text-red-600">
                 {errors.store?.bank_account &&
                   errors.store.bank_account.message}
               </span>
@@ -210,12 +232,16 @@ function SignUpPage() {
         )}
 
         <div>
-          <button type="submit" disabled={loading}>
+          <button
+            className="w-fit font-mont font-bold rounded-md text-white bg-primary-bg py-2 px-6"
+            type="submit"
+            disabled={loading}
+          >
             {loading ? (
               <div role="status">
                 <svg
                   aria-hidden="true"
-                  class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                  className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
                   viewBox="0 0 100 101"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -229,7 +255,7 @@ function SignUpPage() {
                     fill="currentFill"
                   />
                 </svg>
-                <span class="sr-only">Loading...</span>
+                <span className="sr-only">Loading...</span>
               </div>
             ) : (
               "Sign Up"
