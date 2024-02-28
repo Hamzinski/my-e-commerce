@@ -1,4 +1,8 @@
 import React from "react";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { clearUser } from "../store/actions/UserAction";
+import { useHistory } from "react-router-dom";
 import Hamburger from "../components/Hamburger";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -41,12 +45,6 @@ const links = [
 
 const buttons = [
   {
-    icon: faUser,
-    text: "Login",
-    className: "font-mont font-bold text-2xl md:text-base text-primary-color",
-    href: "login",
-  },
-  {
     icon: faAddressCard,
     text: "Register",
     className: "font-mont font-bold text-2xl md:text-base text-primary-color",
@@ -74,6 +72,22 @@ const buttons = [
 
 function Header() {
   const user = useSelector((store) => store.user.user);
+  const token = localStorage.getItem("token");
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const handleLogout = () => {
+    // 1. Local storage'dan token'ı kaldırın.
+    localStorage.removeItem("token");
+
+    // 2. Redux store'daki kullanıcı bilgilerini temizleyin.
+    dispatch(clearUser());
+
+    // 3. Axios header'ındaki Authorization bilgisini kaldırın.
+    delete axios.defaults.headers.common["Authorization"];
+
+    // Opsiyonel olarak, kullanıcıyı başka bir sayfaya yönlendirebilirsiniz (örneğin, login sayfasına).
+    history.push("/login");
+  };
   return (
     <>
       <div className="flex  flex-col  ">
@@ -138,7 +152,22 @@ function Header() {
                   {user && user.name}
                 </p>
               </div>
-
+              {token ? (
+                <NavLink
+                  className="font-mont font-bold text-2xl md:text-base text-primary-color"
+                  to="#"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </NavLink>
+              ) : (
+                <NavLink
+                  className="font-mont font-bold text-2xl md:text-base text-primary-color"
+                  to="/login"
+                >
+                  Login
+                </NavLink>
+              )}
               {buttons.map((button, index) => (
                 <NavLink
                   key={index}

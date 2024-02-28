@@ -36,9 +36,8 @@ export const loginUser = (userData) => (dispatch) => {
     instance
       .post("/login", userData)
       .then((res) => {
-        const token = res.data.token;
         dispatch(setUser(res.data));
-        localStorage.setItem("authToken", token);
+        localStorage.setItem("token", res.data.token);
         resolve(); // Resolve the promise on successful login
       })
       .catch((error) => {

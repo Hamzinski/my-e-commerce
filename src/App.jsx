@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import axios from "axios";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import Home from "./pages/Home";
 import ProductListPage from "./pages/ProductListPage";
@@ -12,7 +13,43 @@ import Header from "./layouts/Header";
 import Footer from "./layouts/Footer";
 import { Provider } from "react-redux";
 import { store } from "../src/store/Store";
+import { setUser, clearUser } from "../src/store/actions/UserAction";
+
 function App() {
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    const handleAuthSuccess = (userData) => {
+      store.dispatch(setUser(userData));
+      localStorage.setItem("token", userData.token);
+      axios.defaults.headers.common["Authorization"] = userData.token;
+    };
+
+    const handleAuthFailure = () => {
+      localStorage.removeItem("token");
+      delete axios.defaults.headers.common["Authorization"];
+      store.dispatch(clearUser());
+    };
+
+    if (token) {
+      axios
+        .get("https://workintech-fe-ecommerce.onrender.com/verify", {
+          headers: {
+            Authorization: token,
+          },
+        })
+        .then((res) => {
+          // Successful verification
+          handleAuthSuccess(res.data);
+        })
+        .catch((error) => {
+          // Failed verification
+          console.error("Auto login failed:", error);
+          handleAuthFailure();
+        });
+    }
+  }, []);
+
   return (
     <Provider store={store}>
       <Router>
