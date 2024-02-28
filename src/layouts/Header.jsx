@@ -95,12 +95,12 @@ function Header() {
           <div className="flex justify-between custom-container">
             <div className="flex gap-6">
               {contactInfo.map((info, index) => (
-                <button key={index} className="flex items-center gap-2" href="">
+                <a key={index} className="flex items-center gap-2" href="">
                   <FontAwesomeIcon className="text-white" icon={info.icon} />
                   <h6 className="font-mont text-white text-sm font-bold">
                     {info.text}
                   </h6>
-                </button>
+                </a>
               ))}
             </div>
 
@@ -155,7 +155,7 @@ function Header() {
               {token ? (
                 <NavLink
                   className="font-mont font-bold text-2xl md:text-base text-primary-color"
-                  to="#"
+                  href="#"
                   onClick={handleLogout}
                 >
                   Logout
@@ -163,7 +163,7 @@ function Header() {
               ) : (
                 <NavLink
                   className="font-mont font-bold text-2xl md:text-base text-primary-color"
-                  to="/login"
+                  href="/login"
                 >
                   Login
                 </NavLink>
