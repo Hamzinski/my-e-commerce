@@ -7,6 +7,7 @@ import ProductPage from "./pages/ProductPage";
 import TeamPage from "./pages/TeamPage";
 import ContactPage from "./pages/ContactPage";
 import SignUpPage from "./pages/SignUpPage";
+import LoginPage from "./pages/LoginPage";
 import Header from "./layouts/Header";
 import Footer from "./layouts/Footer";
 import { Provider } from "react-redux";
@@ -24,6 +25,7 @@ function App() {
           <Route path="/team" component={TeamPage} />
           <Route path="/contact" component={ContactPage} />
           <Route path="/signup" component={SignUpPage} />
+          <Route path="/login" component={LoginPage} />
         </Switch>
         <Footer />
       </Router>

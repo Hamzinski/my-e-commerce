@@ -16,7 +16,8 @@ import {
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import { NavLink } from "reactstrap";
-
+import { useSelector } from "react-redux";
+import Gravatar from "../components/Gravatar.jsx";
 const contactInfo = [
   { icon: faPhone, text: "(225) 555-0118" },
   { icon: faEnvelope, text: "michelle.rivera@example.com" },
@@ -43,7 +44,7 @@ const buttons = [
     icon: faUser,
     text: "Login",
     className: "font-mont font-bold text-2xl md:text-base text-primary-color",
-    href: "#",
+    href: "login",
   },
   {
     icon: faAddressCard,
@@ -72,6 +73,7 @@ const buttons = [
 ];
 
 function Header() {
+  const user = useSelector((store) => store.user.user);
   return (
     <>
       <div className="flex  flex-col  ">
@@ -130,6 +132,13 @@ function Header() {
               </div>
             </div>
             <div className="flex flex-col md:flex-row items-center">
+              <div className="flex items-center gap-2">
+                {user && <Gravatar email={user.email} />}{" "}
+                <p className="font-mont font-bold text-2xl md:text-base text-primary-color">
+                  {user && user.name}
+                </p>
+              </div>
+
               {buttons.map((button, index) => (
                 <NavLink
                   key={index}
