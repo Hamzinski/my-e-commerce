@@ -40,10 +40,18 @@ function LoginPage() {
   };
 
   return (
-    <div className="flex justify-center my-12">
+    <div className="flex flex-col justify-center items-center my-12 w-full">
+      <div className="flex flex-col w-1/2">
+        <p className="text-center font-mont font-bold text-3xl text-primary-color underline decoration-solid ">
+          Login
+        </p>
+      </div>
       <ToastContainer />
-      <form className="flex flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex flex-col">
+      <form
+        className="flex flex-col gap-3 shadow-md w-full md:w-1/3 items-center p-6"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <div className="flex flex-col w-2/3">
           <label className="font-mont font-bold">Email</label>
           <input
             className="border-3 rounded-md border-gray-border"
@@ -60,7 +68,7 @@ function LoginPage() {
             {errors.email && errors.email.message}
           </span>
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col w-2/3">
           <label className="font-mont font-bold">Password</label>
           <input
             className="border-3 rounded-md border-gray-border"
@@ -75,7 +83,7 @@ function LoginPage() {
         </div>
         <div>
           <button
-            className="w-fit font-mont font-bold rounded-md text-white bg-primary-bg py-2 px-6"
+            className="w-fit font-mont font-bold rounded-md text-white text-2xl bg-primary-bg py-2 px-8"
             type="submit"
             disabled={loading}
           >

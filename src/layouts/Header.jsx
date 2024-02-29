@@ -1,5 +1,12 @@
 import React from "react";
 import axios from "axios";
+import { useState } from "react";
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from "reactstrap";
 import { useDispatch } from "react-redux";
 import { clearUser } from "../store/actions/UserAction";
 import { useHistory } from "react-router-dom";
@@ -35,8 +42,6 @@ const socialMediaIcons = [
 ];
 
 const links = [
-  { text: "Home", href: "/" },
-  { text: "Shop", href: "productlist" },
   { text: "About", href: "about" },
   { text: "Blog", href: "team" },
   { text: "Contact", href: "contact" },
@@ -44,12 +49,6 @@ const links = [
 ];
 
 const buttons = [
-  {
-    icon: faAddressCard,
-    text: "Register",
-    className: "font-mont font-bold text-2xl md:text-base text-primary-color",
-    href: "signup",
-  },
   {
     icon: faMagnifyingGlass,
     text: "",
@@ -71,6 +70,8 @@ const buttons = [
 ];
 
 function Header() {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
   const user = useSelector((store) => store.user.user);
   const token = localStorage.getItem("token");
   const dispatch = useDispatch();
@@ -81,6 +82,7 @@ function Header() {
     delete axios.defaults.headers.common["Authorization"];
     history.push("/login");
   };
+  const allCategories = useSelector((store) => store.global.categories);
   return (
     <>
       <div className="flex  flex-col  ">
@@ -127,6 +129,37 @@ function Header() {
               </div>
 
               <div className="flex flex-col items-center md:flex-row ml-0 md:ml-32">
+                <NavLink
+                  className="font-mont text-3xl md:text-sm font-normal md:font-bold text-second-text-color"
+                  href="/"
+                >
+                  Home
+                </NavLink>
+
+                <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
+                  <DropdownToggle
+                    className="font-mont text-3xl md:text-sm font-normal md:font-bold text-second-text-color"
+                    caret
+                  >
+                    Shop
+                  </DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem tag={NavLink} href="productlist">
+                      All Products
+                    </DropdownItem>
+                    {allCategories.map((category, index) => (
+                      <DropdownItem
+                        key={index}
+                        tag={NavLink}
+                        href={`/shopping/${
+                          category.gender === "k" ? "kadın" : "erkek"
+                        }/${category.title.toLowerCase()}`}
+                      >
+                        {category.title}
+                      </DropdownItem>
+                    ))}
+                  </DropdownMenu>
+                </Dropdown>
                 {links.map((link, index) => (
                   <NavLink
                     key={index}
@@ -154,12 +187,22 @@ function Header() {
                   Logout
                 </NavLink>
               ) : (
-                <NavLink
-                  className="font-mont font-bold text-2xl md:text-base text-primary-color"
-                  href="/login"
-                >
-                  Login
-                </NavLink>
+                <>
+                  <NavLink
+                    className="font-mont font-bold text-2xl md:text-base text-primary-color"
+                    href="/login"
+                  >
+                    <FontAwesomeIcon icon={faUser} />
+                    Login
+                  </NavLink>
+                  <NavLink
+                    className="font-mont font-bold text-2xl md:text-base text-primary-color"
+                    href="/signup"
+                  >
+                    <FontAwesomeIcon icon={faAddressCard} />
+                    Register
+                  </NavLink>
+                </>
               )}
               {buttons.map((button, index) => (
                 <NavLink
