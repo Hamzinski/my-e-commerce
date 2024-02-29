@@ -35,6 +35,13 @@ export const setLanguage = (language) => {
 export const fetchRoles = () => (dispatch) => {
   instance.get("/roles").then((res) => {
     dispatch(setRoles(res.data));
-    console.log("resp:", res.data);
+  });
+};
+
+export const fetchCategories = () => (dispatch) => {
+  instance.get("/categories").then((res) => {
+    const categories = res.data;
+    dispatch(setCategories(categories));
+    console.log(categories);
   });
 };

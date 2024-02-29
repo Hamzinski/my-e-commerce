@@ -76,16 +76,9 @@ function Header() {
   const dispatch = useDispatch();
   const history = useHistory();
   const handleLogout = () => {
-    // 1. Local storage'dan token'ı kaldırın.
     localStorage.removeItem("token");
-
-    // 2. Redux store'daki kullanıcı bilgilerini temizleyin.
     dispatch(clearUser());
-
-    // 3. Axios header'ındaki Authorization bilgisini kaldırın.
     delete axios.defaults.headers.common["Authorization"];
-
-    // Opsiyonel olarak, kullanıcıyı başka bir sayfaya yönlendirebilirsiniz (örneğin, login sayfasına).
     history.push("/login");
   };
   return (
