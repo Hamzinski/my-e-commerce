@@ -2,7 +2,6 @@ const initialState = {
   user: {
     name: "",
     email: "",
-    password: "",
     role_id: "3",
     store: {
       phone: "",

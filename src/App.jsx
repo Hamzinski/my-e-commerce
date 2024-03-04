@@ -56,7 +56,7 @@ function App() {
         <Header />
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/productlist" component={ProductListPage} />
+          <Route path="/shopping" component={ProductListPage} />
           <Route path="/product" component={ProductPage} />
           <Route path="/about" component={AboutPage} />
           <Route path="/team" component={TeamPage} />

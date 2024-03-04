@@ -1,49 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import mbc1 from "../assets/mediabgcover.png";
-import mbc2 from "../assets/mediabgcover2.png";
-import mbc3 from "../assets/mediabgcover3.png";
-import mbc4 from "../assets/mediabgcover4.png";
-import mbc5 from "../assets/mediabgcover5.png";
 import { useSelector } from "react-redux";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-const items = [
-  {
-    id: 1,
-    title: "Ceket",
-    gender: "k",
-    img: "https://workintech-fe-ecommerce.onrender.com/assets/category-img/category_kadın_ceket.jpg",
-    rating: 3.8,
-  },
-  {
-    id: 1,
-    title: "Ceket",
-    gender: "k",
-    img: "https://workintech-fe-ecommerce.onrender.com/assets/category-img/category_kadın_ceket.jpg",
-    rating: 3.8,
-  },
-  {
-    id: 1,
-    title: "Ceket",
-    gender: "k",
-    img: "https://workintech-fe-ecommerce.onrender.com/assets/category-img/category_kadın_ceket.jpg",
-    rating: 3.8,
-  },
-  {
-    id: 1,
-    title: "Ceket",
-    gender: "k",
-    img: "https://workintech-fe-ecommerce.onrender.com/assets/category-img/category_kadın_ceket.jpg",
-    rating: 3.8,
-  },
-  {
-    id: 1,
-    title: "Ceket",
-    gender: "k",
-    img: "https://workintech-fe-ecommerce.onrender.com/assets/category-img/category_kadın_ceket.jpg",
-    rating: 3.8,
-  },
-];
 
 function CategoryCard() {
   const topCategories = useSelector((store) => store.global.categories);

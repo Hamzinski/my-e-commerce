@@ -1,18 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ProductCard from "../components/ProductCard";
 import CategoryCard from "../components/CategoryCard";
 import { TbCategoryFilled } from "react-icons/tb";
 import { MdChecklist } from "react-icons/md";
 import BrandsTab from "../layouts/BrandsTab";
-import { fetchCategories } from "../store/actions/GlobalAction";
-import { useDispatch } from "react-redux";
 
 function ProductListPage() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchCategories());
-  }, []);
   return (
     <div>
       <CategoryCard />

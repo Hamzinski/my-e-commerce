@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { fetchCategories } from "../store/actions/GlobalAction";
 import {
   Dropdown,
   DropdownToggle,
@@ -71,6 +72,9 @@ const buttons = [
 
 function Header() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, []);
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
   const user = useSelector((store) => store.user.user);
   const token = localStorage.getItem("token");
@@ -83,6 +87,24 @@ function Header() {
     history.push("/login");
   };
   const allCategories = useSelector((store) => store.global.categories);
+
+  const renderDropdownItems = (gender) => {
+    return allCategories
+      .filter((category) => category.code.startsWith(`${gender}:`))
+      .map((category, index) => (
+        <DropdownItem
+          key={index}
+          tag={NavLink}
+          href={`/shopping/${
+            gender === "k" ? "kadın" : "erkek"
+          }/${category.title.toLowerCase()}`}
+          className="font-mont text-second-text-color"
+        >
+          {category.title}
+        </DropdownItem>
+      ));
+  };
+
   return (
     <>
       <div className="flex  flex-col  ">
@@ -140,24 +162,40 @@ function Header() {
                   <DropdownToggle
                     className="font-mont text-3xl md:text-sm font-normal md:font-bold text-second-text-color"
                     caret
+                    onClick={toggleDropdown}
                   >
                     Shop
                   </DropdownToggle>
                   <DropdownMenu>
-                    <DropdownItem tag={NavLink} href="productlist">
-                      All Products
-                    </DropdownItem>
-                    {allCategories.map((category, index) => (
-                      <DropdownItem
-                        key={index}
-                        tag={NavLink}
-                        href={`/shopping/${
-                          category.gender === "k" ? "kadın" : "erkek"
-                        }/${category.title.toLowerCase()}`}
-                      >
-                        {category.title}
-                      </DropdownItem>
-                    ))}
+                    <div className="flex">
+                      <div>
+                        <DropdownItem
+                          className="font-mont font-bold text-lg text-primary-color"
+                          tag={NavLink}
+                          href="shopping"
+                        >
+                          All Products
+                        </DropdownItem>
+                      </div>
+                      <div className="flex flex-col">
+                        <DropdownItem
+                          className="font-mont font-bold text-lg text-primary-color"
+                          header
+                        >
+                          Kadın
+                        </DropdownItem>
+                        {renderDropdownItems("k")}
+                      </div>
+                      <div className="flex flex-col">
+                        <DropdownItem
+                          className="font-mont font-bold text-lg text-primary-color"
+                          header
+                        >
+                          Erkek
+                        </DropdownItem>
+                        {renderDropdownItems("e")}
+                      </div>
+                    </div>
                   </DropdownMenu>
                 </Dropdown>
                 {links.map((link, index) => (
