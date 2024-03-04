@@ -1,3 +1,8 @@
+import axios from "axios";
+
+const instance = axios.create({
+  baseURL: "https://workintech-fe-ecommerce.onrender.com",
+});
 export const setProductList = (products) => {
   return {
     type: "SET_PRODUCT_LIST",
@@ -31,4 +36,21 @@ export const setFetchState = (fetchState) => {
     type: "SET_FETCH_STATE",
     payload: fetchState,
   };
+};
+
+export const fetchProducts = () => (dispatch) => {
+  dispatch(setFetchState("FETCH_PRODUCTS"));
+
+  instance
+    .get("/products")
+    .then((res) => {
+      const products = res.data;
+      dispatch(setProductList(products));
+      dispatch(setFetchState("FETCHED"));
+      console.log(products);
+    })
+    .catch((error) => {
+      console.error("Error fetching products:", error);
+      dispatch(setFetchState("FAILED"));
+    });
 };

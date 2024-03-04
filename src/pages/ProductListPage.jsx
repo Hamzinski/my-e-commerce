@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import ProductCard from "../components/ProductCard";
 import CategoryCard from "../components/CategoryCard";
 import { TbCategoryFilled } from "react-icons/tb";
 import { MdChecklist } from "react-icons/md";
 import BrandsTab from "../layouts/BrandsTab";
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from "reactstrap";
 
 function ProductListPage() {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggle = () => setDropdownOpen((prevState) => !prevState);
   return (
     <div>
       <CategoryCard />
@@ -25,9 +34,27 @@ function ProductListPage() {
               <MdChecklist className="w-8 h-8" />
             </div>
           </div>
-          <button className="bg-primary-bg font-mont font-bold px-5 py-2.5 text-white rounded-md ">
-            Filter
-          </button>
+          <div className="flex items-center gap-9">
+            <div className="d-flex">
+              <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+                <DropdownToggle
+                  className="font-mont text-xl md:text-sm font-normal md:font-bold text-second-text-color"
+                  caret
+                >
+                  Sort
+                </DropdownToggle>
+                <DropdownMenu className="font-mont">
+                  <DropdownItem>Price:Asc</DropdownItem>
+                  <DropdownItem>Price:Desc</DropdownItem>
+                  <DropdownItem>Rating:Asc</DropdownItem>
+                  <DropdownItem>Rating:Desc</DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            </div>
+            <button className="bg-primary-bg font-mont font-bold w-32 h-9 text-white rounded-md">
+              Filter
+            </button>
+          </div>
         </div>
       </div>
       <ProductCard />

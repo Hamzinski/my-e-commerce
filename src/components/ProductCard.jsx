@@ -1,126 +1,73 @@
-import React from "react";
-import pc1 from "../assets/pc1.png";
-import pc2 from "../assets/pc2.png";
-import pc3 from "../assets/pc3.png";
-import pc4 from "../assets/pc4.png";
-import pc5 from "../assets/pc5.png";
-import pc6 from "../assets/pc6.png";
-import pc7 from "../assets/pc7.png";
-import pc8 from "../assets/pc8.png";
+import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
+import { fetchProducts } from "../store/actions/ProductAction";
+import { useDispatch, useSelector } from "react-redux";
+
 function ProductCard() {
-  const myarr = [
-    {
-      img: pc1,
-      title: "Graphic Design",
-      department: "English Department",
-      oldPrice: "$16.48",
-      newPrice: "$6.48",
-    },
-    {
-      img: pc2,
-      title: "Graphic Design",
-      department: "English Department",
-      oldPrice: "$16.48",
-      newPrice: "$6.48",
-    },
-    {
-      img: pc3,
-      title: "Graphic Design",
-      department: "English Department",
-      oldPrice: "$16.48",
-      newPrice: "$6.48",
-    },
-    {
-      img: pc4,
-      title: "Graphic Design",
-      department: "English Department",
-      oldPrice: "$16.48",
-      newPrice: "$6.48",
-    },
-    {
-      img: pc5,
-      title: "Graphic Design",
-      department: "English Department",
-      oldPrice: "$16.48",
-      newPrice: "$6.48",
-    },
-    {
-      img: pc6,
-      title: "Graphic Design",
-      department: "English Department",
-      oldPrice: "$16.48",
-      newPrice: "$6.48",
-    },
-    {
-      img: pc7,
-      title: "Graphic Design",
-      department: "English Department",
-      oldPrice: "$16.48",
-      newPrice: "$6.48",
-    },
-    {
-      img: pc8,
-      title: "Graphic Design",
-      department: "English Department",
-      oldPrice: "$16.48",
-      newPrice: "$6.48",
-    },
-  ];
+  const dispatch = useDispatch();
+  const allProducts = useSelector(
+    (store) => store.product.productList.products
+  );
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
+
   return (
     <div className="custom-container flex flex-col md:flex-row justify-between flex-wrap gap-9 px-12 md:px-36 py-12">
-      {myarr.map((item, index) => (
-        <div key={index} className="flex flex-col items-center ">
-          <img
-            className="w-80 md:w-60 h-[427px] object-cover"
-            src={item.img}
-            alt=""
-          />
-          <div className="flex flex-col gap-3 items-center pt-6  pb-9">
-            <h5 className="font-mont font-bold text-base text-dark-text-color">
-              {item.title}
-            </h5>
-            <p className="font-mont font-bold text-sm text-second-text-color">
-              {item.department}
-            </p>
-            <div className="flex gap-3">
-              <h5 className="font-mont font-bold text-base text-muted-text-color">
-                {item.oldPrice}
+      {Array.isArray(allProducts) &&
+        allProducts.map((product, index) => (
+          <div
+            id={product.id}
+            key={index}
+            className="flex flex-col items-center w-1/5 shadow-md"
+          >
+            <img
+              className="w-80 md:w-60 h-[427px] object-cover"
+              src={product.images?.[0]?.url}
+              alt=""
+            />
+            <div className="flex flex-col gap-3 items-center px-2 text-center pt-6 pb-9">
+              <h5 className="font-mont font-bold text-base text-dark-text-color">
+                {product.name}
               </h5>
-              <h5 className="font-mont font-bold text-base text-secondary-color">
-                {item.newPrice}
-              </h5>
-            </div>
-            <div className="flex gap-2">
-              <button>
-                <FontAwesomeIcon
-                  className="w-fit text-primary-color"
-                  icon={faCircle}
-                />
-              </button>
-              <button>
-                <FontAwesomeIcon
-                  className="w-fit text-secondary-color"
-                  icon={faCircle}
-                />
-              </button>
-              <button>
-                <FontAwesomeIcon
-                  className="w-fit text-alert-color"
-                  icon={faCircle}
-                />
-              </button>
-              <button>
-                <FontAwesomeIcon
-                  className="w-fit text-dark-text-color"
-                  icon={faCircle}
-                />
-              </button>
+              <p className="font-mont font-bold text-sm text-second-text-color">
+                {product.description}
+              </p>
+              <div className="flex gap-3">
+                <h5 className="font-mont font-bold text-base text-secondary-color">
+                  ${product.price}
+                </h5>
+              </div>
+              <div className="flex gap-2">
+                <button>
+                  <FontAwesomeIcon
+                    className="w-fit text-primary-color"
+                    icon={faCircle}
+                  />
+                </button>
+                <button>
+                  <FontAwesomeIcon
+                    className="w-fit text-secondary-color"
+                    icon={faCircle}
+                  />
+                </button>
+                <button>
+                  <FontAwesomeIcon
+                    className="w-fit text-alert-color"
+                    icon={faCircle}
+                  />
+                </button>
+                <button>
+                  <FontAwesomeIcon
+                    className="w-fit text-dark-text-color"
+                    icon={faCircle}
+                  />
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
     </div>
   );
 }
