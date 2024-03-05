@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
+import useQuery from "../hooks/useQuery";
 
 function CategoryCard() {
+  const {
+    data,
+    loading,
+    error,
+    getQueryData,
+    setFilterText,
+    setFilterSort,
+    setCategory,
+  } = useQuery();
+  const filterCategory = (id) => {
+    setCategory(id);
+    getQueryData();
+  };
   const topCategories = useSelector((store) => store.global.categories);
   const sortedCategories = topCategories
     .slice()
@@ -30,10 +44,11 @@ function CategoryCard() {
         </div>
         <div className="custom-container flex flex-col md:flex-row items-center md:items-stretch justify-between gap-3">
           {top5Categories.map((category, index) => (
-            <Link
-              to={`/shopping/${
+            <div
+              onClick={() => filterCategory(category.id)}
+              /*   to={`/shopping/${
                 category.gender === "k" ? "kadın" : "erkek"
-              }/${category.title.toLowerCase()}`}
+              }/${category.title.toLowerCase()}`} */
               key={index}
               className="md:w-52 md:h-56 w-80 h-72 flex flex-col justify-center items-center gap-3"
               style={{
@@ -48,7 +63,7 @@ function CategoryCard() {
               <p className="font-mont font-medium text-white text-base">
                 Rating: {category.rating}
               </p>
-            </Link>
+            </div>
           ))}
         </div>
       </div>

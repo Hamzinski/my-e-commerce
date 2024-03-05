@@ -172,7 +172,7 @@ function Header() {
                         <DropdownItem
                           className="font-mont font-bold text-lg text-primary-color"
                           tag={NavLink}
-                          href="shopping"
+                          href="/shopping"
                         >
                           All Products
                         </DropdownItem>

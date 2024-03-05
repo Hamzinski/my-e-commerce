@@ -20,7 +20,7 @@ function ProductCard() {
           <div
             id={product.id}
             key={index}
-            className="flex flex-col items-center w-1/5 shadow-md"
+            className="flex flex-col items-center w-full md:w-1/5 shadow-md"
           >
             <img
               className="w-80 md:w-60 h-[427px] object-cover"

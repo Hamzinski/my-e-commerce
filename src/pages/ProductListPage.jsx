@@ -1,20 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
 import CategoryCard from "../components/CategoryCard";
 import { TbCategoryFilled } from "react-icons/tb";
 import { MdChecklist } from "react-icons/md";
 import BrandsTab from "../layouts/BrandsTab";
 import {
+  Input,
   Dropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
+import useQuery from "../hooks/useQuery";
 
 function ProductListPage() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
   const toggle = () => setDropdownOpen((prevState) => !prevState);
+  const { data, loading, error, getQueryData, setFilterText, setFilterSort } =
+    useQuery();
+  const handleChange = (e) => {
+    setFilterText(e.target.value);
+  };
+  const filterProduct = () => {
+    getQueryData();
+  };
   return (
     <div>
       <CategoryCard />
@@ -44,14 +53,28 @@ function ProductListPage() {
                   Sort
                 </DropdownToggle>
                 <DropdownMenu className="font-mont">
-                  <DropdownItem>Price:Asc</DropdownItem>
-                  <DropdownItem>Price:Desc</DropdownItem>
-                  <DropdownItem>Rating:Asc</DropdownItem>
-                  <DropdownItem>Rating:Desc</DropdownItem>
+                  <DropdownItem onClick={() => setFilterSort("price:asc")}>
+                    Price:Asc
+                  </DropdownItem>
+                  <DropdownItem onClick={() => setFilterSort("price:desc")}>
+                    Price:Desc
+                  </DropdownItem>
+                  <DropdownItem onClick={() => setFilterSort("rating:asc")}>
+                    Rating:Asc
+                  </DropdownItem>
+                  <DropdownItem onClick={() => setFilterSort("rating:desc")}>
+                    Rating:Desc
+                  </DropdownItem>
                 </DropdownMenu>
               </Dropdown>
             </div>
-            <button className="bg-primary-bg font-mont font-bold w-32 h-9 text-white rounded-md">
+            <div>
+              <Input onChange={handleChange}></Input>
+            </div>
+            <button
+              onClick={filterProduct}
+              className="bg-primary-bg font-mont font-bold w-32 h-9 text-white rounded-md"
+            >
               Filter
             </button>
           </div>

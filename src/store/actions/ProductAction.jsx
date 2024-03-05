@@ -38,11 +38,10 @@ export const setFetchState = (fetchState) => {
   };
 };
 
-export const fetchProducts = () => (dispatch) => {
+export const fetchProducts = (queryParams) => (dispatch) => {
   dispatch(setFetchState("FETCH_PRODUCTS"));
-
   instance
-    .get("/products")
+    .get("/products", { params: queryParams })
     .then((res) => {
       const products = res.data;
       dispatch(setProductList(products));
