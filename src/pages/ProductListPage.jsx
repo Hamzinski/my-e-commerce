@@ -11,7 +11,8 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
-import useQuery from "../hooks/useQuery";
+import useQuery from "../Hooks/useQuery";
+import { useSelector } from "react-redux";
 
 function ProductListPage() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -24,13 +25,18 @@ function ProductListPage() {
   const filterProduct = () => {
     getQueryData();
   };
+  const allProducts = useSelector(
+    (store) => store.product.productList.products
+  );
+
   return (
     <div>
       <CategoryCard />
       <div className="custom-container p-12">
         <div className="flex flex-col md:flex-row gap-6 md:gap-0 justify-between items-center">
           <h6 className="font-mont font-bold text-base text-second-text-color">
-            Showing all 12 results
+            Showing all {Array.isArray(allProducts) && allProducts.length}{" "}
+            results.
           </h6>
           <div className="flex items-center gap-3">
             <h6 className="font-mont font-bold text-base text-second-text-color">

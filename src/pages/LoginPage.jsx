@@ -105,7 +105,6 @@ function LoginPage() {
                     fill="currentFill"
                   />
                 </svg>
-                <span className="sr-only">Loading...</span>
               </div>
             ) : (
               "Login"

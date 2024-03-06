@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import { useSelector } from "react-redux";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-import useQuery from "../hooks/useQuery";
+import useQuery from "../Hooks/useQuery";
 
 function CategoryCard() {
   const {
@@ -12,12 +11,12 @@ function CategoryCard() {
     getQueryData,
     setFilterText,
     setFilterSort,
-    setCategory,
+    getQueryDatawithCategory,
   } = useQuery();
-  const filterCategory = (id) => {
-    setCategory(id);
-    getQueryData();
+  const filterCategory = (id, gender) => {
+    getQueryDatawithCategory(id, gender);
   };
+
   const topCategories = useSelector((store) => store.global.categories);
   const sortedCategories = topCategories
     .slice()
@@ -45,12 +44,12 @@ function CategoryCard() {
         <div className="custom-container flex flex-col md:flex-row items-center md:items-stretch justify-between gap-3">
           {top5Categories.map((category, index) => (
             <div
-              onClick={() => filterCategory(category.id)}
+              onClick={() => filterCategory(category.id, category.gender)}
               /*   to={`/shopping/${
                 category.gender === "k" ? "kadın" : "erkek"
               }/${category.title.toLowerCase()}`} */
               key={index}
-              className="md:w-52 md:h-56 w-80 h-72 flex flex-col justify-center items-center gap-3"
+              className="md:w-52 md:h-56 w-80 h-72 flex flex-col justify-center items-center gap-3 cursor-pointer"
               style={{
                 backgroundImage: `url(${category.img})`,
                 backgroundRepeat: "no-repeat",

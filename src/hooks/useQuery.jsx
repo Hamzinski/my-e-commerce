@@ -6,31 +6,47 @@ const useQuery = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [category, setCategory] = useState();
+  // const [category, setCategory] = useState();
+  // const [gender, setGender] = useState();
   const [filterText, setFilterText] = useState();
   const [filterSort, setFilterSort] = useState();
-  const myObject = {
-    category: category || null,
-    filter: filterText || null,
-    sort: filterSort || null,
+
+  // useEffect(() => {
+  //   getQueryData();
+  // }, [category]);
+
+  const getQueryDatawithCategory = (category, gender) => {
+    getQueryData(category, gender);
   };
-  useEffect(() => {
-    getQueryData();
-  }, [category]);
-  const getQueryData = () => {
-    dispatch(fetchProducts(myObject));
+
+  const getQueryData = (category, gender) => {
+    const myObject = {
+      category: category || null,
+      filter: filterText || null,
+      sort: filterSort || null,
+    };
+    setLoading(true);
+
+    dispatch(fetchProducts(myObject)).then(() => {
+      setLoading(false);
+    });
     const queryParams = new URLSearchParams();
     if (filterText) queryParams.append("filter", filterText);
     if (filterSort) queryParams.append("sort", filterSort);
     if (category) queryParams.append("category", category);
     const queryString = queryParams.toString();
-    const fullUrl = queryString && `/shopping/products?${queryString}`;
+    const fullUrl =
+      queryString &&
+      `/shopping${
+        gender && gender === "k" ? "/women" : "/men"
+      }/products?${queryString}`;
     if (fullUrl) {
       history.push(fullUrl);
     }
   };
+
   return {
     data,
     loading,
@@ -38,7 +54,7 @@ const useQuery = () => {
     getQueryData,
     setFilterText,
     setFilterSort,
-    setCategory,
+    getQueryDatawithCategory,
   };
 };
 

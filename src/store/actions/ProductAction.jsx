@@ -40,16 +40,20 @@ export const setFetchState = (fetchState) => {
 
 export const fetchProducts = (queryParams) => (dispatch) => {
   dispatch(setFetchState("FETCH_PRODUCTS"));
-  instance
-    .get("/products", { params: queryParams })
-    .then((res) => {
-      const products = res.data;
-      dispatch(setProductList(products));
-      dispatch(setFetchState("FETCHED"));
-      console.log(products);
-    })
-    .catch((error) => {
-      console.error("Error fetching products:", error);
-      dispatch(setFetchState("FAILED"));
-    });
+  return new Promise((resolve, reject) => {
+    instance
+      .get("/products", { params: queryParams })
+      .then((res) => {
+        const products = res.data;
+        dispatch(setProductList(products));
+        dispatch(setFetchState("FETCHED"));
+        console.log(products);
+        resolve();
+      })
+      .catch((error) => {
+        console.error("Error fetching products:", error);
+        dispatch(setFetchState("FAILED"));
+        reject(error);
+      });
+  });
 };

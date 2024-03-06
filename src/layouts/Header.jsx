@@ -30,6 +30,7 @@ import {
 import { NavLink } from "reactstrap";
 import { useSelector } from "react-redux";
 import Gravatar from "../components/Gravatar.jsx";
+import useQuery from "../Hooks/useQuery.jsx";
 const contactInfo = [
   { icon: faPhone, text: "(225) 555-0118" },
   { icon: faEnvelope, text: "michelle.rivera@example.com" },
@@ -43,9 +44,9 @@ const socialMediaIcons = [
 ];
 
 const links = [
-  { text: "About", href: "about" },
-  { text: "Blog", href: "team" },
-  { text: "Contact", href: "contact" },
+  { text: "About", href: "/about" },
+  { text: "Blog", href: "/team" },
+  { text: "Contact", href: "/contact" },
   { text: "Pages", href: "#" },
 ];
 
@@ -71,21 +72,38 @@ const buttons = [
 ];
 
 function Header() {
+  const {
+    data,
+    loading,
+    error,
+    getQueryData,
+    setFilterText,
+    setFilterSort,
+    getQueryDatawithCategory,
+  } = useQuery();
+
+  const filterCategory = (id, gender) => {
+    getQueryDatawithCategory(id, gender);
+  };
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
   useEffect(() => {
     dispatch(fetchCategories());
   }, []);
+
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
   const user = useSelector((store) => store.user.user);
   const token = localStorage.getItem("token");
   const dispatch = useDispatch();
   const history = useHistory();
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     dispatch(clearUser());
     delete axios.defaults.headers.common["Authorization"];
     history.push("/login");
   };
+
   const allCategories = useSelector((store) => store.global.categories);
 
   const renderDropdownItems = (gender) => {
@@ -95,9 +113,10 @@ function Header() {
         <DropdownItem
           key={index}
           tag={NavLink}
-          href={`/shopping/${
-            gender === "k" ? "kadın" : "erkek"
-          }/${category.title.toLowerCase()}`}
+          onClick={() => filterCategory(category.id, category.gender)}
+          /*  href={`/shopping/${
+            gender === "k" ? "women" : "men"
+          }/${category.title.toLowerCase()}`} */
           className="font-mont text-second-text-color"
         >
           {category.title}
