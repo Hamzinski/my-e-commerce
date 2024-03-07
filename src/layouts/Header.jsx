@@ -123,6 +123,11 @@ function Header() {
         </DropdownItem>
       ));
   };
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
 
   return (
     <>
@@ -158,18 +163,26 @@ function Header() {
         </div>
 
         <div className=" bg-white p-6">
-          <div className="flex flex-col md:flex-row justify-between gap-6 md:gap-0 custom-container">
+          <div className="flex flex-col md:flex-row justify-between gap-6 md:gap-0 custom-container ">
             <div className="flex flex-col gap-6 md:gap-0 md:flex-row ">
               <div className="flex justify-between items-center">
                 <h3 className="font-mont text-2xl font-bold text-dark-text-color">
                   Bandage
                 </h3>
                 <div className="block md:hidden">
-                  <Hamburger />
+                  <button onClick={toggleMobileMenu}>
+                    <Hamburger />
+                  </button>
                 </div>
               </div>
 
-              <div className="flex flex-col items-center md:flex-row ml-0 md:ml-32">
+              <div
+                className={`${
+                  mobileMenuOpen
+                    ? "flex md:flex flex-col items-center md:flex-row ml-0 md:ml-32"
+                    : "hidden md:visible md:flex flex-col items-center md:flex-row ml-0 md:ml-32"
+                }`}
+              >
                 <NavLink
                   className="font-mont text-3xl md:text-sm font-normal md:font-bold text-second-text-color"
                   href="/"
@@ -185,7 +198,7 @@ function Header() {
                   >
                     Shop
                   </DropdownToggle>
-                  <DropdownMenu>
+                  <DropdownMenu className="px-3 md:px-0">
                     <div className="flex">
                       <div>
                         <DropdownItem
@@ -228,7 +241,13 @@ function Header() {
                 ))}
               </div>
             </div>
-            <div className="flex flex-col md:flex-row items-center">
+            <div
+              className={`${
+                mobileMenuOpen
+                  ? "flex md:flex flex-col md:flex-row items-center"
+                  : "hidden md:visible md:flex flex-col md:flex-row items-center"
+              }`}
+            >
               <div className="flex items-center gap-2">
                 {user && <Gravatar email={user.email} />}{" "}
                 <p className="font-mont font-bold text-2xl md:text-base text-primary-color">
@@ -261,15 +280,17 @@ function Header() {
                   </NavLink>
                 </>
               )}
-              {buttons.map((button, index) => (
-                <NavLink
-                  key={index}
-                  className={button.className}
-                  href={button.href}
-                >
-                  <FontAwesomeIcon icon={button.icon} /> {button.text}
-                </NavLink>
-              ))}
+              <div className="flex">
+                {buttons.map((button, index) => (
+                  <NavLink
+                    key={index}
+                    className={button.className}
+                    href={button.href}
+                  >
+                    <FontAwesomeIcon icon={button.icon} /> {button.text}
+                  </NavLink>
+                ))}
+              </div>
             </div>
           </div>
         </div>

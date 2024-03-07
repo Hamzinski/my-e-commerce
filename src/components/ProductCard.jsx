@@ -3,9 +3,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { fetchProducts, setFetchState } from "../store/actions/ProductAction";
 import { useDispatch, useSelector } from "react-redux";
+import useQuery from "../Hooks/useQuery";
 
 function ProductCard() {
-  console.log(setFetchState);
+  const {
+    data,
+    loading,
+    error,
+    getQueryData,
+    setFilterText,
+    setFilterSort,
+    getQueryFromUrl,
+  } = useQuery();
   const dispatch = useDispatch();
   const allProducts = useSelector(
     (store) => store.product.productList.products
@@ -13,14 +22,14 @@ function ProductCard() {
   const fetchState = useSelector((store) => store.product.fetchState);
   useEffect(() => {
     if (fetchState == "NOT_FETCHED") {
-      dispatch(fetchProducts());
+      getQueryFromUrl();
     }
   }, []);
 
   return (
     <div className="custom-container flex flex-col md:flex-row justify-between flex-wrap gap-9 px-12 md:px-36 py-12">
       {fetchState != "FETCHED" ? (
-        <div className="flex" role="status">
+        <div className="flex mx-auto" role="status">
           <svg
             aria-hidden="true"
             className="w-32 h-32 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"

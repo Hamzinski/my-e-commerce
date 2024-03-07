@@ -17,8 +17,15 @@ import { useSelector } from "react-redux";
 function ProductListPage() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
-  const { data, loading, error, getQueryData, setFilterText, setFilterSort } =
-    useQuery();
+  const {
+    data,
+    loading,
+    error,
+    getQueryData,
+    setFilterText,
+    setFilterSort,
+    getQueryFromUrl,
+  } = useQuery();
   const handleChange = (e) => {
     setFilterText(e.target.value);
   };

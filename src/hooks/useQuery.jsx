@@ -13,12 +13,23 @@ const useQuery = () => {
   const [filterText, setFilterText] = useState();
   const [filterSort, setFilterSort] = useState();
 
-  // useEffect(() => {
-  //   getQueryData();
-  // }, [category]);
-
   const getQueryDatawithCategory = (category, gender) => {
     getQueryData(category, gender);
+  };
+
+  const getQueryFromUrl = () => {
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const categoryParam = urlSearchParams.get("category");
+    const filterTextParam = urlSearchParams.get("filter");
+    const filterSortParam = urlSearchParams.get("sort");
+    const myObject = {
+      category: categoryParam || null,
+      filter: filterTextParam || null,
+      sort: filterSortParam || null,
+    };
+    dispatch(fetchProducts(myObject)).then(() => {
+      setLoading(false);
+    });
   };
 
   const getQueryData = (category, gender) => {
@@ -55,6 +66,7 @@ const useQuery = () => {
     setFilterText,
     setFilterSort,
     getQueryDatawithCategory,
+    getQueryFromUrl,
   };
 };
 
