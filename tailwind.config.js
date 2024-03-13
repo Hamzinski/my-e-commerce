@@ -28,6 +28,7 @@ export default {
       borderColor: {
         "success-border-color": "#2DC071",
         "gray-border": "#E8E8E8",
+        "primary-border-color": "#23A6F0",
       },
     },
   },

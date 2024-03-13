@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
-import { fetchProducts, setFetchState } from "../store/actions/ProductAction";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import useQuery from "../Hooks/useQuery";
 
-function ProductCard() {
+function ProductCard({ firstPostIndex, lastPostIndex, totalPosts }) {
   const {
     data,
     loading,
@@ -15,7 +14,6 @@ function ProductCard() {
     setFilterSort,
     getQueryFromUrl,
   } = useQuery();
-  const dispatch = useDispatch();
   const allProducts = useSelector(
     (store) => store.product.productList.products
   );
@@ -26,6 +24,7 @@ function ProductCard() {
     }
   }, []);
 
+  const cartProducts = allProducts?.slice(firstPostIndex, lastPostIndex);
   return (
     <div className="custom-container flex flex-col md:flex-row justify-between flex-wrap gap-9 px-12 md:px-36 py-12">
       {fetchState != "FETCHED" ? (
@@ -48,8 +47,8 @@ function ProductCard() {
           </svg>
         </div>
       ) : (
-        Array.isArray(allProducts) &&
-        allProducts.map((product, index) => (
+        Array.isArray(cartProducts) &&
+        cartProducts.map((product, index) => (
           <div
             id={product.id}
             key={index}

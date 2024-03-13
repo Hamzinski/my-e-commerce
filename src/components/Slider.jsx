@@ -3,6 +3,7 @@ import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import { Button } from "reactstrap";
 import sliderwomen from "../assets/sliderwomen.png";
 import sliderwomen2 from "../assets/sliderwomen2.png";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 function Slider() {
   const slides = [
     {
@@ -28,6 +29,11 @@ function Slider() {
 
   const goToSlide = (slideIndex) => {
     setCurrentIndex(slideIndex);
+  };
+  const history = useHistory();
+
+  const handleClick = () => {
+    history.push("/shopping");
   };
 
   return (
@@ -60,7 +66,10 @@ function Slider() {
             <p className="font-mont font-normal md:text-start text-xl text-white w-72 md:w-96">
               We know how large objects will act, but things on a small scale.
             </p>
-            <Button className="w-fit font-mont font-bold rounded-md text-2xl text-white bg-success-color py-3.5 px-10">
+            <Button
+              onClick={handleClick}
+              className="w-fit font-mont font-bold rounded-md text-2xl text-white bg-success-color py-3.5 px-10"
+            >
               SHOP NOW
             </Button>
           </div>

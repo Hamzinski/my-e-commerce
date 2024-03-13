@@ -13,6 +13,7 @@ import {
 } from "reactstrap";
 import useQuery from "../Hooks/useQuery";
 import { useSelector } from "react-redux";
+import Pagination from "../components/Pagination";
 
 function ProductListPage() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -31,10 +32,18 @@ function ProductListPage() {
   };
   const filterProduct = () => {
     getQueryData();
+    setCurrentPage(1);
   };
   const allProducts = useSelector(
     (store) => store.product.productList.products
   );
+
+  const [productsData, setProductsData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setpostsPerPage] = useState(4);
+
+  const lastPostIndex = currentPage * postsPerPage;
+  const firstPostIndex = lastPostIndex - postsPerPage;
 
   return (
     <div>
@@ -93,7 +102,16 @@ function ProductListPage() {
           </div>
         </div>
       </div>
-      <ProductCard />
+      <ProductCard
+        firstPostIndex={firstPostIndex}
+        lastPostIndex={lastPostIndex}
+      />
+      <Pagination
+        totalPosts={Array.isArray(allProducts) ? allProducts.length : 0}
+        postsPerPage={postsPerPage}
+        setCurrentPage={setCurrentPage}
+        currentPage={currentPage}
+      />
       <BrandsTab />
     </div>
   );
