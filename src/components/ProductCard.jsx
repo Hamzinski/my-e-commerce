@@ -3,8 +3,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import useQuery from "../Hooks/useQuery";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { Link } from "react-router-dom";
 
-function ProductCard({ firstPostIndex, lastPostIndex, totalPosts }) {
+function ProductCard({
+  firstPostIndex,
+  lastPostIndex,
+  totalPosts,
+  onItemClick,
+}) {
+  const history = useHistory();
+  const handleItemClick = (product) => {
+    history.push(
+      `/products/${product.category_id}/${product.id}/${product.name}`
+    );
+  };
   const {
     data,
     loading,
@@ -53,6 +66,8 @@ function ProductCard({ firstPostIndex, lastPostIndex, totalPosts }) {
             id={product.id}
             key={index}
             className="flex flex-col items-center w-full md:w-1/5 shadow-md"
+            onClick={() => handleItemClick(product)}
+            style={{ cursor: "pointer" }}
           >
             <img
               className="w-80 md:w-60 h-[427px] object-cover"

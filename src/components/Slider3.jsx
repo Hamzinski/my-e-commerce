@@ -2,25 +2,20 @@ import React, { useState } from "react";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import slider2 from "../assets/sliderimg2.jpg";
 import slider3 from "../assets/slider2.png";
-function Slider3() {
-  const slides = [
-    {
-      image: slider2,
-    },
-    {
-      image: slider3,
-    },
-  ];
-
+function Slider3(images) {
+  const slides = images.images.map((item) => {
+    return [{ image: item.url }, { image: item.url }];
+  });
+  console.log(images);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const prevSlide = () => {
     const isFirstSlide = currentIndex === 0;
-    const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
+    const newIndex = isFirstSlide ? slides[0].length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
   };
   const nextSlide = () => {
-    const isLastSlide = currentIndex === slides.length - 1;
+    const isLastSlide = currentIndex === slides[0].length - 1;
     const newIndex = isLastSlide ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
   };
@@ -41,13 +36,13 @@ function Slider3() {
           </div>
           <img
             className="w-[500px] h-[450px] object-fill"
-            src={slides[currentIndex].image}
+            src={slides[0][currentIndex].image}
             alt=""
           />
         </div>
 
         <div className="flex py-3 gap-1">
-          {slides.map((slide, slideIndex) => (
+          {slides[0].map((slide, slideIndex) => (
             <div
               key={slideIndex}
               onClick={() => goToSlide(slideIndex)}

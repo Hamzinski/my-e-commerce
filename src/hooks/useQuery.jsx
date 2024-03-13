@@ -58,6 +58,19 @@ const useQuery = () => {
     }
   };
 
+  const getQueryDataCategory = (category) => {
+    const myObject = {
+      category: category || null,
+      filter: filterText || null,
+      sort: filterSort || null,
+    };
+    setLoading(true);
+
+    dispatch(fetchProducts(myObject)).then(() => {
+      setLoading(false);
+    });
+  };
+
   return {
     data,
     loading,
@@ -67,6 +80,7 @@ const useQuery = () => {
     setFilterSort,
     getQueryDatawithCategory,
     getQueryFromUrl,
+    getQueryDataCategory,
   };
 };
 

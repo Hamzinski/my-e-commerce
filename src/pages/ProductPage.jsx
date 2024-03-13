@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import BrandsTab from "../layouts/BrandsTab";
 import Slider3 from "../components/Slider3";
 import product1 from "../assets/product1.png";
@@ -15,6 +16,9 @@ import {
   faEye,
 } from "@fortawesome/free-solid-svg-icons";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useSelector } from "react-redux";
+import useQuery from "../Hooks/useQuery";
 const myarr = [
   {
     img: product2,
@@ -94,25 +98,54 @@ const data1 = [
   "the quick fox jumps over the lazy dog",
 ];
 function ProductPage() {
+  const { getQueryFromUrl, getQueryDataCategory } = useQuery();
+  const history = useHistory();
+  const [selectedProduct, setSelectedProduct] = useState();
+  const { productId, category } = useParams();
+  console.log(productId);
+  const goBack = () => {
+    history.goBack();
+  };
+  const allProducts = useSelector(
+    (store) => store.product.productList.products
+  );
+
+  useEffect(() => {
+    if (allProducts) {
+      console.warn(allProducts);
+      const test = allProducts.find((product) => product.id == productId);
+      setSelectedProduct(test);
+    } else {
+      getQueryDataCategory(category);
+    }
+  }, [allProducts]);
   return (
     <div>
       <div className="py-8 bg-light-gray-1">
-        <div className="custom-container flex justify-center md:justify-start items-center">
-          <p className="font-mont font-bold text-sm text-dark-text-color ">
-            Home{" "}
-          </p>
-          <MdOutlineKeyboardArrowRight className="text-muted-text-color size-8" />
-          <p className="font-mont font-bold text-sm text-muted-text-color">
-            Shop
-          </p>
+        <div className="custom-container flex justify-between">
+          <button
+            onClick={goBack}
+            className="bg-primary-bg font-mont font-bold px-2.5 py-2.5 text-white rounded-md"
+          >
+            Go Back
+          </button>
+          <div className="flex md:justify-start items-center">
+            <p className="font-mont font-bold text-sm text-dark-text-color ">
+              Home{" "}
+            </p>
+            <MdOutlineKeyboardArrowRight className="text-muted-text-color size-8" />
+            <p className="font-mont font-bold text-sm text-muted-text-color">
+              Shop
+            </p>
+          </div>
         </div>
         <div className="custom-container items-center md:items-stretch flex flex-col md:flex-row gap-12 py-12">
           <div>
-            <Slider3 />
+            {selectedProduct && <Slider3 images={selectedProduct.images} />}
           </div>
           <div className="flex flex-col gap-3 w-2/3 md:w-1/3">
             <p className="text-dark-text-color font-mont font-semibold text-xl">
-              Floating Phone
+              {selectedProduct?.name}
             </p>
             <div className="flex items-center gap-3">
               <div className="text-[#F3CD03] text-xl">
@@ -170,7 +203,7 @@ function ProductPage() {
               </button>
             </div>
             <div className="flex gap-3">
-              <button className="bg-primary-bg font-mont font-bold px-2.5 py-2.5 text-white rounded-md ">
+              <button className="bg-primary-bg font-mont font-bold px-2.5 py-2.5 text-white rounded-md">
                 Select Options
               </button>
               <button className="bg-white rounded-full w-10 h-10 border-1 border-gray-border">
