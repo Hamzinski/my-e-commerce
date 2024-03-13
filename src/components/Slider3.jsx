@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
-import slider2 from "../assets/sliderimg2.jpg";
-import slider3 from "../assets/slider2.png";
 function Slider3(images) {
   const slides = images.images.map((item) => {
     return [{ image: item.url }, { image: item.url }];
@@ -35,7 +33,7 @@ function Slider3(images) {
             <BsChevronCompactRight onClick={nextSlide} size={60} />
           </div>
           <img
-            className="w-[500px] h-[450px] object-fill"
+            className="w-96 flex justify-center items-center "
             src={slides[0][currentIndex].image}
             alt=""
           />

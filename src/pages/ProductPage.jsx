@@ -156,24 +156,22 @@ function ProductPage() {
                 <FontAwesomeIcon icon={faStar1} />
               </div>
               <p className="text-second-text-color font-mont font-bold text-sm">
-                10 Reviews
+                {selectedProduct?.sell_count} Reviews
               </p>
             </div>
-            <p className="text-dark-text-color font-mont font-bold text-2xl">
-              $1,139.33
+            <p className="text-success-text-color font-mont font-bold text-2xl">
+              ${selectedProduct?.price}
             </p>
-            <div className="flex">
+            <div className="flex gap-2">
               <p className="text-second-text-color font-mont font-bold text-sm">
                 Availability :
               </p>
               <p className="text-primary-color font-mont font-bold text-sm">
-                In Stock{" "}
+                {selectedProduct?.stock} units left in stock.
               </p>
             </div>
             <p className="text-gray-text-color font-mont font-semibold text-sm ">
-              Met minim Mollie non desert Alamo est sit cliquey dolor do met
-              sent. RELIT official consequent door ENIM RELIT Mollie. Excitation
-              venial consequent sent nostrum met.
+              {selectedProduct?.description}
             </p>
             <hr />
             <div className="flex gap-2">
