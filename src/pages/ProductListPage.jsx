@@ -11,7 +11,7 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
-import useQuery from "../Hooks/useQuery";
+import useQuery from "../hooks/useQuery";
 import { useSelector } from "react-redux";
 import Pagination from "../components/Pagination";
 

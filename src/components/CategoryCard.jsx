@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-import useQuery from "../Hooks/useQuery";
+import useQuery from "../hooks/useQuery";
 
 function CategoryCard() {
   const {

@@ -30,7 +30,7 @@ import {
 import { NavLink } from "reactstrap";
 import { useSelector } from "react-redux";
 import Gravatar from "../components/Gravatar.jsx";
-import useQuery from "../Hooks/useQuery.jsx";
+import useQuery from "../hooks/useQuery.jsx";
 const contactInfo = [
   { icon: faPhone, text: "(225) 555-0118" },
   { icon: faEnvelope, text: "michelle.rivera@example.com" },

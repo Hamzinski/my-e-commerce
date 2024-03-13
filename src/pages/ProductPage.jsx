@@ -18,7 +18,7 @@ import {
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { useSelector } from "react-redux";
-import useQuery from "../Hooks/useQuery";
+import useQuery from "../hooks/useQuery";
 const myarr = [
   {
     img: product2,

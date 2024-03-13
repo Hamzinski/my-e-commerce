@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
-import useQuery from "../Hooks/useQuery";
+import useQuery from "../hooks/useQuery";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { Link } from "react-router-dom";
 
