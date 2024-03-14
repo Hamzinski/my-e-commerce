@@ -138,7 +138,6 @@ function Header() {
   }, [cartItems]);
 
   useEffect(() => {
-    // Local storage'dan sepeti al ve Redux store'a yükle
     const cartFromLocalStorage = localStorage.getItem("cart");
     if (cartFromLocalStorage) {
       dispatch(updateCart(JSON.parse(cartFromLocalStorage)));
@@ -146,10 +145,7 @@ function Header() {
   }, []);
 
   useEffect(() => {
-    // Sepeti local storage'a kaydet
     localStorage.setItem("cart", JSON.stringify(cartItems));
-
-    // Sepet öğe sayısını güncelle
     const itemCount = cartItems.reduce((total, item) => total + item.count, 0);
     setCartItemCount(itemCount);
   }, [cartItems]);
@@ -314,7 +310,16 @@ function Header() {
                 <Dropdown className="" isOpen={dropdownOpen1} toggle={toggle1}>
                   <DropdownToggle className="text-primary-color">
                     {" "}
-                    <FontAwesomeIcon icon={faCartShopping} />
+                    {cartItemCount > 0 ? (
+                      <p className="font-mont font-bold flex items-center gap-2">
+                        <FontAwesomeIcon icon={faCartShopping} />{" "}
+                        {cartItemCount}
+                      </p>
+                    ) : (
+                      <p className="font-mont font-bold">
+                        <FontAwesomeIcon icon={faCartShopping} />
+                      </p>
+                    )}
                   </DropdownToggle>
                   <DropdownMenu className="w-96 max-h-80 overflow-y-auto">
                     <div className="flex justify-between p-3 font-mont font-bold">
@@ -329,11 +334,9 @@ function Header() {
                     {Array.from(
                       new Set(cartItems.map((item) => item.product.id))
                     ).map((productId) => {
-                      // Find the first item with the matching productId
                       const item = cartItems.find(
                         (item) => item.product.id === productId
                       );
-                      // Calculate the total count of this item in the cart
                       const itemCount = cartItems.reduce(
                         (total, cartItem) =>
                           cartItem.product.id === productId
@@ -344,19 +347,19 @@ function Header() {
                       return (
                         <DropdownItem key={productId}>
                           {" "}
-                          <div className="flex gap-3">
+                          <div className="flex gap-6">
                             <img
                               className="w-24 h-32 rounded-md"
                               src={item.product.images[0].url}
                             />
-                            <div className="flex flex-col font-mont font-bold">
+                            <div className="flex flex-col gap-3 font-mont font-bold">
                               <p>{item.product.name}</p>{" "}
                               <p className="text-success-text-color">
                                 <p>${item.count * item.product.price}</p>
                               </p>
-                              <div className="flex items-center">
+                              <div className="flex items-center gap-2">
                                 <button
-                                  className="mr-2"
+                                  className="bg-primary-bg w-6 text-white rounded-md"
                                   onClick={(e) => {
                                     e.stopPropagation();
                                     handleUpdateItemCount(
@@ -367,9 +370,9 @@ function Header() {
                                 >
                                   -
                                 </button>
-                                <p>{item.count}</p>
+                                <span>{item.count}</span>
                                 <button
-                                  className="ml-2"
+                                  className="bg-primary-bg w-6 text-white rounded-md"
                                   onClick={(e) => {
                                     e.stopPropagation();
                                     handleUpdateItemCount(
@@ -392,9 +395,18 @@ function Header() {
                               </div>
                             </div>
                           </div>
+                          <DropdownItem divider />
                         </DropdownItem>
                       );
                     })}
+                    <DropdownItem className="flex justify-center">
+                      <NavLink
+                        href="#"
+                        className="bg-primary-bg font-mont font-bold px-9 py-2.5 text-white rounded-md w-fit"
+                      >
+                        Sepete Git
+                      </NavLink>
+                    </DropdownItem>
                   </DropdownMenu>
                 </Dropdown>
                 <NavLink
