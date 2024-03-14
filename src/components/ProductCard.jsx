@@ -18,15 +18,7 @@ function ProductCard({
       `/products/${product.category_id}/${product.id}/${product.name}`
     );
   };
-  const {
-    data,
-    loading,
-    error,
-    getQueryData,
-    setFilterText,
-    setFilterSort,
-    getQueryFromUrl,
-  } = useQuery();
+  const { getQueryFromUrl } = useQuery();
   const allProducts = useSelector(
     (store) => store.product.productList.products
   );

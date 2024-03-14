@@ -35,6 +35,11 @@ const ShoppingCartReducer = (state = initialState, action) => {
         ...state,
         cart: updatedCartItems,
       };
+    case "UPDATE_CART":
+      return {
+        ...state,
+        cart: action.payload.cart,
+      };
 
     case "CLEAR_CART":
       return {

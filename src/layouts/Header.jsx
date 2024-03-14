@@ -19,6 +19,7 @@ import {
   faMagnifyingGlass,
   faCartShopping,
   faAddressCard,
+  faTrashAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { faUser, faHeart } from "@fortawesome/free-regular-svg-icons";
 import {
@@ -31,6 +32,12 @@ import { NavLink } from "reactstrap";
 import { useSelector } from "react-redux";
 import Gravatar from "../components/Gravatar.jsx";
 import useQuery from "../hooks/useQuery.jsx";
+import {
+  clearCart,
+  updateCartItemCount,
+  removeFromCart,
+  updateCart,
+} from "../store/actions/ShoppingCartAction.jsx";
 const contactInfo = [
   { icon: faPhone, text: "(225) 555-0118" },
   { icon: faEnvelope, text: "michelle.rivera@example.com" },
@@ -50,37 +57,10 @@ const links = [
   { text: "Pages", href: "#" },
 ];
 
-const buttons = [
-  {
-    icon: faMagnifyingGlass,
-    text: "",
-    className: "text-primary-color text-2xl md:text-base",
-    href: "#",
-  },
-  {
-    icon: faCartShopping,
-    text: "",
-    className: "text-primary-color text-2xl md:text-base",
-    href: "#",
-  },
-  {
-    icon: faHeart,
-    text: "",
-    className: "text-primary-color text-2xl md:text-base",
-    href: "#",
-  },
-];
-
 function Header() {
-  const {
-    data,
-    loading,
-    error,
-    getQueryData,
-    setFilterText,
-    setFilterSort,
-    getQueryDatawithCategory,
-  } = useQuery();
+  const cartItems = useSelector((state) => state.shoppingCart.cart);
+  console.log(cartItems);
+  const { getQueryDatawithCategory } = useQuery();
 
   const filterCategory = (id, gender) => {
     getQueryDatawithCategory(id, gender);
@@ -103,7 +83,26 @@ function Header() {
     delete axios.defaults.headers.common["Authorization"];
     history.push("/login");
   };
-
+  const handleClearCart = () => {
+    dispatch(clearCart());
+  };
+  const handleUpdateItemCount = (productId, newCount) => {
+    const existingItem = cartItems.find(
+      (item) => item.product.id === productId
+    );
+    if (existingItem) {
+      if (newCount <= 0) {
+        dispatch(removeFromCart(productId));
+      } else {
+        dispatch(updateCartItemCount(productId, newCount));
+      }
+    } else {
+      dispatch(updateCartItemCount(productId, newCount));
+    }
+  };
+  const handleRemoveFromCart = (productId) => {
+    dispatch(removeFromCart(productId));
+  };
   const allCategories = useSelector((store) => store.global.categories);
 
   const renderDropdownItems = (gender) => {
@@ -128,7 +127,32 @@ function Header() {
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
+  const [dropdownOpen1, setDropdownOpen1] = useState(false);
 
+  const toggle1 = () => setDropdownOpen1((prevState) => !prevState);
+
+  const [cartItemCount, setCartItemCount] = useState(0);
+  useEffect(() => {
+    const itemCount = cartItems.reduce((total, item) => total + item.count, 0);
+    setCartItemCount(itemCount);
+  }, [cartItems]);
+
+  useEffect(() => {
+    // Local storage'dan sepeti al ve Redux store'a yükle
+    const cartFromLocalStorage = localStorage.getItem("cart");
+    if (cartFromLocalStorage) {
+      dispatch(updateCart(JSON.parse(cartFromLocalStorage)));
+    }
+  }, []);
+
+  useEffect(() => {
+    // Sepeti local storage'a kaydet
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+
+    // Sepet öğe sayısını güncelle
+    const itemCount = cartItems.reduce((total, item) => total + item.count, 0);
+    setCartItemCount(itemCount);
+  }, [cartItems]);
   return (
     <>
       <div className="flex  flex-col  ">
@@ -280,16 +304,105 @@ function Header() {
                   </NavLink>
                 </>
               )}
-              <div className="flex">
-                {buttons.map((button, index) => (
-                  <NavLink
-                    key={index}
-                    className={button.className}
-                    href={button.href}
-                  >
-                    <FontAwesomeIcon icon={button.icon} /> {button.text}
-                  </NavLink>
-                ))}
+              <div className="flex items-center">
+                <NavLink
+                  className="text-primary-color text-2xl md:text-base"
+                  href="#"
+                >
+                  <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </NavLink>
+                <Dropdown className="" isOpen={dropdownOpen1} toggle={toggle1}>
+                  <DropdownToggle className="text-primary-color">
+                    {" "}
+                    <FontAwesomeIcon icon={faCartShopping} />
+                  </DropdownToggle>
+                  <DropdownMenu className="w-96 max-h-80 overflow-y-auto">
+                    <div className="flex justify-between p-3 font-mont font-bold">
+                      <p>Sepetim ({cartItemCount} Ürün)</p>
+                      <button
+                        className="text-primary-color ml-2"
+                        onClick={handleClearCart}
+                      >
+                        <FontAwesomeIcon icon={faTrashAlt} />
+                      </button>
+                    </div>
+                    {Array.from(
+                      new Set(cartItems.map((item) => item.product.id))
+                    ).map((productId) => {
+                      // Find the first item with the matching productId
+                      const item = cartItems.find(
+                        (item) => item.product.id === productId
+                      );
+                      // Calculate the total count of this item in the cart
+                      const itemCount = cartItems.reduce(
+                        (total, cartItem) =>
+                          cartItem.product.id === productId
+                            ? total + cartItem.count
+                            : total,
+                        0
+                      );
+                      return (
+                        <DropdownItem key={productId}>
+                          {" "}
+                          <div className="flex gap-3">
+                            <img
+                              className="w-24 h-32 rounded-md"
+                              src={item.product.images[0].url}
+                            />
+                            <div className="flex flex-col font-mont font-bold">
+                              <p>{item.product.name}</p>{" "}
+                              <p className="text-success-text-color">
+                                <p>${item.count * item.product.price}</p>
+                              </p>
+                              <div className="flex items-center">
+                                <button
+                                  className="mr-2"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleUpdateItemCount(
+                                      item.product.id,
+                                      item.count - 1
+                                    );
+                                  }}
+                                >
+                                  -
+                                </button>
+                                <p>{item.count}</p>
+                                <button
+                                  className="ml-2"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleUpdateItemCount(
+                                      item.product.id,
+                                      item.count + 1
+                                    );
+                                  }}
+                                >
+                                  +
+                                </button>
+                                <button
+                                  className="ml-2 text-primary-color"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleRemoveFromCart(item.product.id);
+                                  }}
+                                >
+                                  <FontAwesomeIcon icon={faTrashAlt} />
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </DropdownItem>
+                      );
+                    })}
+                  </DropdownMenu>
+                </Dropdown>
+                <NavLink
+                  className="text-primary-color text-2xl md:text-base"
+                  href="#"
+                >
+                  <FontAwesomeIcon icon={faHeart} />
+                </NavLink>
               </div>
             </div>
           </div>

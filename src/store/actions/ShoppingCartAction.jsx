@@ -18,6 +18,12 @@ export const updateCartItemCount = (productId, newCount) => {
     payload: { productId, newCount },
   };
 };
+export const updateCart = (cart) => {
+  return {
+    type: "UPDATE_CART",
+    payload: { cart },
+  };
+};
 
 export const clearCart = () => {
   return {

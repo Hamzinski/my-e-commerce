@@ -19,6 +19,18 @@ import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { useSelector } from "react-redux";
 import useQuery from "../hooks/useQuery";
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from "reactstrap";
+import {
+  addToCart,
+  updateCartItemCount,
+} from "../store/actions/ShoppingCartAction";
+import { useDispatch } from "react-redux";
+
 const myarr = [
   {
     img: product2,
@@ -98,7 +110,22 @@ const data1 = [
   "the quick fox jumps over the lazy dog",
 ];
 function ProductPage() {
-  const { getQueryFromUrl, getQueryDataCategory } = useQuery();
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.shoppingCart.cart);
+  const handleAddToCart = (product) => {
+    const existingItem = cartItems.find(
+      (item) => item.product.id === product.id
+    );
+    if (existingItem) {
+      dispatch(updateCartItemCount(product.id, existingItem.count + 0));
+    } else {
+      dispatch(addToCart(1, product));
+    }
+  };
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggle = () => setDropdownOpen((prevState) => !prevState);
+  const { getQueryDataCategory } = useQuery();
   const history = useHistory();
   const [selectedProduct, setSelectedProduct] = useState();
   const { productId, category } = useParams();
@@ -201,13 +228,27 @@ function ProductPage() {
               </button>
             </div>
             <div className="flex gap-3">
-              <button className="bg-primary-bg font-mont font-bold px-2.5 py-2.5 text-white rounded-md">
-                Select Options
-              </button>
+              <div>
+                <Dropdown
+                  className="bg-primary-bg font-mont"
+                  isOpen={dropdownOpen}
+                  toggle={toggle}
+                >
+                  <DropdownToggle caret>Select Options</DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem>Small</DropdownItem>
+                    <DropdownItem>Medium</DropdownItem>
+                    <DropdownItem>Large</DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
+              </div>
               <button className="bg-white rounded-full w-10 h-10 border-1 border-gray-border">
                 <FontAwesomeIcon icon={faHeart} />
               </button>
-              <button className="bg-white rounded-full w-10 h-10 border-1 border-gray-border">
+              <button
+                onClick={() => handleAddToCart(selectedProduct)}
+                className="bg-white rounded-full w-10 h-10 border-1 border-gray-border"
+              >
                 <FontAwesomeIcon icon={faCartShopping} />
               </button>
               <button className="bg-white rounded-full w-10 h-10 border-1 border-gray-border">
