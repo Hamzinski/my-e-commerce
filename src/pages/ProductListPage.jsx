@@ -13,37 +13,40 @@ import {
 } from "reactstrap";
 import useQuery from "../hooks/useQuery";
 import { useSelector } from "react-redux";
-import Pagination from "../components/Pagination";
+import ReactPaginate from "react-paginate";
 
 function ProductListPage() {
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 25;
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
   const {
-    data,
-    loading,
-    error,
     getQueryData,
     setFilterText,
     setFilterSort,
-    getQueryFromUrl,
+    setPaginationOffSet,
+    paginationOffSet,
   } = useQuery();
   const handleChange = (e) => {
     setFilterText(e.target.value);
   };
+
+  const handlePageClick = ({ selected }) => {
+    setCurrentPage(selected);
+    const offset = selected * itemsPerPage;
+    setPaginationOffSet(offset);
+    console.log("Current Page", currentPage);
+  };
+  useEffect(() => {
+    getQueryData();
+  }, [paginationOffSet]);
+
   const filterProduct = () => {
     getQueryData();
-    setCurrentPage(1);
   };
   const allProducts = useSelector(
     (store) => store.product.productList.products
   );
-
-  const [productsData, setProductsData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setpostsPerPage] = useState(4);
-
-  const lastPostIndex = currentPage * postsPerPage;
-  const firstPostIndex = lastPostIndex - postsPerPage;
 
   return (
     <div>
@@ -102,16 +105,29 @@ function ProductListPage() {
           </div>
         </div>
       </div>
-      <ProductCard
-        firstPostIndex={firstPostIndex}
-        lastPostIndex={lastPostIndex}
-      />
-      <Pagination
-        totalPosts={Array.isArray(allProducts) ? allProducts.length : 0}
-        postsPerPage={postsPerPage}
-        setCurrentPage={setCurrentPage}
-        currentPage={currentPage}
-      />
+      <ProductCard />
+      <div className="custom-container font-mont font-semibold flex justify-center">
+        <ReactPaginate
+          nextLabel="next >"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={3}
+          marginPagesDisplayed={2}
+          pageCount={25}
+          previousLabel="< previous"
+          pageClassName="page-item"
+          pageLinkClassName="page-link"
+          previousClassName="page-item"
+          previousLinkClassName="page-link"
+          nextClassName="page-item"
+          nextLinkClassName="page-link"
+          breakLabel="..."
+          breakClassName="page-item"
+          breakLinkClassName="page-link"
+          containerClassName="pagination"
+          activeClassName="active"
+          renderOnZeroPageCount={null}
+        />
+      </div>
       <BrandsTab />
     </div>
   );

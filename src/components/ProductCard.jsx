@@ -4,14 +4,8 @@ import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import useQuery from "../hooks/useQuery";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { Link } from "react-router-dom";
 
-function ProductCard({
-  firstPostIndex,
-  lastPostIndex,
-  totalPosts,
-  onItemClick,
-}) {
+function ProductCard() {
   const history = useHistory();
   const handleItemClick = (product) => {
     history.push(
@@ -29,7 +23,6 @@ function ProductCard({
     }
   }, []);
 
-  const cartProducts = allProducts?.slice(firstPostIndex, lastPostIndex);
   return (
     <div className="custom-container flex flex-col md:flex-row justify-between flex-wrap gap-9 px-12 md:px-36 py-12">
       {fetchState != "FETCHED" ? (
@@ -52,8 +45,8 @@ function ProductCard({
           </svg>
         </div>
       ) : (
-        Array.isArray(cartProducts) &&
-        cartProducts.map((product, index) => (
+        Array.isArray(allProducts) &&
+        allProducts.map((product, index) => (
           <div
             id={product.id}
             key={index}
