@@ -59,7 +59,6 @@ const links = [
 
 function Header() {
   const cartItems = useSelector((state) => state.shoppingCart.cart);
-  console.log(cartItems);
   const { getQueryDatawithCategory } = useQuery();
 
   const filterCategory = (id, gender) => {

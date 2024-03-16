@@ -26,28 +26,24 @@ function ProductListPage() {
     setFilterSort,
     setPaginationOffSet,
     paginationOffSet,
+    getQueryOffset,
   } = useQuery();
   const handleChange = (e) => {
     setFilterText(e.target.value);
   };
 
-  const handlePageClick = ({ selected }) => {
-    setCurrentPage(selected);
-    const offset = selected * itemsPerPage;
-    setPaginationOffSet(offset);
-    console.log("Current Page", currentPage);
+  const handlePageClick = ({ nextSelectedPage }) => {
+    setCurrentPage(nextSelectedPage);
+    const offset = nextSelectedPage * itemsPerPage;
+    getQueryOffset(25, offset);
   };
-  useEffect(() => {
-    getQueryData();
-  }, [paginationOffSet]);
 
   const filterProduct = () => {
     getQueryData();
   };
-  const allProducts = useSelector(
-    (store) => store.product.productList.products
-  );
-
+  const allProducts = useSelector((store) => store.product.productList);
+  const urlSearchParams = new URLSearchParams(window.location.search);
+  const paginationOffSetParam = urlSearchParams.get("offset");
   return (
     <div>
       <CategoryCard />
@@ -109,10 +105,11 @@ function ProductListPage() {
       <div className="custom-container font-mont font-semibold flex justify-center">
         <ReactPaginate
           nextLabel="next >"
-          onPageChange={handlePageClick}
+          onClick={handlePageClick}
           pageRangeDisplayed={3}
           marginPagesDisplayed={2}
-          pageCount={25}
+          initialPage={paginationOffSetParam / 25}
+          pageCount={allProducts.total / 25}
           previousLabel="< previous"
           pageClassName="page-item"
           pageLinkClassName="page-link"

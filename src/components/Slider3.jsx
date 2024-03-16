@@ -4,7 +4,6 @@ function Slider3(images) {
   const slides = images.images.map((item) => {
     return [{ image: item.url }, { image: item.url }];
   });
-  console.log(images);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const prevSlide = () => {

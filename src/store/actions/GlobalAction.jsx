@@ -42,6 +42,5 @@ export const fetchCategories = () => (dispatch) => {
   instance.get("/categories").then((res) => {
     const categories = res.data;
     dispatch(setCategories(categories));
-    console.log(categories);
   });
 };

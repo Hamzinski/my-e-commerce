@@ -50,7 +50,6 @@ function SignUpPage() {
     instance
       .post("/signup", postData)
       .then((res) => {
-        console.log(res);
         toast.success(
           "Submit successful. Check your email to activate your account!"
         );

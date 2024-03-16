@@ -129,7 +129,6 @@ function ProductPage() {
   const history = useHistory();
   const [selectedProduct, setSelectedProduct] = useState();
   const { productId, category } = useParams();
-  console.log(productId);
   const goBack = () => {
     history.goBack();
   };
@@ -139,7 +138,6 @@ function ProductPage() {
 
   useEffect(() => {
     if (allProducts) {
-      console.warn(allProducts);
       const test = allProducts.find((product) => product.id == productId);
       setSelectedProduct(test);
     } else {

@@ -47,7 +47,6 @@ export const fetchProducts = (queryParams) => (dispatch) => {
         const products = res.data;
         dispatch(setProductList(products));
         dispatch(setFetchState("FETCHED"));
-        console.log(products);
         resolve();
       })
       .catch((error) => {
