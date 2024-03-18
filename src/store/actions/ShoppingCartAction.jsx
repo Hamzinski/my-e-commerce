@@ -44,3 +44,9 @@ export const setAddressInfo = (addressInfo) => {
     payload: addressInfo,
   };
 };
+export const toggleCheckItemAction = (productId, checked) => {
+  return {
+    type: "TOGGLE_CHECK_ITEM",
+    payload: { productId, checked },
+  };
+};

@@ -14,6 +14,7 @@ import Footer from "./layouts/Footer";
 import { Provider } from "react-redux";
 import { store } from "../src/store/Store";
 import { setUser, clearUser } from "../src/store/actions/UserAction";
+import ShoppingCartPage from "./pages/ShoppingCartPage";
 
 function App() {
   useEffect(() => {
@@ -61,6 +62,7 @@ function App() {
             path="/products/:category/:productId/:productNameSlug"
             component={ProductPage}
           />
+          <Route path="/cart" component={ShoppingCartPage} />
           <Route path="/about" component={AboutPage} />
           <Route path="/team" component={TeamPage} />
           <Route path="/contact" component={ContactPage} />

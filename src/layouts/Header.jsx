@@ -400,7 +400,7 @@ function Header() {
                     })}
                     <DropdownItem className="flex justify-center">
                       <NavLink
-                        href="#"
+                        href="/cart"
                         className="bg-primary-bg font-mont font-bold px-9 py-2.5 text-white rounded-md w-fit"
                       >
                         Sepete Git

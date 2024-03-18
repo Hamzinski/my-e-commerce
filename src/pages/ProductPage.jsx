@@ -30,6 +30,7 @@ import {
   updateCartItemCount,
 } from "../store/actions/ShoppingCartAction";
 import { useDispatch } from "react-redux";
+import { toast, ToastContainer } from "react-toastify";
 
 const myarr = [
   {
@@ -113,6 +114,7 @@ function ProductPage() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.shoppingCart.cart);
   const handleAddToCart = (product) => {
+    toast.success("Sepete eklendi.");
     const existingItem = cartItems.find(
       (item) => item.product.id === product.id
     );
@@ -123,8 +125,12 @@ function ProductPage() {
     }
   };
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
   const toggle = () => setDropdownOpen((prevState) => !prevState);
+  const [selectedOption, setSelectedOption] = useState("Select Options");
+  const handleOptionSelect = (option) => {
+    setSelectedOption(option);
+  };
+
   const { getQueryDataCategory } = useQuery();
   const history = useHistory();
   const [selectedProduct, setSelectedProduct] = useState();
@@ -146,6 +152,7 @@ function ProductPage() {
   }, [allProducts]);
   return (
     <div>
+      <ToastContainer />
       <div className="py-8 bg-light-gray-1">
         <div className="custom-container flex justify-between">
           <button
@@ -232,24 +239,30 @@ function ProductPage() {
                   isOpen={dropdownOpen}
                   toggle={toggle}
                 >
-                  <DropdownToggle caret>Select Options</DropdownToggle>
+                  <DropdownToggle caret>{selectedOption}</DropdownToggle>
                   <DropdownMenu>
-                    <DropdownItem>Small</DropdownItem>
-                    <DropdownItem>Medium</DropdownItem>
-                    <DropdownItem>Large</DropdownItem>
+                    <DropdownItem onClick={() => handleOptionSelect("Small")}>
+                      Small
+                    </DropdownItem>
+                    <DropdownItem onClick={() => handleOptionSelect("Medium")}>
+                      Medium
+                    </DropdownItem>
+                    <DropdownItem onClick={() => handleOptionSelect("Large")}>
+                      Large
+                    </DropdownItem>
                   </DropdownMenu>
                 </Dropdown>
               </div>
-              <button className="bg-white rounded-full w-10 h-10 border-1 border-gray-border">
+              <button className="bg-white rounded-full w-10 h-10 border-1 border-gray-border transition-all duration-100 hover:w-12 hover:h-12 hover:text-primary-color cursor-pointer">
                 <FontAwesomeIcon icon={faHeart} />
               </button>
               <button
                 onClick={() => handleAddToCart(selectedProduct)}
-                className="bg-white rounded-full w-10 h-10 border-1 border-gray-border"
+                className="bg-white rounded-full w-10 h-10 border-1 border-gray-border transition-all duration-100 hover:w-12 hover:h-12 hover:text-primary-color cursor-pointer"
               >
                 <FontAwesomeIcon icon={faCartShopping} />
               </button>
-              <button className="bg-white rounded-full w-10 h-10 border-1 border-gray-border">
+              <button className="bg-white rounded-full w-10 h-10 border-1 border-gray-border transition-all duration-100 hover:w-12 hover:h-12 hover:text-primary-color cursor-pointer">
                 <FontAwesomeIcon icon={faEye} />
               </button>
             </div>

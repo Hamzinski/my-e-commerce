@@ -2,6 +2,7 @@ const initialState = {
   cart: [],
   payment: {},
   address: {},
+  checkedCard: {},
 };
 
 const ShoppingCartReducer = (state = initialState, action) => {
@@ -34,6 +35,16 @@ const ShoppingCartReducer = (state = initialState, action) => {
       return {
         ...state,
         cart: updatedCartItems,
+      };
+    case "TOGGLE_CHECK_ITEM":
+      const toggledCart = state.cart.map((item) =>
+        item.product.id === action.payload.productId
+          ? { ...item, checked: action.payload.checked }
+          : item
+      );
+      return {
+        ...state,
+        cart: toggledCart,
       };
     case "UPDATE_CART":
       return {
