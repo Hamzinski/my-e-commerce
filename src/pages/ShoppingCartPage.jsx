@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import cat from "../assets/catincart.jpg";
 import {
   faTruck,
   faTrashAlt,
@@ -14,7 +15,9 @@ import {
   toggleCheckItemAction,
 } from "../store/actions/ShoppingCartAction.jsx";
 import { ToastContainer, toast } from "react-toastify";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min.js";
 function ShoppingCartPage() {
+  const history = useHistory();
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.shoppingCart.cart);
   const [discountCode, setDiscountCode] = useState("");
@@ -221,9 +224,15 @@ function ShoppingCartPage() {
           </div>
         </div>
       ) : (
-        <h1 className="m-auto text-3xl bg-gray-300 shadow-2xl p-4 rounded-lg">
-          Sepetinizde Ürün Yok!!
-        </h1>
+        <div className="w-full flex flex-col gap-9 py-12">
+          <img className="w-96" src={cat} alt="" />
+          <button
+            onClick={() => history.push("shopping")}
+            className="w-96 font-mont font-bold text-center text-white bg-primary-bg  p-4 rounded-md"
+          >
+            Lütfen sepetinize ürün ekleyiniz.
+          </button>
+        </div>
       )}
     </div>
   );
