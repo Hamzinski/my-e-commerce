@@ -48,3 +48,13 @@
 .ham1.active .bottom {
   stroke-dashoffset: -138px;
 }
+.custom-padding {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+@media (min-width: 768px) {
+  .custom-padding {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

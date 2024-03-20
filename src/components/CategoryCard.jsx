@@ -4,15 +4,7 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import useQuery from "../hooks/useQuery";
 
 function CategoryCard() {
-  const {
-    data,
-    loading,
-    error,
-    getQueryData,
-    setFilterText,
-    setFilterSort,
-    getQueryDatawithCategory,
-  } = useQuery();
+  const { getQueryDatawithCategory } = useQuery();
   const filterCategory = (id, gender) => {
     getQueryDatawithCategory(id, gender);
   };

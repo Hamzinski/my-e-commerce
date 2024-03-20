@@ -26,6 +26,9 @@ function ShoppingCartPage() {
   const handleChange = (event) => {
     setDiscountCode(event.target.value);
   };
+  const handleItemClick = (item) => {
+    history.push(`/products/${item.category_id}/${item.id}/${item.name}`);
+  };
   const toFixed2 = (number) => {
     return (Math.round(number * 100) / 100).toFixed(2);
   };
@@ -63,6 +66,9 @@ function ShoppingCartPage() {
 
   function applyDiscount(totalPrice) {
     if (discountApplied) {
+      if (totalPrice < 150) {
+        return totalPrice - 100 + 29;
+      }
       return totalPrice > 100 ? totalPrice - 100 : 0;
     }
     return totalPrice < 150 && totalPrice > 0 ? totalPrice + 29 : totalPrice;
@@ -76,15 +82,15 @@ function ShoppingCartPage() {
     }
   };
   return (
-    <div className="flex custom-container justify-between ">
-      <div className="w-2/3">
+    <div className="flex flex-col md:flex-row custom-container justify-between ">
+      <div className="w-full md:w-2/3">
         <ToastContainer />
         {cartItems.map((item, index) => {
           if (item.count > 0) {
             return (
               <div
                 key={index}
-                className="font-mont flex items-center gap-6 py-5 px-10 border-y-2 w-full"
+                className="font-mont flex items-center flex-col md:flex-row gap-6 py-5 px-10 border-y-2 w-full"
               >
                 <input
                   className="w-5 h-5"
@@ -93,11 +99,12 @@ function ShoppingCartPage() {
                   onClick={() => toggleCheckbox(item.product.id, !item.checked)}
                 />
                 <img
-                  className="w-[9rem] h-[12rem] shadow-md rounded-md"
+                  onClick={() => handleItemClick(item.product)}
+                  className="w-[9rem] h-[12rem] shadow-md rounded-md cursor-pointer"
                   src={item.product.images[0].url}
                   alt=""
                 />
-                <div className="flex flex-col gap-3 w-1/2">
+                <div className="flex flex-col gap-3 w-full md:w-1/2">
                   <h1 className="text-dark-text-color font-bold">
                     {item.product.name}
                   </h1>
@@ -110,7 +117,7 @@ function ShoppingCartPage() {
                       className="text-success-text-color"
                       icon={faTruck}
                     />
-                    <p className="text-second-text-color">
+                    <p className="text-second-text-color ">
                       <span className="font-bold text-dark-text-color">
                         39 dk içinde
                       </span>{" "}
@@ -122,7 +129,7 @@ function ShoppingCartPage() {
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center justify-between gap-12 w-1/4">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-12 w-1/4">
                   <div className="flex items-center ">
                     <button
                       className="bg-primary-bg w-12 h-12 text-white rounded-sm"
@@ -146,17 +153,22 @@ function ShoppingCartPage() {
                       <FontAwesomeIcon className="text-white" icon={faPlus} />
                     </button>
                   </div>
-                  <h1 className="text-xl font-bold text-success-text-color">
-                    {toFixed2(item.product.price * item.count)}$
-                  </h1>
-                  <FontAwesomeIcon
-                    className="w-5 h-5 text-primary-color cursor-pointer"
-                    icon={faTrashAlt}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleRemoveFromCart(item.product.id);
-                    }}
-                  />
+                  <div className="flex gap-9 md:gap-3 items-center">
+                    <h1 className="text-xl font-bold text-success-text-color">
+                      {toFixed2(item.product.price * item.count)}$
+                    </h1>
+                    <div>
+                      {" "}
+                      <FontAwesomeIcon
+                        className="w-5 h-5 text-primary-color cursor-pointer"
+                        icon={faTrashAlt}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleRemoveFromCart(item.product.id);
+                        }}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             );
@@ -164,7 +176,7 @@ function ShoppingCartPage() {
         })}
       </div>
       {cartItems.length > 0 ? (
-        <div className="w-1/4 flex flex-col gap-2 p-3 border-y-2 font-mont">
+        <div className="w-full md:w-1/4 flex flex-col gap-2 p-3 border-y-2 font-mont">
           <div className="flex flex-col gap-2 ">
             <h1 className="pb-4 text-2xl">Sipariş Özeti</h1>
             <div className="flex justify-between">
@@ -216,7 +228,7 @@ function ShoppingCartPage() {
               </form>
             )}
             <button
-              onClick={() => history.push("#")}
+              onClick={() => history.push("order")}
               className="text-sm border-1 rounded-md py-2 px-5 bg-primary-bg text-white"
             >
               Sepeti Onayla <FontAwesomeIcon icon={faChevronRight} />

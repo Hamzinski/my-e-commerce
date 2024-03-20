@@ -18,7 +18,6 @@ import {
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { useSelector } from "react-redux";
-import useQuery from "../hooks/useQuery";
 import {
   Dropdown,
   DropdownToggle,
@@ -28,6 +27,7 @@ import {
 import {
   addToCart,
   updateCartItemCount,
+  toggleCheckItemAction,
 } from "../store/actions/ShoppingCartAction";
 import { useDispatch } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
@@ -104,12 +104,6 @@ const data = [
       "Met minim Mollie non desert Alamo est sit cliquey dolor do met sent. RELIT official consequent door ENIM RELIT Mollie. Excitation venial consequent sent nostrum met.",
   },
 ];
-const data1 = [
-  "the quick fox jumps over the lazy dog",
-  "the quick fox jumps over the lazy dog",
-  "the quick fox jumps over the lazy dog",
-  "the quick fox jumps over the lazy dog",
-];
 function ProductPage() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.shoppingCart.cart);
@@ -131,37 +125,49 @@ function ProductPage() {
     setSelectedOption(option);
   };
 
-  const { getQueryDataCategory } = useQuery();
   const history = useHistory();
   const [selectedProduct, setSelectedProduct] = useState();
-  const { productId, category } = useParams();
+  const { productId } = useParams();
   const goBack = () => {
     history.goBack();
   };
-  const allProducts = useSelector(
-    (store) => store.product.productList.products
-  );
-
   useEffect(() => {
-    if (allProducts) {
-      const test = allProducts.find((product) => product.id == productId);
-      setSelectedProduct(test);
-    } else {
-      getQueryDataCategory(category);
+    const url = "https://workintech-fe-ecommerce.onrender.com/products/";
+    fetch(`${url}${productId}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setSelectedProduct(data);
+      })
+      .catch((error) => {
+        console.error("Hata:", error);
+      });
+  }, []);
+  useEffect(() => {
+    const jumperSection = document.getElementById("jumperSection");
+    if (jumperSection) {
+      jumperSection.scrollIntoView({ behavior: "smooth" });
     }
-  }, [allProducts]);
+  }, []);
+  const toggleCheckbox = (productId, checked) => {
+    dispatch(toggleCheckItemAction(productId, checked));
+  };
   return (
-    <div>
+    <div id="jumperSection">
       <ToastContainer />
       <div className="py-8 bg-light-gray-1">
-        <div className="custom-container flex justify-between">
+        <div className="custom-container custom-padding flex justify-between">
           <button
             onClick={goBack}
             className="bg-primary-bg font-mont font-bold px-2.5 py-2.5 text-white rounded-md"
           >
             Go Back
           </button>
-          <div className="flex md:justify-start items-center">
+          <div className="flex items-center">
             <p className="font-mont font-bold text-sm text-dark-text-color ">
               Home{" "}
             </p>
@@ -175,7 +181,7 @@ function ProductPage() {
           <div>
             {selectedProduct && <Slider3 images={selectedProduct.images} />}
           </div>
-          <div className="flex flex-col gap-3 w-2/3 md:w-1/3">
+          <div className="flex flex-col gap-3 w-4/5 md:w-1/3">
             <p className="text-dark-text-color font-mont font-semibold text-xl">
               {selectedProduct?.name}
             </p>
@@ -257,7 +263,10 @@ function ProductPage() {
                 <FontAwesomeIcon icon={faHeart} />
               </button>
               <button
-                onClick={() => handleAddToCart(selectedProduct)}
+                onClick={() => {
+                  handleAddToCart(selectedProduct);
+                  toggleCheckbox(selectedProduct.id, !selectedProduct.checked);
+                }}
                 className="bg-white rounded-full w-10 h-10 border-1 border-gray-border transition-all duration-100 hover:w-12 hover:h-12 hover:text-primary-color cursor-pointer"
               >
                 <FontAwesomeIcon icon={faCartShopping} />
@@ -269,7 +278,7 @@ function ProductPage() {
           </div>
         </div>
       </div>
-      <div className="custom-container flex flex-col">
+      <div className="custom-container flex flex-col px-3 md:px-0">
         <div className="flex justify-center gap-6 font-mont font-semibold text-second-text-color pt-12 py-6 ">
           <p>Description</p>
           <p>Additional Information</p>
