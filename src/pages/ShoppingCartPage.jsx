@@ -67,11 +67,14 @@ function ShoppingCartPage() {
   function applyDiscount(totalPrice) {
     if (discountApplied) {
       if (totalPrice < 150) {
-        return totalPrice - 100 + 29;
+        return Math.max(totalPrice - 100 + 29, 0);
       }
-      return totalPrice > 100 ? totalPrice - 100 : 0;
+      return Math.max(totalPrice - 100, 0);
     }
-    return totalPrice < 150 && totalPrice > 0 ? totalPrice + 29 : totalPrice;
+    return Math.max(
+      totalPrice < 150 && totalPrice > 0 ? totalPrice + 29 : totalPrice,
+      0
+    );
   }
   const handleSubmit = (event) => {
     event.preventDefault();
