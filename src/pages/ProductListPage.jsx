@@ -104,13 +104,14 @@ function ProductListPage() {
       <ProductCard />
       <div className="custom-container font-mont font-semibold flex justify-center">
         <ReactPaginate
-          nextLabel="next >"
+          className=""
+          nextLabel=">>"
           onClick={handlePageClick}
-          pageRangeDisplayed={3}
-          marginPagesDisplayed={2}
+          pageRangeDisplayed={2}
+          marginPagesDisplayed={1}
           initialPage={paginationOffSetParam / 25}
           pageCount={allProducts.total / 25}
-          previousLabel="< previous"
+          previousLabel="<<"
           pageClassName="page-item"
           pageLinkClassName="page-link"
           previousClassName="page-item"
