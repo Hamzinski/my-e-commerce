@@ -165,17 +165,26 @@ function OrderPage(address) {
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
               >
-                <FontAwesomeIcon
-                  onClick={() => setModal(false)}
-                  icon={faX}
-                  className="py-2 border-1 bg-primary-bg text-white cursor-pointer"
-                />
-                <div className="w-1/2 m-auto py-16">
+                {" "}
+                <div className="flex items-center justify-between bg-primary-bg">
+                  {" "}
+                  <FontAwesomeIcon
+                    icon={faUser}
+                    className="w-fit p-3 text-2xl text-white"
+                  />
+                  <p className="text-white text-2xl">Address Form</p>
+                  <FontAwesomeIcon
+                    onClick={() => setModal(false)}
+                    icon={faX}
+                    className="w-fit p-3 text-2xl text-white cursor-pointer"
+                  />
+                </div>
+                <div className="w-3/5 m-auto py-16">
                   <div>
-                    <form className="flex flex-col p-2 ">
+                    <form className="flex flex-col p-2">
                       <div className="flex flex-col w-full">
                         <div className=" flex flex-col ">
-                          <label className="font-bold text-xl p-3">
+                          <label className="font-bold text-xl pb-3">
                             Address Title
                           </label>
                           <input
@@ -188,7 +197,7 @@ function OrderPage(address) {
                       </div>
                       <div className="flex justify-between gap-1">
                         <div className="flex flex-col w-1/2">
-                          <label className="font-bold text-xl p-3">Name</label>
+                          <label className="font-bold text-xl py-3">Name</label>
                           <input
                             placeholder="Name"
                             className="p-2 rounded-md border border-[#DADADA] text-black"
@@ -207,7 +216,7 @@ function OrderPage(address) {
                           </span>
                         </div>
                         <div className="flex flex-col w-1/2">
-                          <label className="font-bold text-xl p-3">
+                          <label className="font-bold text-xl py-3">
                             Surname
                           </label>
                           <input
@@ -230,10 +239,11 @@ function OrderPage(address) {
                           </span>
                         </div>
                       </div>
-
                       <div className="flex justify-between gap-1">
                         <div className="w-1/2 flex flex-col">
-                          <label className="font-bold text-xl p-3">Phone</label>
+                          <label className="font-bold text-xl py-3">
+                            Phone
+                          </label>
                           <input
                             placeholder="555 456 24 21"
                             className={`p-2 rounded-md border border-[#DADADA] text-black`}
@@ -251,7 +261,7 @@ function OrderPage(address) {
                           </div>
                         </div>
                         <div className="w-1/2 flex flex-col">
-                          <label className="font-bold text-xl p-3">City</label>
+                          <label className="font-bold text-xl py-3">City</label>
                           <select
                             className="p-2 rounded-md border border-[#DADADA] text-black"
                             {...register("city")}
@@ -276,7 +286,7 @@ function OrderPage(address) {
                       </div>
                       <div className="flex justify-between gap-1">
                         <div className="w-1/2 flex flex-col">
-                          <label className="font-bold text-xl p-3">
+                          <label className="font-bold text-xl py-3">
                             District
                           </label>
                           <select
@@ -288,7 +298,7 @@ function OrderPage(address) {
                               <option
                                 key={i}
                                 value={district}
-                                className="text-lg font-bold"
+                                className="flex flex-wrap text-lg font-bold"
                               >
                                 {district}
                               </option>
@@ -299,7 +309,7 @@ function OrderPage(address) {
                           </div>
                         </div>
                         <div className="w-1/2 flex flex-col">
-                          <label className="font-bold text-xl p-3">
+                          <label className="font-bold text-xl py-3">
                             Neighborhood
                           </label>
                           <select
@@ -324,7 +334,9 @@ function OrderPage(address) {
                         </div>
                       </div>
                       <div className="w-full flex flex-col ">
-                        <label className="font-bold text-xl p-3">Address</label>
+                        <label className="font-bold text-xl py-3">
+                          Address
+                        </label>
                         <input
                           type="text"
                           placeholder="Address"
