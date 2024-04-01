@@ -16,7 +16,14 @@ const ShoppingCartReducer = (state = initialState, action) => {
         ...state,
         cart: [...state.cart, newItem],
       };
+    case "REMOVE_ADDRESS":
+      const updatedAddressList = state.address.filter(
+        (item) => item.id !== action.payload.id
+      );
 
+      return { ...state, address: updatedAddressList };
+    case "SET_LOADING":
+      return { ...state, loading: action.payload };
     case "REMOVE_FROM_CART":
       const updatedCart = state.cart.filter(
         (item) => item.product.id !== action.payload.productId
@@ -69,9 +76,20 @@ const ShoppingCartReducer = (state = initialState, action) => {
         ...state,
         address: action.payload,
       };
+    case "SET_ADDRESS":
+      return { ...state, address: action.payload };
 
     default:
       return state;
+    case "UPDATE_ADDRESS":
+      return {
+        ...state,
+        address: state.address.map((address) =>
+          address.id === action.payload.id
+            ? { ...address, ...action.payload }
+            : address
+        ),
+      };
   }
 };
 
