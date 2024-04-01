@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { Modal } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
   faInfo,
@@ -8,17 +6,17 @@ import {
   faPlus,
   faTrashAlt,
   faUser,
-  faX,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import CardModal from "../components/CardModal.jsx";
 import AddressModal from "../components/AddressModal.jsx";
 import axios from "axios";
 import {
   removeAddressThunkAction,
   setAddress,
   setLoading,
+  addCardsThunkAction,
 } from "../store/actions/ShoppingCartAction.jsx";
+import CreditCard from "../components/CreditCard.jsx";
 
 function OrderPage() {
   const [showThirdDiv, setShowThirdDiv] = useState(true);
@@ -26,7 +24,8 @@ function OrderPage() {
   const [showFourthDiv, setShowFourthDiv] = useState(false);
   const [showSixthDiv, setShowSixthDiv] = useState(false);
   const [isPaymentOptionSelected, setIsPaymentOptionSelected] = useState(false);
-  const [selectedCard, setSelectedCard] = useState({});
+  const [isAddingCard, setIsAddingCard] = useState(false);
+  const [cards, setCards] = useState([]);
   const token = localStorage.getItem("token");
   const dispatch = useDispatch();
   const address = useSelector((state) => state.shoppingCart.address);
@@ -51,7 +50,6 @@ function OrderPage() {
   };
 
   const [modal, setModal] = useState(false);
-  const [cardModal, setCardModal] = useState(false);
 
   useEffect(() => {
     dispatch(setLoading(true));
@@ -85,7 +83,26 @@ function OrderPage() {
       }
     }
   };
-
+  const handleAddCard = (cardInfo) => {
+    dispatch(addCardsThunkAction(cardInfo)).then(() => {
+      instance
+        .get("/user/card", {
+          headers: {
+            Authorization: token,
+          },
+        })
+        .then((res) => {
+          setCards(res.data);
+          setIsAddingCard(false);
+        })
+        .catch((error) => {
+          console.error("Error fetching updated cards data:", error);
+        });
+    });
+  };
+  const handleCloseModal = () => {
+    setIsAddingCard(false);
+  };
   return (
     <div className="custom-container">
       <div className="flex">
@@ -239,81 +256,21 @@ function OrderPage() {
           }
         >
           <FontAwesomeIcon className="rounded-full text-white border-1 h-6 w-6 bg-primary-bg" />
-          <input type="checkbox" checked />
+          <input type="checkbox" defaultChecked={true} />
           <label htmlFor="">
             Kart ile ödemeyi seçtiniz.Banka veya Kredi Kartı kullanarak
             ödemenizi güvenle yapabilirsiniz.
           </label>
         </div>
       )}
-      {showSixthDiv && (
-        <div className="font-mont border-2 py-3 mt-2 px-3">
-          <div className="flex">
-            <div className="flex flex-col w-1/2 px-2">
-              <div className="flex justify-between items-center">
-                <h1 className="text-xl font-semibold">Kart Bilgileri</h1>
-                <p
-                  onClick={() => setCardModal(!cardModal)}
-                  className="underline cursor-pointer"
-                >
-                  Başka bir Kart ile Ödeme Yap
-                </p>
-                <CardModal
-                  cardModal={cardModal}
-                  setCardModal={setCardModal}
-                  card={selectedCard}
-                />
-              </div>
-              <div className="py-6 flex flex-wrap">
-                <div className="flex flex-col gap-2 cursor-pointer">
-                  <div className="flex items-center gap-2">
-                    <input type="checkbox" checked="true" />
-                    <label className="text-black font-bold" htmlFor="">
-                      Kartım
-                    </label>
-                  </div>
-                  <div className="w-80 h-40 border-1 border-primary-border-color rounded-lg">
-                    <div className="flex flex-col px-3">
-                      <div className="flex items-center justify-between ">
-                        <img
-                          className="w-36 p-2"
-                          src="https://upload.wikimedia.org/wikipedia/commons/0/0c/DenizBank_logo.svg"
-                          alt=""
-                        />
-                        <img
-                          className="w-16 p-2"
-                          src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg"
-                          alt=""
-                        />
-                      </div>
-                      <div className="text-end flex flex-col pt-6">
-                        <p>Card No</p>
-                        <p>Ay / Yıl</p>
-                        <p>Card Name</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="border-l-2 w-1/2 px-2">
-              <div className="flex flex-col gap-2">
-                <h1 className="text-xl font-semibold">Taksit Seçenekleri</h1>
-              </div>
-              <div className="border-1 border-primary-border-color flex flex-col gap-3 py-3 px-4 rounded-lg mt-10">
-                <div className="flex justify-between border-b-2 border-primary-border-color py-2">
-                  <p>Taksit Sayısı</p>
-                  <p>Aylık Ödeme</p>
-                </div>
-                <div className="flex justify-between">
-                  <div className="flex items-center gap-1">
-                    <input type="checkbox" checked="true" />
-                    <label htmlFor="">Tek Çekim</label>
-                  </div>
-                  <p>Toplam $</p>
-                </div>
-              </div>
-            </div>
+      {showSixthDiv && <CreditCard />}
+      {isAddingCard && (
+        <div className="">
+          <div className="">
+            <CardForm
+              closeModal={handleCloseModal}
+              handleAddCard={handleAddCard}
+            />
           </div>
         </div>
       )}

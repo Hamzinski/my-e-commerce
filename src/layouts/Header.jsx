@@ -310,14 +310,14 @@ function Header() {
                   <DropdownToggle className="text-primary-color">
                     {" "}
                     {cartItemCount > 0 ? (
-                      <p className="font-mont font-bold flex items-center gap-2">
+                      <span className="font-mont font-bold flex items-center gap-2">
                         <FontAwesomeIcon icon={faCartShopping} />{" "}
                         {cartItemCount}
-                      </p>
+                      </span>
                     ) : (
-                      <p className="font-mont font-bold">
+                      <span className="font-mont font-bold">
                         <FontAwesomeIcon icon={faCartShopping} />
-                      </p>
+                      </span>
                     )}
                   </DropdownToggle>
                   <DropdownMenu className="w-96 max-h-80 overflow-y-auto">
@@ -344,18 +344,18 @@ function Header() {
                         0
                       );
                       return (
-                        <DropdownItem key={productId}>
+                        <div key={productId}>
                           {" "}
-                          <div className="flex gap-6">
+                          <div className="flex gap-6 ml-6">
                             <img
                               className="w-24 h-32 rounded-md"
                               src={item.product.images[0].url}
                             />
                             <div className="flex flex-col gap-3 font-mont font-bold">
-                              <p>{item.product.name}</p>{" "}
-                              <p className="text-success-text-color">
-                                <p>${item.count * item.product.price}</p>
-                              </p>
+                              <span>{item.product.name}</span>{" "}
+                              <span className="text-success-text-color">
+                                <span>${item.count * item.product.price}</span>
+                              </span>
                               <div className="flex items-center gap-2">
                                 <button
                                   className="bg-primary-bg w-6 text-white rounded-md"
@@ -395,7 +395,7 @@ function Header() {
                             </div>
                           </div>
                           <DropdownItem divider />
-                        </DropdownItem>
+                        </div>
                       );
                     })}
                     <DropdownItem className="flex justify-center">

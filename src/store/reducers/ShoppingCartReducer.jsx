@@ -3,6 +3,7 @@ const initialState = {
   payment: {},
   address: {},
   checkedCard: {},
+  cards: [],
 };
 
 const ShoppingCartReducer = (state = initialState, action) => {
@@ -53,6 +54,7 @@ const ShoppingCartReducer = (state = initialState, action) => {
         ...state,
         cart: toggledCart,
       };
+
     case "UPDATE_CART":
       return {
         ...state,
@@ -64,6 +66,8 @@ const ShoppingCartReducer = (state = initialState, action) => {
         ...state,
         cart: [],
       };
+    case "ADD_CARDS":
+      return { ...state, cards: [...state.cards, action.payload] };
 
     case "SET_PAYMENT_INFO":
       return {
@@ -81,6 +85,11 @@ const ShoppingCartReducer = (state = initialState, action) => {
 
     default:
       return state;
+    case "SET_SELECTED_CARD":
+      return {
+        ...state,
+        checkedCard: action.payload,
+      };
     case "UPDATE_ADDRESS":
       return {
         ...state,
@@ -89,6 +98,11 @@ const ShoppingCartReducer = (state = initialState, action) => {
             ? { ...address, ...action.payload }
             : address
         ),
+      };
+    case "REMOVE_CARDS":
+      return {
+        ...state,
+        cards: state.cards.filter((card) => card.id !== action.payload),
       };
   }
 };

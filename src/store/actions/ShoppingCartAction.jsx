@@ -9,6 +9,15 @@ export const addToCart = (count, product) => {
     payload: { count, product },
   };
 };
+export const setCartListAction = (cartList, operation) => {
+  return {
+    type: operation === "decrement" ? "DECREMENT_CART_ITEM" : "SET_CART_LIST",
+    payload: cartList,
+  };
+};
+export const addCard = (card) => {
+  return { type: "ADD_CARDS", payload: card };
+};
 
 export const removeFromCart = (productId) => {
   return {
@@ -54,6 +63,9 @@ export const toggleCheckItemAction = (productId, checked) => {
     type: "TOGGLE_CHECK_ITEM",
     payload: { productId, checked },
   };
+};
+export const setCheckedCard = (card) => {
+  return { type: "SET_SELECTED_CARD", payload: card };
 };
 export const removeAddressAction = (address) => {
   return { type: "REMOVE_ADDRESS", payload: address };
@@ -126,5 +138,55 @@ export const removeAddressThunkAction = (id) => (dispatch) => {
     .catch((err) => {
       toast.error("Error deleting address");
       console.error(err);
+    });
+};
+
+export const addCardsThunkAction = (formData) => (dispatch) => {
+  const token = localStorage.getItem("token");
+  axiosInstance
+    .post("/user/card", formData, {
+      headers: {
+        Authorization: token,
+      },
+    })
+    .then((res) => {
+      dispatch(addCard(res.data));
+    });
+};
+export const updateCardThunkAction = (formData) => (dispatch) => {
+  const token = localStorage.getItem("token");
+  axiosInstance
+    .put(`/user/card`, formData, {
+      headers: {
+        Authorization: token,
+      },
+    })
+    .then((res) => {
+      console.log(res.data);
+      toast.success("Card updated successfully");
+    })
+    .catch((err) => {
+      console.error(err.response);
+      toast.error("Error updating card");
+    });
+};
+export const removeCardThunkAction = (id) => (dispatch) => {
+  const token = localStorage.getItem("token");
+  console.log("Removing card from DB:", id);
+
+  axiosInstance
+    .delete(`/user/card/${id}`, {
+      headers: {
+        Authorization: token,
+      },
+    })
+    .then((res) => {
+      console.log("Card successfully deleted:", res.data);
+      dispatch({ type: "REMOVE_CARDS", payload: id });
+      toast.success("Card deleted from the database.");
+    })
+    .catch((err) => {
+      console.error("Error deleting card from the database:", err);
+      toast.error("Error deleting card from the database. Please try again.");
     });
 };

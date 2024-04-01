@@ -3,7 +3,17 @@ import { Modal } from "reactstrap";
 import { useEffect } from "react";
 import { faX, faCreditCard } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  addCardsThunkAction,
+  updateCardThunkAction,
+} from "../store/actions/ShoppingCartAction";
+import axios from "axios";
+import { useDispatch } from "react-redux";
 export default function CardModal({ cardModal, setCardModal, card }) {
+  const instance = axios.create({
+    baseURL: "https://workintech-fe-ecommerce.onrender.com",
+  });
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -25,6 +35,26 @@ export default function CardModal({ cardModal, setCardModal, card }) {
   for (let i = 1; i < 41; i++) {
     years.push(date + i);
   }
+  const submitHandle = (formData) => {
+    console.log("Kart", formData);
+    const postData = {
+      card_no: formData.card_number,
+      expire_month: formData.month,
+      expire_year: formData.year,
+      name_on_card: formData.name,
+    };
+    if (card && card.id) {
+      const updatedFormData = {
+        ...card,
+        ...postData,
+      };
+      dispatch(updateCardThunkAction(updatedFormData));
+      setCardModal(!cardModal);
+    } else {
+      dispatch(addCardsThunkAction(postData));
+      setCardModal(!cardModal);
+    }
+  };
 
   useEffect(() => {
     setValue("card_number", card?.card_number || "");
@@ -57,7 +87,10 @@ export default function CardModal({ cardModal, setCardModal, card }) {
         />
       </div>
       <div className="py-4">
-        <form className="flex flex-col gap-2 px-8">
+        <form
+          onSubmit={handleSubmit(submitHandle)}
+          className="flex flex-col gap-2 px-8"
+        >
           <label className="flex flex-col ">
             {" "}
             Card Number
@@ -123,7 +156,7 @@ export default function CardModal({ cardModal, setCardModal, card }) {
           <label className="flex gap-1">
             <input
               type="checkbox"
-              className="bg-gray-100 rounded-md w-4 accent-orange-700 "
+              className="bg-gray-100 rounded-md w-4"
               {...register("secure")}
             ></input>
             I want to pay with 3D Secure
@@ -131,7 +164,7 @@ export default function CardModal({ cardModal, setCardModal, card }) {
           <button
             disabled={!isValid}
             type="submit"
-            className="w-20 p-2 bg-primary-bg  text-white rounded-lg hover:bg-orange-200 cursor-pointer"
+            className="w-20 p-2 bg-primary-bg  text-white rounded-lg hover:bg-gray-200 cursor-pointer"
           >
             Submit
           </button>
