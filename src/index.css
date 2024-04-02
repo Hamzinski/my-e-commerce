@@ -58,3 +58,14 @@
     padding-right: 0;
   }
 }
+.custom-padding-mobile {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+@media (min-width: 768px) {
+  .custom-padding-desktop {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}

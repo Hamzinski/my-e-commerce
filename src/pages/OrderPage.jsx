@@ -105,8 +105,8 @@ function OrderPage() {
     setIsAddingCard(false);
   };
   return (
-    <div className="custom-container flex">
-      <div className="w-3/4">
+    <div className="custom-container flex flex-col md:flex-row ">
+      <div className="w-full md:w-3/4">
         <div className="flex">
           {" "}
           <div
@@ -148,7 +148,7 @@ function OrderPage() {
             }
           >
             <FontAwesomeIcon
-              className="rounded-full text-white border-1 h-6 w-6 bg-primary-bg"
+              className="rounded-full text-white border-1 h-6 w-20 md:w-6 bg-primary-bg"
               icon={faInfo}
             />
             <p>
@@ -159,7 +159,7 @@ function OrderPage() {
           </div>
         )}
         {showFifthDiv && (
-          <div className="font-mont flex flex-col mt-3 border-2 py-3 px-10">
+          <div className="font-mont flex flex-col mt-3 border-2 py-3 px-6">
             <div className="flex justify-between items-center">
               <h1 className="text-xl">Teslimat Adresi</h1>
               <div className="flex gap-1 ">
@@ -169,7 +169,7 @@ function OrderPage() {
             </div>
             <div className="flex flex-col gap-2 py-4">
               <div
-                className="flex flex-col items-center gap-2 border-1 rounded-md w-1/2 justify-center py-5 hover:bg-gray-200 cursor-pointer"
+                className="flex flex-col items-center gap-2 border-1 rounded-md w-full md:w-1/2 justify-center py-5 hover:bg-gray-200 cursor-pointer"
                 onClick={() => setModal(!modal)}
               >
                 <FontAwesomeIcon
@@ -190,7 +190,10 @@ function OrderPage() {
                   address.length > 0 &&
                   address.map((item, index) => {
                     return (
-                      <div key={index} className="w-1/2 flex flex-col p-1">
+                      <div
+                        key={index}
+                        className="w-full md:w-1/2 flex flex-col p-1"
+                      >
                         <div className="flex justify-between items-center">
                           <div className="flex gap-2 ">
                             <input
@@ -278,7 +281,7 @@ function OrderPage() {
           </div>
         )}
       </div>
-      <div className="w-1/4">
+      <div className="w-full md:w-1/4">
         <OrderSummary selectedAddress={selectedAddress} />
       </div>
     </div>

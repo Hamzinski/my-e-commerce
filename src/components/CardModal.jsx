@@ -107,10 +107,10 @@ export default function CardModal({ cardModal, setCardModal, card }) {
             ></input>
             <div className="text-red-700">{errors.card_number?.message}</div>
           </label>
-          <div className="flex justify-between ">
+          <div className="flex flex-col md:flex-row justify-between">
             <div>
               <label className="">Expiration Date</label>
-              <div className="flex gap-12">
+              <div className="flex gap-3">
                 <select
                   className="p-[6px] rounded-md bg-gray-100"
                   {...register("month")}
@@ -136,7 +136,7 @@ export default function CardModal({ cardModal, setCardModal, card }) {
 
             <div className="flex flex-col">
               <label className="">Name on Card</label>
-              <div className="w-1/3">
+              <div className="w-full">
                 {" "}
                 <input
                   type="text"

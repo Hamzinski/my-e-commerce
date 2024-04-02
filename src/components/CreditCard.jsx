@@ -54,8 +54,8 @@ export default function CreditCard() {
 
   return (
     <div className="font-mont border-2 py-3 mt-2 px-3">
-      <div className="flex">
-        <div className="flex flex-col w-1/2 px-2">
+      <div className="flex flex-col md:flex-row">
+        <div className="flex flex-col w-full md:w-1/2 px-2">
           <div className="flex justify-between items-center">
             <h1 className="text-xl font-semibold">Kart Bilgileri</h1>
             <p
@@ -122,7 +122,7 @@ export default function CreditCard() {
             })}
           </div>
         </div>
-        <div className="border-l-2 w-1/2 px-2">
+        <div className="border-l-0 md:border-l-2 w-full md:w-1/2 px-2">
           <div className="flex flex-col gap-2">
             <h1 className="text-xl font-semibold">Taksit Seçenekleri</h1>
           </div>
