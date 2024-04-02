@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
-import { clearCart, resetDiscount } from "../store/actions/ShoppingCartAction";
+import {
+  applyDissprice,
+  clearCart,
+  resetDiscount,
+} from "../store/actions/ShoppingCartAction";
 import axios from "axios";
 export default function OrderSummary({ selectedAddress }) {
   const instance = axios.create({
@@ -40,6 +44,12 @@ export default function OrderSummary({ selectedAddress }) {
       0
     );
   }
+  useEffect(() => {
+    const discountAppliedFromStorage = localStorage.getItem("discountApplied");
+    if (discountAppliedFromStorage === "true") {
+      dispatch(applyDissprice());
+    }
+  }, []);
   const [isAgreed, setIsAgreed] = useState(false);
   const handleCheckboxChange2 = (event) => {
     setIsAgreed(event.target.checked);

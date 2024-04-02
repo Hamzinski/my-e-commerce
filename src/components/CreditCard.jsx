@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   removeCardThunkAction,
   setCheckedCard,
+  applyDissprice,
 } from "../store/actions/ShoppingCartAction";
 import axios from "axios";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
@@ -12,12 +13,17 @@ export default function CreditCard() {
   const instance = axios.create({
     baseURL: "https://workintech-fe-ecommerce.onrender.com",
   });
+
   const dispatch = useDispatch();
   const [cardModal, setCardModal] = useState(false);
   const [cards, setCards] = useState([]);
   const [selectedCard, setSelectedCard] = useState({});
   const checkedCard = useSelector((state) => state.shoppingCart.checkedCard);
   const token = localStorage.getItem("token");
+  const cartItems = useSelector((state) => state.shoppingCart.cart);
+  const discountApplied = useSelector(
+    (state) => state.shoppingCart.isDiscountApplied
+  );
 
   function editCard(card) {
     setSelectedCard(card);
@@ -51,6 +57,37 @@ export default function CreditCard() {
       console.error("Error removing card:", error);
     }
   };
+  const toFixed2 = (number) => {
+    return (Math.round(number * 100) / 100).toFixed(2);
+  };
+  function totalPricefunc() {
+    let totalPrice = 0;
+    for (let item of cartItems) {
+      if (item.checked) {
+        totalPrice += item.count * item.product.price;
+      }
+    }
+
+    return totalPrice;
+  }
+  function applyDiscount(totalPrice) {
+    if (discountApplied) {
+      if (totalPrice < 150) {
+        return Math.max(totalPrice - 100 + 29, 0);
+      }
+      return Math.max(totalPrice - 100, 0);
+    }
+    return Math.max(
+      totalPrice < 150 && totalPrice > 0 ? totalPrice + 29 : totalPrice,
+      0
+    );
+  }
+  useEffect(() => {
+    const discountAppliedFromStorage = localStorage.getItem("discountApplied");
+    if (discountAppliedFromStorage === "true") {
+      dispatch(applyDissprice());
+    }
+  }, []);
 
   return (
     <div className="font-mont border-2 py-3 mt-2 px-3">
@@ -136,7 +173,7 @@ export default function CreditCard() {
                 <input type="checkbox" defaultChecked={true} />
                 <label htmlFor="">Single Payment</label>
               </div>
-              <p>$</p>
+              <p>{applyDiscount(parseFloat(totalPricefunc())).toFixed(2)}$</p>
             </div>
           </div>
         </div>
