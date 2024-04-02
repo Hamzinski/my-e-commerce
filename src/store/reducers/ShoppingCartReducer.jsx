@@ -4,6 +4,7 @@ const initialState = {
   address: {},
   checkedCard: {},
   cards: [],
+  isDiscountApplied: false,
 };
 
 const ShoppingCartReducer = (state = initialState, action) => {
@@ -83,8 +84,6 @@ const ShoppingCartReducer = (state = initialState, action) => {
     case "SET_ADDRESS":
       return { ...state, address: action.payload };
 
-    default:
-      return state;
     case "SET_SELECTED_CARD":
       return {
         ...state,
@@ -104,6 +103,18 @@ const ShoppingCartReducer = (state = initialState, action) => {
         ...state,
         cards: state.cards.filter((card) => card.id !== action.payload),
       };
+    case "APPLY_DISCOUNT":
+      return {
+        ...state,
+        isDiscountApplied: true,
+      };
+    case "RESET_DISCOUNT":
+      return {
+        ...state,
+        isDiscountApplied: false,
+      };
+    default:
+      return state;
   }
 };
 

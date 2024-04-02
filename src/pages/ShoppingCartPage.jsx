@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import cat from "../assets/catincart.jpg";
 import {
@@ -13,6 +13,7 @@ import {
   updateCartItemCount,
   removeFromCart,
   toggleCheckItemAction,
+  applyDissprice,
 } from "../store/actions/ShoppingCartAction.jsx";
 import { ToastContainer, toast } from "react-toastify";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min.js";
@@ -83,6 +84,16 @@ function ShoppingCartPage() {
       setDiscountApplied(true);
       setInputOpen(false);
     }
+  };
+  useEffect(() => {
+    const discountApplied = localStorage.getItem("discountApplied");
+    if (discountApplied) {
+      setDiscountApplied(true);
+    }
+  }, []);
+  const handleApplyDiscount = () => {
+    localStorage.setItem("discountApplied", true);
+    dispatch(applyDissprice());
   };
   return (
     <div className="flex flex-col md:flex-row custom-container justify-between ">
@@ -223,6 +234,7 @@ function ShoppingCartPage() {
                   className="pl-[35%] border-1 py-2"
                 />
                 <button
+                  onClick={handleApplyDiscount}
                   type="submit"
                   className="border-1 w-24 m-auto py-2 rounded-lg bg-primary-bg text-white"
                 >

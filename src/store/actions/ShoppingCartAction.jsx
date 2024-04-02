@@ -18,7 +18,15 @@ export const setCartListAction = (cartList, operation) => {
 export const addCard = (card) => {
   return { type: "ADD_CARDS", payload: card };
 };
-
+export const applyDissprice = () => ({
+  type: "APPLY_DISCOUNT",
+});
+export const resetDiscount = () => {
+  localStorage.removeItem("discountApplied");
+  return {
+    type: "RESET_DISCOUNT",
+  };
+};
 export const removeFromCart = (productId) => {
   return {
     type: "REMOVE_FROM_CART",
