@@ -322,7 +322,7 @@ function Header() {
                   </DropdownToggle>
                   <DropdownMenu className="w-96 max-h-80 overflow-y-auto">
                     <div className="flex justify-between p-3 font-mont font-bold">
-                      <p>Sepetim ({cartItemCount} Ürün)</p>
+                      <p>My Cart ({cartItemCount} Product)</p>
                       <button
                         className="text-primary-color ml-2"
                         onClick={handleClearCart}
@@ -403,7 +403,7 @@ function Header() {
                         href="/cart"
                         className="bg-primary-bg font-mont font-bold px-9 py-2.5 text-white rounded-md w-fit"
                       >
-                        Sepete Git
+                        Go to Cart
                       </NavLink>
                     </DropdownItem>
                   </DropdownMenu>

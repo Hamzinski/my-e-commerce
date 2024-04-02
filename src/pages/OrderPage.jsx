@@ -115,7 +115,7 @@ function OrderPage() {
             }`}
             onClick={toggleThirdDiv}
           >
-            <h1 className="text-2xl text-primary-color">Adres Bilgileri</h1>
+            <h1 className="text-2xl text-primary-color">Address Info</h1>
             <p>
               {selectedAddress?.name} {selectedAddress?.surname}
             </p>
@@ -131,13 +131,12 @@ function OrderPage() {
             onClick={toggleFourthDiv}
           >
             <h1 className="text-2xl text-primary-color font-mont">
-              Ödeme Seçenekleri
+              Payment Options
             </h1>
             <p>
-              <span className="font-bold text-black">Banka/Kredi Kartı</span>{" "}
-              veya{" "}
-              <span className="font-bold text-black">Alışveriş Kredisi</span>{" "}
-              ile ödemenizi güvenle yapabilirsiniz
+              You can make your payment safely by{" "}
+              <span className="font-bold text-black">Debit/Credit Card</span> or{" "}
+              <span className="font-bold text-black">Shopping Credit.</span>{" "}
             </p>
           </div>
         </div>
@@ -152,19 +151,19 @@ function OrderPage() {
               icon={faInfo}
             />
             <p>
-              Kurumsal faturalı alışveriş yapmak için "Faturamı Aynı Adrese
-              Gönder" tikini kaldırın ve Fatura adresi olarak kayıtlı kurumsal
-              fatura adresinizi seçin.
+              To make corporate invoiced purchases, "Send My Invoice to the Same
+              Address" Uncheck "Send" and enter the corporate name registered as
+              the billing address. Select your billing address.
             </p>
           </div>
         )}
         {showFifthDiv && (
           <div className="font-mont flex flex-col mt-3 border-2 py-3 px-6">
             <div className="flex justify-between items-center">
-              <h1 className="text-xl">Teslimat Adresi</h1>
+              <h1 className="text-xl">Delivery Address</h1>
               <div className="flex gap-1 ">
                 <input type="checkbox" />
-                <label htmlFor="">Faturamı aynı adrese gönder</label>
+                <label htmlFor="">Send my invoice to the same address.</label>
               </div>
             </div>
             <div className="flex flex-col gap-2 py-4">
@@ -176,7 +175,7 @@ function OrderPage() {
                   className="text-primary-color text-xl"
                   icon={faPlus}
                 />
-                <h1 className="text-lg">Yeni Adres Ekle</h1>
+                <h1 className="text-lg">Add New Address</h1>
               </div>
               {true && (
                 <AddressModal
@@ -203,18 +202,20 @@ function OrderPage() {
                                 handleCheckboxChange(e.target.checked, item)
                               }
                             />
-                            <label htmlFor="">{item.title}</label>
+                            <label className="font-bold" htmlFor="">
+                              {item.title}
+                            </label>
                           </div>
                           <p
                             onClick={() => openEditModal(item)}
-                            className="text-sm underline cursor-pointer"
+                            className="text-sm font-bold underline cursor-pointer"
                           >
-                            Düzenle
+                            Edit
                           </p>
                         </div>
                         <div className="border-1 rounded-md flex flex-col gap-7 px-3 h-full py-3 justify-center">
                           <div className="flex justify-between">
-                            <div className="flex gap-2">
+                            <div className="flex gap-2 ">
                               <FontAwesomeIcon
                                 className="text-primary-color"
                                 icon={faUser}
@@ -264,8 +265,8 @@ function OrderPage() {
             <FontAwesomeIcon className="rounded-full text-white border-1 h-6 w-6 bg-primary-bg" />
             <input type="checkbox" defaultChecked={true} />
             <label htmlFor="">
-              Kart ile ödemeyi seçtiniz.Banka veya Kredi Kartı kullanarak
-              ödemenizi güvenle yapabilirsiniz.
+              You chose to pay by card. Using Debit or Credit Card You can make
+              your payment safely.
             </label>
           </div>
         )}

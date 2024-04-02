@@ -80,7 +80,7 @@ function ShoppingCartPage() {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (discountCode.toLowerCase() === "hamza") {
-      toast.success("İndirim uygulandı.");
+      toast.success("Discount applied.");
       setDiscountApplied(true);
       setInputOpen(false);
     }
@@ -132,14 +132,15 @@ function ShoppingCartPage() {
                       icon={faTruck}
                     />
                     <p className="text-second-text-color ">
+                      If you order within{" "}
                       <span className="font-bold text-dark-text-color">
-                        39 dk içinde
+                        39 minutes,
                       </span>{" "}
-                      sipariş verirsen{" "}
+                      it will be shipped{" "}
                       <span className="font-bold text-dark-text-color">
-                        en geç yarın
+                        tomorrow
                       </span>{" "}
-                      kargoda!
+                      at the latest!
                     </p>
                   </div>
                 </div>
@@ -192,25 +193,25 @@ function ShoppingCartPage() {
       {cartItems.length > 0 ? (
         <div className="w-full md:w-1/4 flex flex-col gap-2 p-3 border-y-2 font-mont">
           <div className="flex flex-col gap-2 ">
-            <h1 className="pb-4 text-2xl">Sipariş Özeti</h1>
+            <h1 className="pb-4 text-2xl">Order Summary</h1>
             <div className="flex justify-between">
-              <p>Ürün Toplamı</p>
+              <p>Product Total</p>
               <p>{toFixed2(totalPricefunc())} $</p>
             </div>
             <div className="flex justify-between">
-              <p>Kargo Toplam</p>
+              <p>Shipping Total</p>
               <p>{totalPricefunc() > 0 ? 29 : 0} $</p>
             </div>
             <div className="flex justify-between border-b-2 pb-2">
               <p>
-                150 $ ve Üzeri <br /> Kargo Bedava(Satıcı Karşılar)
+                $150 and Above <br /> Free Shipping (Seller Pays)
               </p>
               <p className="text-primary-color">
                 -{totalPricefunc() > 149 ? 29 : 0}$
               </p>
             </div>
             <div className="flex justify-between">
-              <p>Toplam</p>
+              <p>Total</p>
               <p className="text-primary-color">
                 {applyDiscount(parseFloat(totalPricefunc())).toFixed(2)} $
               </p>
@@ -219,10 +220,12 @@ function ShoppingCartPage() {
           <div className="flex flex-col gap-3">
             <button
               onClick={() => setInputOpen(!inputOpen)}
-              className="text-sm border-1 rounded-md py-2 px-5"
+              className="font-semibold text-sm border-1 rounded-md py-2 px-5"
             >
               <FontAwesomeIcon className="text-primary-color" icon={faPlus} />{" "}
-              {discountApplied ? "İNDİRİM KODU GİRiLDİ" : "İNDİRİM KODU GİR"}
+              {discountApplied
+                ? "DISCOUNT CODE ENTERED!"
+                : "ENTER DISCOUNT CODE"}
             </button>
             {inputOpen && (
               <form onSubmit={handleSubmit} className="flex flex-col gap-2">
@@ -244,9 +247,9 @@ function ShoppingCartPage() {
             )}
             <button
               onClick={() => history.push("order")}
-              className="text-sm border-1 rounded-md py-2 px-5 bg-primary-bg text-white"
+              className="font-bold text-sm border-1 rounded-md py-2 px-5 bg-primary-bg text-white"
             >
-              Sepeti Onayla <FontAwesomeIcon icon={faChevronRight} />
+              Confirm Cart <FontAwesomeIcon icon={faChevronRight} />
             </button>
           </div>
         </div>
@@ -257,7 +260,7 @@ function ShoppingCartPage() {
             onClick={() => history.push("shopping")}
             className="w-96 font-mont font-bold text-center text-white bg-primary-bg  p-4 rounded-md"
           >
-            Lütfen sepetinize ürün ekleyiniz.
+            Please add product to your cart.
           </button>
         </div>
       )}

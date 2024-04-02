@@ -57,12 +57,12 @@ export default function CreditCard() {
       <div className="flex flex-col md:flex-row">
         <div className="flex flex-col w-full md:w-1/2 px-2">
           <div className="flex justify-between items-center">
-            <h1 className="text-xl font-semibold">Kart Bilgileri</h1>
+            <h1 className="text-xl font-semibold">Card Information</h1>
             <p
               onClick={() => setCardModal(!cardModal)}
               className="underline cursor-pointer"
             >
-              Başka bir Kart ile Ödeme Yap
+              Pay with Another Card
             </p>
             <CardModal
               cardModal={cardModal}
@@ -81,7 +81,7 @@ export default function CreditCard() {
                       onChange={() => handleCheckboxChange(card)}
                     />
                     <label className="text-black font-bold" htmlFor="">
-                      Kart
+                      Card
                     </label>
                   </div>
                   <div className="w-80 h-40 border-1 border-primary-border-color rounded-lg">
@@ -124,17 +124,17 @@ export default function CreditCard() {
         </div>
         <div className="border-l-0 md:border-l-2 w-full md:w-1/2 px-2">
           <div className="flex flex-col gap-2">
-            <h1 className="text-xl font-semibold">Taksit Seçenekleri</h1>
+            <h1 className="text-xl font-semibold">Payment Options</h1>
           </div>
           <div className="border-1 border-primary-border-color flex flex-col gap-3 py-3 px-4 rounded-lg mt-10">
             <div className="flex justify-between border-b-2 border-primary-border-color py-2">
-              <p>Taksit Sayısı</p>
-              <p>Aylık Ödeme</p>
+              <p>Number of Installments</p>
+              <p>Monthly Payment</p>
             </div>
             <div className="flex justify-between">
               <div className="flex items-center gap-1">
                 <input type="checkbox" defaultChecked={true} />
-                <label htmlFor="">Tek Çekim</label>
+                <label htmlFor="">Single Payment</label>
               </div>
               <p>$</p>
             </div>

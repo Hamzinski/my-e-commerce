@@ -79,29 +79,29 @@ export default function OrderSummary({ selectedAddress }) {
   return (
     <div className="w-full flex flex-col gap-2 p-3 border-y-2 font-mont">
       <div className="flex flex-col gap-2 ">
-        <h1 className="pb-4 text-2xl">Sipariş Özeti</h1>
+        <h1 className="pb-4 text-2xl">Order Summary</h1>
         <div className="flex justify-between">
-          <p>Ürün Toplamı</p>
+          <p>Product Total</p>
           <p>{toFixed2(totalPricefunc())} $</p>
         </div>
         <div className="flex justify-between">
-          <p>Kargo Toplam</p>
+          <p>Shipping Total</p>
           <p>{totalPricefunc() > 0 ? 29 : 0} $</p>
         </div>
         <div className="flex justify-between border-b-2 pb-2">
           <p>
-            150 $ ve Üzeri <br /> Kargo Bedava(Satıcı Karşılar)
+            $150 and Above <br /> Free Shipping (Seller Pays)
           </p>
           <p className="text-primary-color">
             -{totalPricefunc() > 149 ? 29 : 0}$
           </p>
         </div>
         <div className="flex justify-between">
-          <p>Toplam</p>
+          <p>Total</p>
           <p className="text-primary-color">
             {applyDiscount(parseFloat(totalPricefunc())).toFixed(2)} $
             {discountApplied && (
-              <span className="ml-2 text-green-500">İndirim Uygulandı</span>
+              <span className="ml-2 text-green-500">Discount Applied!</span>
             )}
           </p>
         </div>
@@ -115,28 +115,28 @@ export default function OrderSummary({ selectedAddress }) {
             onChange={handleCheckboxChange2}
           />
           <label className="text-sm">
+            I have read and accept the {""}
             <span className="font-bold text-black underline cursor-pointer">
-              Ön Bilgilendirme Koşulları
+              Preliminary Information Conditions {""}
             </span>
-            'nı ve{" "}
+            and{" "}
             <span className="font-bold text-black underline cursor-pointer">
-              Mesafeli Satış Sözleşmesi
+              Distance Selling Agreement.
             </span>
-            'ni okudum,onaylıyorum.
           </label>
         </div>
       </div>
       <div className="flex flex-col gap-3">
         <button
           onClick={handlePayment}
-          className={`text-sm border-1 rounded-md py-2 px-5 ${
+          className={`text-sm font-bold border-1 rounded-md py-2 px-5 ${
             !isAgreed
               ? "bg-gray-300 text-gray-600 cursor-not-allowed"
               : "bg-primary-bg text-white"
           } `}
           disabled={!isAgreed}
         >
-          Ödeme yap <FontAwesomeIcon icon={faChevronRight} />
+          Pay <FontAwesomeIcon icon={faChevronRight} />
         </button>
       </div>
     </div>
