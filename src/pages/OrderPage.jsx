@@ -105,7 +105,7 @@ function OrderPage() {
     setIsAddingCard(false);
   };
   return (
-    <div className="custom-container flex flex-col md:flex-row ">
+    <div className="custom-container flex flex-col md:flex-row mt-32 md:mt-0">
       <div className="w-full md:w-3/4">
         <div className="flex">
           {" "}

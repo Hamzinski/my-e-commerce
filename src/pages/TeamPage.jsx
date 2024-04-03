@@ -72,7 +72,7 @@ const socialMediaIcons = [
 ];
 function TeamPage() {
   return (
-    <div>
+    <div className="mt-24 md:mt-0">
       <div className="custom-container flex flex-col justify-center items-center gap-6 py-12 px-2 md:px-0">
         <p className="font-mont font-bold text-base text-second-text-color">
           WHAT WE DO

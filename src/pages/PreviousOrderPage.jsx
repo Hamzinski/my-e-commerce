@@ -62,7 +62,7 @@ const PreviousOrderPage = () => {
   };
   console.log("Order:", orders[0]);
   return (
-    <div className="custom-container">
+    <div className="custom-container mt-24 md:mt-0">
       {orders.length > 0 ? (
         <div className="flex flex-col justify-center items-center gap-3 py-12">
           <h1 className="text-4xl text-center font-bold pb-3">

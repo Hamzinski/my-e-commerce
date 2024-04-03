@@ -45,7 +45,7 @@ function ProductListPage() {
   const urlSearchParams = new URLSearchParams(window.location.search);
   const paginationOffSetParam = urlSearchParams.get("offset");
   return (
-    <div>
+    <div className="mt-28 md:mt-0">
       <CategoryCard />
       <div className="custom-container p-12">
         <div className="flex flex-col md:flex-row gap-6 md:gap-0 justify-between items-center">

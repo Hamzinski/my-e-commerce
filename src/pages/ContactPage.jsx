@@ -7,7 +7,7 @@ import contactpic from "../assets/contactpic.png";
 import arrow from "../assets/arrow.png";
 function ContactPage() {
   return (
-    <div>
+    <div className="mt-24 md:mt-0">
       <div className="custom-container flex flex-col md:flex-row justify-between items-center mt-24 md:mt-0 gap-16 md:gap-0">
         <div className="flex flex-col w-full md:w-1/3 text-center gap-9 items-center md:items-stretch px-12 md:px-0">
           <p className="font-mont font-bold text-base text-dark-text-color md:text-start">

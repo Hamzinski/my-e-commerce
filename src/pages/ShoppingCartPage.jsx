@@ -96,7 +96,7 @@ function ShoppingCartPage() {
     dispatch(applyDissprice());
   };
   return (
-    <div className="flex flex-col md:flex-row custom-container justify-between ">
+    <div className="flex flex-col md:flex-row custom-container justify-between mt-12 md:mt-0">
       <div className="w-full md:w-2/3">
         <ToastContainer />
         {cartItems.map((item, index) => {

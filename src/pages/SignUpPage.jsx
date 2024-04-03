@@ -67,7 +67,7 @@ function SignUpPage() {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center my-12 w-full">
+    <div className="flex flex-col justify-center items-center mb-12 w-full mt-36 md:mt-12">
       <div className="flex flex-col w-1/2">
         <p className="text-center font-mont font-bold text-3xl text-primary-color underline decoration-solid ">
           Register

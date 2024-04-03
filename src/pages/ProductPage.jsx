@@ -157,7 +157,7 @@ function ProductPage() {
     dispatch(toggleCheckItemAction(productId, checked));
   };
   return (
-    <div id="jumperSection">
+    <div className="mt-32 md:mt-0" id="jumperSection">
       <ToastContainer />
       <div className="py-8 bg-light-gray-1">
         <div className="custom-container custom-padding flex justify-between">

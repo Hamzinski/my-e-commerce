@@ -44,7 +44,7 @@ const socialMediaIcons = [
 ];
 function AboutPage() {
   return (
-    <div>
+    <div className="mt-24 md:mt-0">
       <div className="custom-container flex flex-col md:flex-row justify-between mt-36 md:mt-0">
         <div className="flex flex-col items-center md:items-start gap-9 text-center justify-center w-full md:w-96">
           <h5 className="font-mont font-bold text-base text-dark-text-color">
