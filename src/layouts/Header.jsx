@@ -150,7 +150,7 @@ function Header() {
   }, [cartItems]);
   return (
     <>
-      <div className="flex  flex-col  ">
+      <div className="flex flex-col top-0 w-full fixed md:static z-10 md:z-0">
         <div className="hidden md:block bg-dark-background-color p-6 ">
           <div className="flex justify-between custom-container">
             <div className="flex gap-6">
@@ -181,17 +181,26 @@ function Header() {
           </div>
         </div>
 
-        <div className=" bg-white p-6">
+        <div className="bg-white p-6">
           <div className="flex flex-col md:flex-row justify-between gap-6 md:gap-0 custom-container ">
             <div className="flex flex-col gap-6 md:gap-0 md:flex-row ">
               <div className="flex justify-between items-center">
                 <h3 className="font-mont text-2xl font-bold text-dark-text-color">
                   Bandage
                 </h3>
-                <div className="block md:hidden">
+                <div className="flex items-center md:hidden">
                   <button onClick={toggleMobileMenu}>
                     <Hamburger />
                   </button>
+                  {cartItemCount > 0 ? (
+                    <p className="w-8 h-8 border-2 text-center rounded-full border-primary-border-color font-mont font-bold text-xl text-primary-color">
+                      {cartItemCount}{" "}
+                    </p>
+                  ) : (
+                    <p className="hidden font-mont font-bold text-primary-color">
+                      {cartItemCount}{" "}
+                    </p>
+                  )}
                 </div>
               </div>
 

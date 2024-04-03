@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import slider2 from "../assets/slider2.png";
+import slider4 from "../assets/slider4.png";
 import { Button } from "reactstrap";
 function Slider2() {
   const slides = [
@@ -9,8 +10,8 @@ function Slider2() {
       image: slider2,
     },
     {
-      bgcolor: "#E77C40",
-      image: slider2,
+      bgcolor: "#23A6F0",
+      image: slider4,
     },
   ];
 
@@ -32,7 +33,7 @@ function Slider2() {
   };
 
   return (
-    <div className="bg-[#23856d] relative group">
+    <div className="relative group">
       <div className="custom container relative">
         <div
           style={{ background: `${slides[currentIndex].bgcolor}` }}

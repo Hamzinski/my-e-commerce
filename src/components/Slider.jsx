@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import { Button } from "reactstrap";
 import sliderwomen from "../assets/sliderwomen.png";
-import sliderwomen2 from "../assets/sliderwomen2.png";
+import slidertest from "../assets/slidertest.png";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 function Slider() {
   const slides = [
@@ -10,7 +10,7 @@ function Slider() {
       image: sliderwomen,
     },
     {
-      image: sliderwomen,
+      image: slidertest,
     },
   ];
 
@@ -37,17 +37,17 @@ function Slider() {
   };
 
   return (
-    <div className="bg-[#00b5da] relative group ">
+    <div className="relative group mt-24 md:mt-0">
       <div className="custom-container relative">
         <div
           style={{
-            background: `url(${slides[currentIndex].image})`,
+            backgroundImage: `url(${slides[currentIndex].image})`,
             backgroundPosition: "center",
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
             height: "100%",
           }}
-          className="w-full h-full duration-500 "
+          className="w-full h-full duration-500"
         >
           <div className="absolute top-[50%] -translate-x-0 translate-y-[-50%] left-0 md:left-5 text-2xl p-2 text-white cursor-pointer">
             <BsChevronCompactLeft onClick={prevSlide} size={60} />
