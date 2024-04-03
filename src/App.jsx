@@ -17,6 +17,7 @@ import { setUser, clearUser } from "../src/store/actions/UserAction";
 import ShoppingCartPage from "./pages/ShoppingCartPage";
 import OrderPage from "./pages/OrderPage";
 import ProtectedRoute from "./components/ProtectedRoute";
+import PreviousOrderPage from "./pages/PreviousOrderPage";
 
 function App() {
   useEffect(() => {
@@ -66,6 +67,7 @@ function App() {
           />
           <Route path="/cart" component={ShoppingCartPage} />
           <ProtectedRoute path="/order" component={OrderPage} />
+          <Route path="/previousorder" component={PreviousOrderPage} />
           <Route path="/about" component={AboutPage} />
           <Route path="/team" component={TeamPage} />
           <Route path="/contact" component={ContactPage} />

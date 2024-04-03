@@ -8,11 +8,13 @@ import {
   resetDiscount,
 } from "../store/actions/ShoppingCartAction";
 import axios from "axios";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 export default function OrderSummary({ selectedAddress }) {
   const instance = axios.create({
     baseURL: "https://workintech-fe-ecommerce.onrender.com",
   });
   const token = localStorage.getItem("token");
+  const history = useHistory();
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.shoppingCart.cart);
   const checkedCard = useSelector((state) => state.shoppingCart.checkedCard);
@@ -54,11 +56,16 @@ export default function OrderSummary({ selectedAddress }) {
   const handleCheckboxChange2 = (event) => {
     setIsAgreed(event.target.checked);
   };
-  const products = cartItems.map((item) => ({
-    product_id: item.id,
-    count: item.count,
-    detail: item.name,
-  }));
+  const productsBought = [];
+  for (const product of cartItems) {
+    if (product.checked) {
+      productsBought.push({
+        product_id: product.product.id,
+        count: product.count,
+        detail: product.product.name,
+      });
+    }
+  }
   const handlePayment = async () => {
     const t1 = applyDiscount(parseFloat(totalPricefunc())).toFixed(2);
     try {
@@ -71,7 +78,7 @@ export default function OrderSummary({ selectedAddress }) {
         card_expire_year: checkedCard.expire_year,
         card_ccv: 999,
         price: t1,
-        products: [...products],
+        products: [...productsBought],
       };
       const response = await instance.post("/order", orderData, {
         headers: {
@@ -81,6 +88,7 @@ export default function OrderSummary({ selectedAddress }) {
       console.log("Order created successfully:", response.data);
       dispatch(resetDiscount());
       dispatch(clearCart());
+      history.push("/previousorder");
     } catch (error) {
       console.error("Error creating order:", error);
     }

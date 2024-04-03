@@ -54,7 +54,7 @@ const links = [
   { text: "About", href: "/about" },
   { text: "Blog", href: "/team" },
   { text: "Contact", href: "/contact" },
-  { text: "Pages", href: "#" },
+  { text: "Previous Orders", href: "/previousorder" },
 ];
 
 function Header() {
